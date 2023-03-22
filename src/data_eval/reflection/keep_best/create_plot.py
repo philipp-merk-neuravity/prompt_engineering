@@ -27,8 +27,8 @@ for model in models:
         label = label_mapping[reflection_type]
         plt.plot(iterations, accuracies, label=label)
     
-    plt.xlabel("Iteration")
-    plt.ylabel("Genauigkeit")
-    plt.legend()
+    plt.xlabel("Iteration", fontsize=10)
+    plt.ylabel("Genauigkeit", fontsize=10)
+    plt.legend(fontsize=8)
     plt.grid(True)
-    plt.savefig(f"{save_path}/{model}.png")
+    plt.savefig(f"{save_path}/{model}.png", dpi=700)

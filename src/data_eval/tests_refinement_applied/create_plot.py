@@ -6,6 +6,11 @@ from collections import defaultdict
 path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_refinement_applied/combined_stats.jsonl"
 save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/images/test_refinement_applied"
 
+label_mapping = {
+    "gpt-3.5-turbo-0125": "3.5",
+    "gpt-4-0125-preview": "4"
+}
+
 # Open and read the data file
 with open(path, "r") as f:
     data = [json.loads(line) for line in f]
@@ -24,14 +29,26 @@ for key, values in data_by_combination.items():
     sorted_values = sorted(values, key=lambda x: x[0])
     sample_sizes = [sv[0] for sv in sorted_values]
     accuracies = [sv[1] for sv in sorted_values]
-    
+    label = "("
+    if key[0] == "gpt-4-0125-preview":
+        label += "4, "
+    elif key[0] == "gpt-3.5-turbo-0125":
+        label += "3.5, "
+    if key[1] == "tests_3.5":
+        label += "3.5, -)"
+    elif key[1] == "tests_3.5_3.5":
+        label += "3.5, 3.5)"
+    elif key[1] == "tests_4":
+        label += "4, -)"
+    elif key[1] == "tests_4_4":
+        label += "4, 4)"
     # Plot each combination as a separate line
-    plt.plot(sample_sizes, accuracies, label=f'{key[0]} - {key[1]}')
+    plt.plot(sample_sizes, accuracies, label=label)
 
-plt.xlabel('Samples')
-plt.ylabel('Genauigkeit')
+plt.xlabel('Samples', fontsize=13)
+plt.ylabel('Genauigkeit', fontsize=13)
 plt.legend()
 plt.grid()
 plt.tight_layout()
 
-plt.savefig(f"{save_path}/accuracy_by_sample_size.png")
+plt.savefig(f"{save_path}/accuracy_by_sample_size.png", dpi=700)

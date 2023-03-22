@@ -34,12 +34,12 @@ def plot_data_for_model(model_data, model_name):
     for temp, values in data_by_temp.items():
         plt.plot(values["k"], values["accuracy"], label=f'Temp: {temp}')
     
-    plt.xlabel('pass@k')
-    plt.ylabel('Genauigkeit')
+    plt.xlabel('pass@k', fontsize=12)
+    plt.ylabel('Genauigkeit', fontsize=12)
     plt.legend()
     plt.grid(True)
     # save
-    plt.savefig(f"/home/neuravity/dev/prompt_engineering/src/{model_name}.png")
+    plt.savefig(f"/home/neuravity/dev/prompt_engineering/src/{model_name}.png", dpi=600)
 
 # Plot data for each model
 for model_name, model_data in data_by_model.items():

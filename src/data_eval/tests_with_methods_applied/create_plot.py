@@ -44,10 +44,10 @@ for model_label, plot_data in model_data.items():
         sample_sizes, accuracies = zip(*points)  # Unpack points into two lists
         plt.plot(sample_sizes, accuracies, label=label)
 
-    plt.xlabel('Samples')
-    plt.ylabel('Genauigkeit')
+    plt.xlabel('Samples', fontsize=13)
+    plt.ylabel('Genauigkeit', fontsize=13)
     plt.legend()
     plt.tight_layout()
     plt.grid()
 
-    plt.savefig(f"{save_path}/{model_label}_accuracy_vs_sample_size.png")
+    plt.savefig(f"{save_path}/{model_label}_accuracy_vs_sample_size.png", dpi=700)

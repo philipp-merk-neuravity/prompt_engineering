@@ -34,10 +34,10 @@ for model, methods_data in data_by_model.items():
     for method, data in methods_data.items():
         label = label_mapping[method]
         plt.plot(data['k'], data['accuracy'], label=label)
-    plt.xlabel('Samples')
-    plt.ylabel('Genauigkeit')
+    plt.xlabel('Pass@k', fontsize=13)
+    plt.ylabel('Genauigkeit', fontsize=13)
     plt.legend()
     plt.grid(True)
     # Save each plot as a separate file, named after the model
-    plt.savefig(f'{save_path}/{model}.png')
+    plt.savefig(f'{save_path}/{model}.png', dpi=700)
     plt.close()  # Close the figure to free memory
