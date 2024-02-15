@@ -1,39 +1,42 @@
-import re
-from langchain_core.output_parsers import StrOutputParser
-from langchain_openai import ChatOpenAI
-import os
-from dotenv import load_dotenv
-from utils.data_conversion import convert_tests_to_list, parse_code_solution
+from utils.openai_api import get_completion
+from utils.prompt_templates import get_messages_for_syntax_correction, get_messages_for_code_generation, get_messages_for_refinement, get_messages_for_self_reflection, get_messages_for_test_generation
+from utils.data_conversion import parse_code_block, convert_tests_to_list,add_imports_from_func_sig_to_code_solution, check_is_syntax_correct, split_tests_into_individual_functions, filter_syntactically_correct_tests_ast, remove_function_definition_from_test
+import random
+from typing import List
 
-load_dotenv()
-openai_api_key = os.getenv('OPENAI_API_KEY')
-model = ChatOpenAI(model="gpt-3.5-turbo", api_key=openai_api_key)
+def get_syntactically_correct_code(code_solution: str, function_signature: str) -> str:
+    is_syntax_correct, error_message = check_is_syntax_correct(code_solution)
+    while not is_syntax_correct:
+        messages = get_messages_for_syntax_correction(code_solution, error_message)
+        code_solution = get_completion(messages)
+        code_block = parse_code_block(code_solution)
+        code_solution = add_imports_from_func_sig_to_code_solution(function_signature, code_block)
+        is_syntax_correct, error_message = check_is_syntax_correct(code_solution)
+    return code_solution
 
-if openai_api_key is None:
-    raise ValueError("OPENAI_API_KEY is not set. Please check your .env file.")
+def gen_function(function_signature: str) -> str:
+    messages = get_messages_for_code_generation(function_signature)
+    code_solution = get_completion(messages)
+    code_block = parse_code_block(code_solution)
+    code_solution_with_imports = add_imports_from_func_sig_to_code_solution(function_signature, code_block)
+    return get_syntactically_correct_code(code_solution_with_imports, function_signature)
 
-output_parser = StrOutputParser()
+def gen_tests(function_signature: str, amount=2) -> List[str]:
+    messages = get_messages_for_test_generation(function_signature)
+    tests = get_completion(messages, max_tokens=1024)
+    tests_as_list = convert_tests_to_list(tests)
+    tests_with_function_def = split_tests_into_individual_functions(tests_as_list)
+    correct_tests_with_function_def = filter_syntactically_correct_tests_ast(tests_with_function_def)
+    tests_as_list = [remove_function_definition_from_test(test) for test in correct_tests_with_function_def]
+    return random.sample(tests_as_list, amount)
 
-def gen_function(prompt_template_for_code_generation: str, function_signature: str) -> str:
-    formatted_function_signature = {"function_signature": function_signature}
-    chain = prompt_template_for_code_generation | model | output_parser | parse_code_solution
-    return chain.invoke({"function_signature": formatted_function_signature})
+def gen_reflection(function_implementation: str, unit_test_results: str) -> str:
+    messages = get_messages_for_self_reflection(function_implementation, unit_test_results)
+    return get_completion(messages)
 
-def gen_tests(prompt_template_for_test_generation: str, function_signature: str) -> str:
-    formatted_function_signature = {"function_signature": function_signature}
-    chain = prompt_template_for_test_generation | model | output_parser | convert_tests_to_list
-    return chain.invoke({"function_signature": formatted_function_signature})
-
-def gen_reflection(prompt_template_for_self_reflection: str, function_implementation: str, unit_test_results: str) -> str:
-    formatted_function_implementation = {"function_implementation": function_implementation}
-    formatted_unit_test_results = {"unit_test_results": unit_test_results}
-    chain = prompt_template_for_self_reflection | model | output_parser
-    return chain.invoke({"function_implementation": formatted_function_implementation, "unit_test_results": formatted_unit_test_results})
-
-def gen_refined_function(prompt_template_for_reflexion: str, function_signature: str, function_implementation: str, unit_test_results: str, reflection: str) -> str:
-    formatted_function_signature = {"function_signature": function_signature}
-    formatted_function_implementation = {"previous_implementation": function_implementation}
-    formatted_unit_test_results = {"unit_test_results": unit_test_results}
-    formatted_reflection = {"reflection_on_previous_implementation": reflection}
-    chain = prompt_template_for_reflexion | model | output_parser | parse_code_solution
-    return chain.invoke({"function_signature": formatted_function_signature, "previous_implementation": formatted_function_implementation, "unit_test_results": formatted_unit_test_results, "reflection_on_previous_implementation": formatted_reflection})
+def gen_refined_function(function_signature: str, function_implementation: str, unit_test_results: str, reflection: str) -> str:
+    messages = get_messages_for_refinement(function_signature, function_implementation, unit_test_results, reflection)
+    refined_function = get_completion(messages)
+    code_block = parse_code_block(refined_function)
+    code_solution = add_imports_from_func_sig_to_code_solution(function_signature, code_block)
+    return get_syntactically_correct_code(code_solution, function_signature)

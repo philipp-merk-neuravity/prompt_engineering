@@ -1,6 +1,4 @@
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.prompts import HumanMessagePromptTemplate
-from langchain_core.messages import SystemMessage
+from utils.openai_api import create_system_message, create_user_message, create_ai_message
 
 programmers_prompt = '''
     **Instructions**:
@@ -46,15 +44,13 @@ CODE_GEN_INSTRUCTION = "You are an AI that only responds with python code, NOT E
 
 CODE_GEN_FEW_SHOT = "Use a Python code block to write your response. For example:\n```python\nprint('Hello world!')\n```\n"
 
-CODE_GEN_FUNCTION_SIGNATURE = "[func_sig]:{function_signature}"
+CODE_GEN_FUNCTION_SIGNATURE = "{function_signature}"
 
-def get_prompt_template_for_code_generation():
-    return ChatPromptTemplate.from_messages(
-    [
-        SystemMessage(CODE_GEN_INSTRUCTION),
-        HumanMessagePromptTemplate.from_template(CODE_GEN_FEW_SHOT +  CODE_GEN_FUNCTION_SIGNATURE)
-    ]
-)
+def get_messages_for_code_generation(function_signature: str):
+    return [
+        create_system_message(CODE_GEN_INSTRUCTION + "\n" + CODE_GEN_FEW_SHOT),
+        create_user_message(CODE_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
+    ] 
 
 TEST_GEN_CHAT_INSTRUCTION = """You are an AI coding assistant that can write unique, diverse, and intuitive unit tests for functions given the signature and docstring."""
 
@@ -71,16 +67,15 @@ assert add3Numbers(1, -2, 3) == 2
 assert add3Numbers(1, 2, -3) == 0
 assert add3Numbers(-3, -2, -1) == -6
 assert add3Numbers(0, 0, 0) == 0
-\n\n[func signature]:\n{function_signature}\n\n[unit tests]:
 """
 
-def get_prompt_template_for_test_generation():
-    return ChatPromptTemplate.from_messages(
-    [
-        SystemMessage(TEST_GEN_CHAT_INSTRUCTION),
-        HumanMessagePromptTemplate.from_template(TEST_GEN_FEW_SHOT)
+TEST_GEN_FUNCTION_SIGNATURE = "\n\n[func signature]:\n{function_signature}\n\n[unit tests]:"
+
+def get_messages_for_test_generation(function_signature: str):
+    return [
+        create_system_message(TEST_GEN_CHAT_INSTRUCTION),
+        create_user_message(TEST_GEN_FEW_SHOT + TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
     ]
-)
 
 SELF_REFLECTION_CHAT_INSTRUCTION = "You are a Python programming assistant. You will be given a function implementation and a series of unit tests. Your goal is to write a few sentences to explain why your implementation is wrong as indicated by the tests. You will need this as a hint when you try again later. Only provide the few sentence description in your answer, not the implementation."
 
@@ -155,128 +150,69 @@ The implementation failed 4 out of the 7 test cases due to an IndexError. The is
 END OF EXAMPLES
 """
 
-SELF_REFLECTION_CURRENT_FEEDBACK = "[function impl]:\n{function_implementation}\n\n[unit test results]:\n{unit_test_results}\n\n[self-reflection]:"
+SELF_REFLECTION_CURRENT_FEEDBACK = "\n\n[function impl]:\n```python\n{function_implementation}\n```\n\n[unit test results]:\n{unit_test_results}\n\n[self-reflection]:"
 
-def get_prompt_template_for_self_reflection():
-    return ChatPromptTemplate.from_messages(
-    [
-        SystemMessage(SELF_REFLECTION_CHAT_INSTRUCTION),
-        HumanMessagePromptTemplate.from_template(SELF_REFLECTION_FEW_SHOT + SELF_REFLECTION_CURRENT_FEEDBACK)
-    ]
-)
+def get_messages_for_self_reflection(function_implementation: str, unit_test_results: str):
+    return [
+        create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION),
+        create_user_message(SELF_REFLECTION_FEW_SHOT + SELF_REFLECTION_CURRENT_FEEDBACK, function_implementation=function_implementation, unit_test_results=unit_test_results),
+    ] 
 
-REFINEMENT_INSTRUCTION = "You are an AI Python assistant. You will be given your past function implementation, a series of unit tests, and a hint to change the implementation appropriately. Write your full implementation (restate the function signature)."
+REFINEMENT_INSTRUCTION = "You are an AI Python assistant. You will be given your past function implementation, a series of unit tests, and a hint to change the implementation appropriately. Write your full implementation (restate the function signature).\nUse a Python code block to write your response. For example:\n```python\nprint('Hello world!')\n```"
 
 REFINEMENT_FEW_SHOT = '''Example 1:
 [previous impl]:
 ```python
-from typing import *
-def fullJustify(words: List[str], maxWidth: int) -> List[str]:
+def add(a: int, b: int) -> int:
     """
-    Given an array of words and a width maxWidth, format the text such that each line has exactly maxWidth characters and is fully (left and right) justified.
-    You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces `' '` when necessary so that each line has exactly maxWidth characters.
-    Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.
-    For the last line of text, it should be left justified and no extra space is inserted between words.
-    Note:
-    A word is defined as a character sequence consisting of non-space characters only.
-    Each word's length is guaranteed to be greater than 0 and not exceed maxWidth.
-    The input array `words` contains at least one word.
+    Given integers a and b, return the total value of a and b.
     """
-    res = []
-    cur_line = []
-    cur_len = 0
-
-    for word in words:
-        if cur_len + len(word) + len(cur_line) > maxWidth:
-            if len(cur_line) == 1:
-                res.append(cur_line[0] + ' ' * (maxWidth - cur_len))
-            else:
-                spaces = maxWidth - cur_len
-                space_between = spaces // (len(cur_line) - 1)
-                extra_spaces = spaces % (len(cur_line) - 1)
-                line = ''
-                for i, w in enumerate(cur_line[:-1]):
-                    line += w + ' ' * (space_between + (i < extra_spaces))
-                line += cur_line[-1]
-                res.append(line)
-            cur_line = []
-            cur_len = 0
-        cur_line.append(word)
-        cur_len += len(word)
-
-    last_line = ' '.join(cur_line)
-    last_line += ' ' * (maxWidth - len(last_line))
-    res.append(last_line)
-
-    return res
+    return a - b
 ```
 
 [unit test results from previous impl]:
 Tested passed:
 
 Tests failed:
-assert fullJustify([], 10) == [] # output: ['          ']
-assert fullJustify([], 0) == [] # output: ['']
+assert add(1, 2) == 3 # output: -1
+assert add(1, 2) == 4 # output: -1
 
 [reflection on previous impl]:
-The implementation failed the test cases where the input list of words is empty. The issue arises because the code does not handle the case where there are no words to process. As a result, it still appends a line with spaces to the result list, even when there are no words. To fix this issue, we should add a condition at the beginning of the function to check if the input list is empty, and return an empty list if it is. This will ensure that the function returns the correct output for empty input lists.
+The implementation failed the test cases where the input integers are 1 and 2. The issue arises because the code does not add the two integers together, but instead subtracts the second integer from the first. To fix this issue, we should change the operator from `-` to `+` in the return statement. This will ensure that the function returns the correct output for the given input.
 
 [improved impl]:
 ```python
-from typing import *
-def fullJustify(words: List[str], maxWidth: int) -> List[str]:
+def add(a: int, b: int) -> int:
     """
-    Given an array of words and a width maxWidth, format the text such that each line has exactly maxWidth characters and is fully (left and right) justified.
-    You should pack your words in a greedy approach; that is, pack as many words as you can in each line. Pad extra spaces `' '` when necessary so that each line has exactly maxWidth characters.
-    Extra spaces between words should be distributed as evenly as possible. If the number of spaces on a line do not divide evenly between words, the empty slots on the left will be assigned more spaces than the slots on the right.
-    For the last line of text, it should be left justified and no extra space is inserted between words.
-    Note:
-    A word is defined as a character sequence consisting of non-space characters only.
-    Each word's length is guaranteed to be greater than 0 and not exceed maxWidth.
-    The input array `words` contains at least one word.
+    Given integers a and b, return the total value of a and b.
     """
-    if not words:
-        return []
-
-    res = []
-    cur_line = []
-    cur_len = 0
-
-    for word in words:
-        if cur_len + len(word) + len(cur_line) > maxWidth:
-            if len(cur_line) == 1:
-                res.append(cur_line[0] + ' ' * (maxWidth - cur_len))
-            else:
-                spaces = maxWidth - cur_len
-                space_between = spaces // (len(cur_line) - 1)
-                extra_spaces = spaces % (len(cur_line) - 1)
-                line = ''
-                for i, w in enumerate(cur_line[:-1]):
-                    line += w + ' ' * (space_between + (i < extra_spaces))
-                line += cur_line[-1]
-                res.append(line)
-            cur_line = []
-            cur_len = 0
-        cur_line.append(word)
-        cur_len += len(word)
-
-    last_line = ' '.join(cur_line)
-    last_line += ' ' * (maxWidth - len(last_line))
-    res.append(last_line)
-
-    return res
+    return a + b
 ```
-END EXAMPLES
-
 '''
 
-REFINEMENT_CURRENT_FEEDBACK = "[previous impl]:\n{previous_implementation}\n\n[unit test results from previous impl]:\n{unit_test_results}\n\n[reflection on previous impl]:\n{reflection_on_previous_implementation}\n\n[improved impl]:{function_signature}"
+REFINEMENT_PREVIOUS_FUNCTION_IMPL = "```python\n{previous_implementation}\n```"
+REFINEMENT_TESTS = "[unit test results from previous impl]:\n{unit_test_results}\n\n[reflection on previous impl]"
+REFINEMENT_REFLECTION = "{reflection_on_previous_implementation}"
+REFINEMENT_FUNC_SIGNATURE = "[improved impl]:\n{function_signature}"
 
-def get_prompt_template_for_reflexion():
-    return ChatPromptTemplate.from_messages(
-    [
-        SystemMessage(REFINEMENT_INSTRUCTION),
-        HumanMessagePromptTemplate.from_template(REFINEMENT_FEW_SHOT),
-        HumanMessagePromptTemplate.from_template(REFINEMENT_CURRENT_FEEDBACK)
+def get_messages_for_refinement(function_signature: str, function_implementation: str, unit_test_results: str, reflection: str):
+    return [
+        create_system_message(REFINEMENT_INSTRUCTION),
+        create_user_message(REFINEMENT_FEW_SHOT),
+        create_ai_message(REFINEMENT_PREVIOUS_FUNCTION_IMPL, previous_implementation=function_implementation),
+        create_user_message(REFINEMENT_TESTS, unit_test_results=unit_test_results),
+        create_ai_message(REFINEMENT_REFLECTION, reflection_on_previous_implementation=reflection),
+        create_user_message(REFINEMENT_FUNC_SIGNATURE, function_signature=function_signature),
     ]
-)
+
+# Syntax Correction
+
+SYNTAX_CORRECTION_INSTRUCTION = "You are an AI that only responds with python code, NOT ENGLISH. You will be given a code snippet with a syntax error. Your goal is to correct the syntax error in the code snippet. Write the corrected code snippet.\nUse a Python code block to write your response. For example:\n```python\nprint('Hello world!')\n```"
+SYNTAX_CORRECTION_CODE_SOLUTION = "[impl]```python\n{code_solution}\n```\n\n"
+SYNTAX_CORRECTION_FEEDBACK = "{syntax_correction_feedback}\n\n[improved impl]:"
+
+def get_messages_for_syntax_correction(code_solution: str, syntax_correction_feedback: str):
+    return [
+        create_system_message(SYNTAX_CORRECTION_INSTRUCTION),
+        create_user_message(SYNTAX_CORRECTION_CODE_SOLUTION + SYNTAX_CORRECTION_FEEDBACK, code_solution=code_solution, syntax_correction_feedback=syntax_correction_feedback),
+    ]

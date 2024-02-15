@@ -3,19 +3,23 @@ import json
 import gzip
 from utils.data_conversion import extract_function_body
 
-humanEval_file_path = '/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl.gz'
 benchmark_results_file_path = '/home/neuravity/dev/prompt_engineering/src/benchmark_results/benchmark_results.jsonl'
+humanEval_file_path = '/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl'
 
 def load_benchmark():
     json_objects = []
+    try:
+        # Open the .jsonl file directly without gzip
+        with open(humanEval_file_path, 'r', encoding='utf-8') as file:
+            for line in file:
+                json_obj = json.loads(line)
+                json_objects.append(json_obj)
+    except Exception as e:
+        # Handle exceptions such as file not found or JSON decode error
+        print(f"An error occurred: {e}")
+        return []
 
-    # Open the .gz file using gzip.open instead of the regular open
-    with gzip.open(humanEval_file_path, 'rt', encoding='utf-8') as file:
-        for line in file:
-            json_obj = json.loads(line)
-            json_objects.append(json_obj)
-            
-    return np.array(json_objects, dtype=object)
+    return json_objects
 
 def load_benchmark_results():
     json_objects = []
