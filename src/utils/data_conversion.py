@@ -2,6 +2,7 @@ from typing import List
 import re
 import ast
 from typing import Optional
+import json
 
 def convert_tests_to_list(tests: str) -> List[str]:
     return tests.split('\n')
@@ -15,19 +16,14 @@ def parse_code_solution(code_solution: str) -> str:
         return code_solution
     
 def parse_code_block(string: str) -> Optional[str]:
-    code_pattern = fr"```python\n(.*?)\n```"
+
+    code_pattern = r"```python(.*?)```"
     match = re.search(code_pattern, string, re.DOTALL)
 
     if match:
-        return match.group(1)
+        return match.group(1).strip()
 
-    generic_code_pattern = r"```\n(.*?)\n```"
-    match = re.search(generic_code_pattern, string, re.DOTALL)
-
-    if match:
-        return match.group(1)
-
-    return parse_first_func(string)
+    return string
 
 def parse_first_func(code: str) -> str:
     # Split the code into lines
@@ -90,12 +86,17 @@ def extract_function_body(code_solution: str) -> str:
     function_body = '\n'.join(body_lines)
     return function_body
 
+def extract_python_code_from_json(json_string, prompt_type):
+    data = json.loads(json_string)
+
+    if prompt_type == "synth_few_shot":
+        python_code = data["Original Problem Solution"]["Python3 Code"]
+    if prompt_type == "agentCoder":
+        python_code = data["code_solution"]
+    return python_code
 
 def convert_unit_test_results_to_str(unit_test_results: object) -> str:
-    # shape: {'passed_tests': ['assert has_close_elements([1.0, 2.0, 3.0], 0.5) == False', 'assert has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3) == True', 'assert has_close_elements([1.0, 2.0, 3.0, 4.0, 5.0], 0.5) == False'], 'failed_tests': ['assert has_close_elements([1.0, 2.0, 3.0], 0.1) == True', 'assert has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.6) == False', 'assert has_close_elements([1.0, 2.0, 3.0, 4.0, 5.0], 1.0) == True']}
     unit_test_results_as_str = f"Tested passed:\n{unit_test_results['passed_tests']}\nTests failed:\n{unit_test_results['failed_tests']}"
-    if (len(unit_test_results["error_messages"]) > 0):
-        unit_test_results_as_str += f"\nError messages:\n{unit_test_results['error_messages']}"
     return unit_test_results_as_str
 
 def check_is_syntax_correct(code):

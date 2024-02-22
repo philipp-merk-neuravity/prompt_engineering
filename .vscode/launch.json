@@ -8,6 +8,39 @@
       "program": "${file}",
       "console": "integratedTerminal",
       "cwd": "${workspaceFolder}"
-    }
+    },
+    {
+      "name": "Debug simple.py with Args",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/simple.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--model", "gpt-3.5-turbo-0125",
+        "--prompt_type", "scot",
+        "--benchmark_type", "all",
+        "--chunk_size", "46",
+        "--delay_seconds", "20"
+      ],
+      "cwd": "${workspaceFolder}/src"
+    },
+    {
+      "name": "Debug reflection.py with Args",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/async_reflection.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--model_for_init", "gpt-3.5-turbo-0125",
+        "--model_for_reflection", "gpt-3.5-turbo-0125",
+        "--model_for_refinement", "gpt-3.5-turbo-0125",
+        "--max_iterations", "2",
+        "--benchmark_type", "all",
+        "--chunk_size", "20",
+        "--delay_seconds", "20",
+        "--tests_path", ""
+      ],
+      "cwd": "${workspaceFolder}/src"
+    },
   ]
 }

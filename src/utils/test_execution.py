@@ -104,7 +104,6 @@ def run_tests(solution_code: str, tests: list, timeout=15):
     results = {
         "passed_tests": [],
         "failed_tests": [],
-        "error_messages": []
     }
 
     for test in tests:
@@ -118,11 +117,11 @@ def run_tests(solution_code: str, tests: list, timeout=15):
             # Handle timeout or other errors
             error_type, error_info = result
             if error_type == "timeout":
-                results["error_messages"].append(("TimeoutError: Execution exceeded time limit for: " + test))
+                results["failed_tests"].append(("TimeoutError: Execution exceeded time limit for: " + test))
             else:
-                results["error_messages"].append((error_info + " for: " + test))
+                results["failed_tests"].append((error_info + " for: " + test))
 
-    if len(results["error_messages"]) > 0 or len(results["failed_tests"]) > 0:
+    if len(results["failed_tests"]) > 0 or len(results["failed_tests"]) > 0:
         return results, False
     else:
         return results, True
