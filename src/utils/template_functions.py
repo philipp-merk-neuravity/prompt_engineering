@@ -1,13 +1,20 @@
 from .prompt_templates.pre_template import (SCOT_PSEUDOCODE_GEN_INSTRUCTION, SCOT_PSEUDOCODE_GEN_FEW_SHOT)
 from .prompt_templates.solution_template import (AC_CODE_GEN_INSTRUCTION, IO_CODE_GEN_FUNCTION_SIGNATURE, IO_CODE_GEN_FEW_SHOT, IO_CODE_GEN_INSTRUCTION, SCOT_CODE_GEN_FEW_SHOT, SCOT_CODE_GEN_INSTRUCTION, SYNTH_FEW_SHOT_GEN_FEW_SHOT, SYNTH_FEW_SHOT_GEN_INSTRUCTION)
 from .prompt_templates.syntax_correction_template import (SYNTAX_CORRECTION_CODE_SOLUTION, SYNTAX_CORRECTION_FEEDBACK, SYNTAX_CORRECTION_INSTRUCTION)
-from .prompt_templates.reflection_template import (SELF_REFLECTION_CHAT_INSTRUCTION, SELF_REFLECTION_CURRENT_FEEDBACK, SELF_REFLECTION_FEW_SHOT)
-from .prompt_templates.refinement_template import (REFINEMENT_FEW_SHOT, REFINEMENT_FUNC_SIGNATURE, REFINEMENT_INSTRUCTION, REFINEMENT_PREVIOUS_FUNCTION_IMPL, REFINEMENT_REFLECTION, REFINEMENT_TESTS)
+from .prompt_templates.reflection_template import (SELF_REFLECTION_CHAT_INSTRUCTION_2, SELF_REFLECTION_FEW_SHOT_2, SELF_REFLECTION_CHAT_INSTRUCTION, SELF_REFLECTION_CURRENT_FEEDBACK, SELF_REFLECTION_FEW_SHOT)
+from .prompt_templates.refinement_template import (REFINEMENT_TASK, REFINEMENT_FEW_SHOT, REFINEMENT_FUNC_SIGNATURE, REFINEMENT_INSTRUCTION, REFINEMENT_PREVIOUS_FUNCTION_IMPL, REFINEMENT_REFLECTION, REFINEMENT_TESTS)
 from .prompt_templates.tests_template import (TEST_GEN_CHAT_INSTRUCTION, TEST_GEN_FEW_SHOT, TEST_GEN_FUNCTION_SIGNATURE)
 
-from .openai_api import create_system_message, create_user_message, create_ai_message
+def create_system_message(template, **kwargs):
+    return {"role": "system", "content": template.format(**kwargs)}
 
-def get_messages_for_prompt_preprocessing(function_description: str, prompt_type="scot"):
+def create_user_message(template, **kwargs):
+    return {"role": "user", "content": template.format(**kwargs)}
+
+def create_ai_message(template, **kwargs):
+    return {"role": "assistant", "content": template.format(**kwargs)}
+
+async def get_messages_for_prompt_preprocessing(function_description: str, prompt_type="scot"):
     if prompt_type == "scot":
         return [
             create_system_message(SCOT_PSEUDOCODE_GEN_INSTRUCTION),
@@ -59,29 +66,52 @@ async def get_messages_for_code_generation(function_description: str, prompt_typ
             create_user_message(AC_CODE_GEN_INSTRUCTION, function_description=function_description),
         ]
     
-def get_messages_for_test_generation(function_signature: str):
+async def get_messages_for_test_generation(function_signature: str):
     return [
         create_system_message(TEST_GEN_CHAT_INSTRUCTION),
         create_user_message(TEST_GEN_FEW_SHOT + TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
     ]
 
-def get_messages_for_self_reflection(function_implementation: str, unit_test_results: str):
+async def get_messages_for_self_reflection(function_implementation: str, unit_test_results: str, prompt: str):
+    if prompt == "reflexion":
+        return [
+            create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION),
+            create_user_message(SELF_REFLECTION_FEW_SHOT + SELF_REFLECTION_CURRENT_FEEDBACK, function_implementation=function_implementation, unit_test_results=unit_test_results),
+        ]
+    if prompt == "reflexion_without_few_shot":
+        return [
+            create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION),
+            create_user_message(SELF_REFLECTION_CURRENT_FEEDBACK, function_implementation=function_implementation, unit_test_results=unit_test_results),
+        ]
+
+async def get_messages_for_refinement(function_signature: str, function_implementation: str, unit_test_results: str, reflection: str, prompt: str):
+    if prompt == "reflexion":
+        return [
+            create_system_message(REFINEMENT_INSTRUCTION),
+            create_user_message(REFINEMENT_FEW_SHOT),
+            create_user_message(REFINEMENT_TASK, function_signature=function_signature),
+            create_ai_message(REFINEMENT_PREVIOUS_FUNCTION_IMPL, previous_implementation=function_implementation),
+            create_user_message(REFINEMENT_TESTS, unit_test_results=unit_test_results),
+            create_ai_message(REFINEMENT_REFLECTION, reflection_on_previous_implementation=reflection),
+            create_user_message(REFINEMENT_FUNC_SIGNATURE),
+        ]
+    if prompt == "reflexion_without_few_shot":
+        return [
+            create_system_message(REFINEMENT_INSTRUCTION),
+            create_user_message(REFINEMENT_TASK, function_signature=function_signature),
+            create_ai_message(REFINEMENT_PREVIOUS_FUNCTION_IMPL, previous_implementation=function_implementation),
+            create_user_message(REFINEMENT_TESTS, unit_test_results=unit_test_results),
+            create_ai_message(REFINEMENT_REFLECTION, reflection_on_previous_implementation=reflection),
+            create_user_message(REFINEMENT_FUNC_SIGNATURE),
+        ]
+    
+async def get_messages_for_reflection_and_refinement(function_implementation: str, unit_test_results: str):
     return [
-        create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION),
-        create_user_message(SELF_REFLECTION_FEW_SHOT + SELF_REFLECTION_CURRENT_FEEDBACK, function_implementation=function_implementation, unit_test_results=unit_test_results),
+        create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION_2),
+        create_user_message(SELF_REFLECTION_FEW_SHOT_2, previous_implementation=function_implementation, unit_test_results=unit_test_results),
     ]
 
-def get_messages_for_refinement(function_signature: str, function_implementation: str, unit_test_results: str, reflection: str):
-    return [
-        create_system_message(REFINEMENT_INSTRUCTION),
-        create_user_message(REFINEMENT_FEW_SHOT),
-        create_ai_message(REFINEMENT_PREVIOUS_FUNCTION_IMPL, previous_implementation=function_implementation),
-        create_user_message(REFINEMENT_TESTS, unit_test_results=unit_test_results),
-        create_ai_message(REFINEMENT_REFLECTION, reflection_on_previous_implementation=reflection),
-        create_user_message(REFINEMENT_FUNC_SIGNATURE, function_signature=function_signature),
-    ]
-
-def get_messages_for_syntax_correction(function_signature: str, code_solution: str, syntax_correction_feedback: str):
+async def get_messages_for_syntax_correction(function_signature: str, code_solution: str, syntax_correction_feedback: str):
     return [
         create_system_message(SYNTAX_CORRECTION_INSTRUCTION),
         create_user_message(SYNTAX_CORRECTION_CODE_SOLUTION + SYNTAX_CORRECTION_FEEDBACK, function_signature=function_signature, code_solution=code_solution, syntax_correction_feedback=syntax_correction_feedback),

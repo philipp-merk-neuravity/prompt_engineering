@@ -1,9 +1,8 @@
 import os
+import time
 from openai import AsyncOpenAI
 from dotenv import load_dotenv
-from tenacity import retry, stop_after_attempt, wait_random_exponential, wait_random_exponential, stop_after_attempt, wait_fixed, before_sleep_log
-import time
-import logging
+from tenacity import retry, stop_after_attempt, wait_random_exponential
 
 load_dotenv()
 
@@ -23,7 +22,7 @@ async def get_completion(
     max_tokens=4095,
     response_format="text"
 ):
-    start_time = time.time()  # Start time measurement
+    start_time = time.time()
     completion = await client.chat.completions.create(
         model=model,
         messages=messages,
@@ -35,21 +34,10 @@ async def get_completion(
         presence_penalty=0.0,
         response_format={"type": response_format}
     )
-    duration = time.time() - start_time  # Calculate duration
+    duration = time.time() - start_time
     return (
         completion.choices[0].message.content,
         completion.usage.prompt_tokens,
         completion.usage.completion_tokens,
         duration
     )
-
-
-def create_system_message(template, **kwargs):
-    return {"role": "system", "content": template.format(**kwargs)}
-
-def create_user_message(template, **kwargs):
-    return {"role": "user", "content": template.format(**kwargs)}
-
-def create_ai_message(template, **kwargs):
-    return {"role": "assistant", "content": template.format(**kwargs)}
-    

@@ -1,0 +1,136 @@
+My goal is to make the process run in parallel without blocking. Im making api calls to openai to generate code
+afterwards its being tested with unit tests. at the moment the get_test_results function is somehow blocking it.
+therefore ive created a custom file to test this process and make it work.
+
+Working example: ```
+import asyncio
+import random
+import traceback
+
+# Simulates the code generation process, returning the 'truncate_number' function as a string
+async def imitate_llm_codegen():
+    random_sleep_time = random.randint(1, 5)
+    await asyncio.sleep(random_sleep_time)  # Simulate a delay
+    return """
+def truncate_number(number: float) -> float:
+    return number - int(number)
+"""
+
+# Executes test cases for the generated function using exec()
+async def execute_testcases(generated_code, test_case_str):
+    namespace = {"candidate": None}  # Predefine 'candidate' in the namespace
+    exec(generated_code, namespace)  # Execute the generated code
+    namespace["candidate"] = namespace["truncate_number"]  # Assign the generated function to 'candidate'
+
+    # Wrap the test case in a try-except block to capture and log assertion errors
+    try:
+        exec(test_case_str, namespace)  # Execute the test case
+        test_passed = True
+    except AssertionError as e:
+        print("AssertionError:", e)
+        traceback.print_exc()  # Print the traceback to help with debugging
+        test_passed = False
+    except Exception as e:
+        print(f"Unexpected exception type {type(e).__name__}: {e}")
+        traceback.print_exc()  # Print the traceback for any other exceptions
+        test_passed = False
+
+    return test_passed
+
+# Runs a single task: code generation followed by test execution
+async def run_single_task(test_case_str):
+    generated_code = await imitate_llm_codegen()
+    test_results = await execute_testcases(generated_code, test_case_str)
+    return test_results
+
+# Main function to run 100 parallel tasks
+async def run_tasks_async(num_tasks=100):
+    # Define the test case as a string, using 'candidate' as the function to test
+    test_case_str = "assert candidate(3.5) == 0.5"
+
+    tasks = [run_single_task(test_case_str) for _ in range(num_tasks)]
+    results = await asyncio.gather(*tasks)
+
+    passed_tests = sum(results)
+    print(f"All tasks completed. {passed_tests}/{num_tasks} tests passed.")
+
+# Execute the async function to run 100 parallel tasks
+asyncio.run(run_tasks_async(100))
+
+```
+
+we need to apply these principles to:
+```
+import asyncio
+import argparse
+from utils.code_generation import gen_function, gen_reflection, gen_refined_function
+from utils.storage import load_benchmark, save_benchmark_results, load_test_cases
+from utils.test_execution import get_test_results
+from typing import List
+
+async def async_refine_code(item, model_for_init, model_for_reflection, model_for_refinement, max_iterations, test_cases):
+    print(f"Processing item {item['task_id']}")
+    generated_code, prompt_tokens, completions_tokens, duration  = await gen_function(item["prompt"], model_for_init)
+    print(f"Generated code for item {item['task_id']}")
+    test_results, is_solved = await get_test_results(generated_code, test_cases)
+    
+    print(f"Processed item {item['task_id']}")
+    return {
+        "task_id": item["task_id"],
+        "generated_code": generated_code,
+        "is_solved": is_solved
+    }
+
+async def process_single_chunk(chunk, model_for_init, model_for_reflection, model_for_refinement, max_iterations, test_cases):
+    tasks = [
+    async_refine_code(
+        item,
+        model_for_init,
+        model_for_reflection,
+        model_for_refinement,
+        max_iterations,
+        [test_case for test_cases in test_cases for test_case in test_cases["test_cases"] if test_cases["task_id"] == item["task_id"]]
+    ) 
+    for item in chunk
+    ]
+    return await asyncio.gather(*tasks)
+
+async def process_chunks(benchmark_data, model_for_init, model_for_reflection, model_for_refinement, max_iterations, tests_cases, chunk_size):
+    chunks = [benchmark_data[i:i + chunk_size] for i in range(0, len(benchmark_data), chunk_size)]
+    all_results = []
+    for chunk in chunks:
+        results = await process_single_chunk(chunk, model_for_init, model_for_reflection, model_for_refinement, max_iterations, tests_cases)
+        all_results.extend(results)
+    return all_results
+
+async def main(model_for_init, model_for_reflection, model_for_refinement, max_iterations, benchmark_type, chunk_size, delay_seconds, tests_path):
+    benchmark_data = load_benchmark(benchmark_type)
+    test_cases = load_test_cases()
+    all_results = await process_chunks(benchmark_data, model_for_init, model_for_reflection, model_for_refinement, max_iterations, test_cases, chunk_size)
+    
+    # Save results
+    for result in all_results:
+        save_benchmark_results(result["task_id"], result["generated_code"], "Your desired format here")
+    print(f"Processed {len(all_results)} items")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Run async tasks for code generation with iterative refinement.')
+    parser.add_argument('--model_for_init', type=str, required=True, help='Model parameter for initial code generation.')
+    parser.add_argument('--model_for_reflection', type=str, required=True, help='Model parameter for reflection.')
+    parser.add_argument('--model_for_refinement', type=str, required=True, help='Model parameter for refinement.')
+    parser.add_argument('--max_iterations', type=int, required=True, help='Maximum number of iterations for refinement.')
+    parser.add_argument('--benchmark_type', type=str, required=True, help='"all" or "50" to specify the benchmark dataset.')
+    parser.add_argument('--chunk_size', type=int, required=True, help='Number of items per chunk for parallel processing.')
+    parser.add_argument('--delay_seconds', type=int, required=True, help='Delay between processing chunks to manage rate limits.')
+    parser.add_argument('--tests_path', type=str, required=True, help='Path to test cases for evaluating generated code.')
+
+    args = parser.parse_args()
+
+    asyncio.run(main(args.model_for_init, args.model_for_reflection, args.model_for_refinement, args.max_iterations, args.benchmark_type, args.chunk_size, args.delay_seconds, args.tests_path))
+
+```
+
+at get_test_results the params have this shape:
+generated_code: 'def truncate_number(number: float) -> float:\n    return number - int(number)'
+test_cases: ['assert candidate(3.5) == 0.5', 'assert abs(candidate(1.33) - 0.33) < 1e-6', 'assert abs(candidate(123.456) - 0.456) < 1e-6']
+

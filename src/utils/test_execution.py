@@ -1,135 +1,36 @@
-from typing import *
-from utils.data_conversion import split_tests_into_individual_functions, extract_function_name, remove_function_definition_from_test, add_typing_package_to_code_solution, remove_typing_package_from_code_solution
-import multiprocessing
-import functools
+import asyncio
+import ast
 
-# def run_test_with_timeout(solution_function, test, timeout):
-#     # Define a wrapper function to execute the test
-#     def test_wrapper(queue, solution_code, test):
-#         namespace = {}
-#         exec(solution_code, namespace)  # Execute solution code in isolated namespace
 
-#         # Extract solution function from namespace
-#         function_name = extract_function_name(solution_code)
-#         solution_function = namespace[function_name]
+def extract_function_name(code: str) -> str:
+    tree = ast.parse(code)
 
-#         # Prepare test execution environment
-#         test_namespace = dict(namespace)
-#         exec(test, test_namespace)  # Execute test code, including check function definition
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef):
+            return node.name  # Return the name of the first top-level function
 
-#         try:
-#             # Call check function with the solution function
-#             test_namespace['check'](solution_function)
-#             queue.put("passed")
-#         except AssertionError:
-#             queue.put("failed")
-#         except Exception as e:
-#             error_info = f"{type(e).__name__}: {str(e)}"
-#             queue.put(("error", error_info))
+    raise ValueError("No function definition found in the provided code.")
 
-#     # Create a multiprocessing Queue to retrieve the result from the subprocess
-#     queue = multiprocessing.Queue()
+async def get_test_results_async(generated_code: str, test_cases: list):
+    function_name = extract_function_name(generated_code)
+    modified_test_cases = [test_case.replace("candidate", function_name) for test_case in test_cases]
+    namespace = {}
+    exec("from typing import *\n" + generated_code, namespace)
 
-#     # Prepare the solution code for execution in the subprocess
-#     solution_executable = functools.partial(test_wrapper, queue, solution_function)
-
-#     # Wrap the test function to pass the necessary arguments
-#     process = multiprocessing.Process(target=solution_executable, args=(test,))
-
-#     # Start the process and wait for it to finish or timeout
-#     process.start()
-#     process.join(timeout)
-
-#     # Determine the outcome based on whether the process finished before the timeout
-#     if process.is_alive():
-#         process.terminate()  # Terminate the process if it is still running
-#         process.join()
-#         return "timeout", "Function execution exceeded time limit"
-#     else:
-#         result = queue.get()  # Retrieve the result from the queue
-#         return result
-    
-def run_test_with_timeout(solution_function, test, timeout):
-    # Define a wrapper function to execute the test
-    def test_wrapper(queue, solution_code, test):
-        namespace = {}
-        exec(solution_code, namespace)  # Execute solution code in isolated namespace
-
-        # Extract solution function from namespace
-        function_name = extract_function_name(solution_code)
-        solution_function = namespace[function_name]
-
-        # Prepare test execution environment
-        test_namespace = dict(namespace)
-        exec(test, test_namespace)  # Execute test code, including check function definition
-
+    async def run_test_case(test_case_str):
         try:
-            # Call check function with the solution function
-            test_namespace['check'](solution_function)
-            queue.put("passed")
-        except AssertionError:
-            queue.put("failed")
+            # Convert the synchronous exec() call into something that can be awaited using asyncio
+            loop = asyncio.get_running_loop()
+            await loop.run_in_executor(None, exec, test_case_str, namespace)
+            return True, test_case_str
+        # except AssertionError:
+        #     return False, test_case_str + " (AssertionError)"
         except Exception as e:
-            error_info = f"{type(e).__name__}: {str(e)}"
-            queue.put(("error", error_info))
+            # return False, test_case_str + f" ({type(e).__name__}: {str(e)})"
+            return False, test_case_str + f" ({type(e).__name__}: {str(e)})"
 
-    # Create a multiprocessing Queue to retrieve the result from the subprocess
-    queue = multiprocessing.Queue()
-
-    # Prepare the solution code for execution in the subprocess
-    solution_executable = functools.partial(test_wrapper, queue, solution_function, test)
-
-    # Wrap the test function to pass the necessary arguments
-    process = multiprocessing.Process(target=solution_executable)
-
-    # Start the process and wait for it to finish or timeout
-    process.start()
-    process.join(timeout)
-
-    # Determine the outcome based on whether the process finished before the timeout
-    if process.is_alive():
-        process.terminate()  # Terminate the process if it is still running
-        process.join()
-        return "timeout", "Function execution exceeded time limit"
-    else:
-        if process.exitcode == 0:
-            # Normal exit, retrieve the result
-            return queue.get()
-        else:
-            # Abnormal exit, interpret as potential stack overflow or other crash
-            return "error", "Process terminated abnormally, potentially due to stack overflow or other critical error"
-
-
-def run_tests(solution_code: str, tests: list, timeout=15):
-    results = {
-        "passed_tests": [],
-        "failed_tests": [],
-    }
-
-    for test in tests:
-        result = run_test_with_timeout(solution_code, test, timeout)
-        test = remove_function_definition_from_test(test)
-        if result == "passed":
-            results["passed_tests"].append(test)
-        elif result == "failed":
-            results["failed_tests"].append(test)
-        else:
-            # Handle timeout or other errors
-            error_type, error_info = result
-            if error_type == "timeout":
-                results["failed_tests"].append(("TimeoutError: Execution exceeded time limit for: " + test))
-            else:
-                results["failed_tests"].append((error_info + " for: " + test))
-
-    if len(results["failed_tests"]) > 0 or len(results["failed_tests"]) > 0:
-        return results, False
-    else:
-        return results, True
-        
-    
-
-def get_test_results(code_solution: str, tests: str):
-    individual_tests = split_tests_into_individual_functions(tests)
-    code_solution = add_typing_package_to_code_solution(code_solution)
-    return run_tests(code_solution, individual_tests)  
-
+    test_results = await asyncio.gather(*(run_test_case(test_case) for test_case in modified_test_cases))
+    passed_tests = [result for result in test_results if result[0]]
+    failed_tests = [result for result in test_results if not result[0]]
+    is_solved = len(passed_tests) == len(modified_test_cases)
+    return {"passed_tests": [pt[1] for pt in passed_tests], "failed_tests": [ft[1] for ft in failed_tests]}, is_solved

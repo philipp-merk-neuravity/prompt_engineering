@@ -17,9 +17,9 @@
       "console": "integratedTerminal",
       "args": [
         "--model", "gpt-3.5-turbo-0125",
-        "--prompt_type", "scot",
+        "--prompt_type", "agentCoder",
         "--benchmark_type", "all",
-        "--chunk_size", "46",
+        "--chunk_size", "160",
         "--delay_seconds", "20"
       ],
       "cwd": "${workspaceFolder}/src"
@@ -34,13 +34,30 @@
         "--model_for_init", "gpt-3.5-turbo-0125",
         "--model_for_reflection", "gpt-3.5-turbo-0125",
         "--model_for_refinement", "gpt-3.5-turbo-0125",
-        "--max_iterations", "2",
+        "--prompt_for_reflection", "reflexion_without_few_shot",
+        "--prompt_for_refinement", "reflexion_without_few_shot",
+        "--max_iterations", "4",
         "--benchmark_type", "all",
-        "--chunk_size", "20",
-        "--delay_seconds", "20",
+        "--chunk_size", "12",
         "--tests_path", ""
       ],
       "cwd": "${workspaceFolder}/src"
     },
+    {
+      "name": "Python: Evaluate Functional Correctness",
+      "type": "python",
+      "request": "launch",
+      "program": "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py",
+      "args": [
+          "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/reflection/standard/gpt-3/11/11.jsonl",
+          "--problem_file=/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl"
+      ],
+      "console": "integratedTerminal",
+      "pythonPath": "/home/neuravity/dev/prompt_engineering/venv/bin/python",
+      "env": {
+          "PYTHONUNBUFFERED": "1"
+      },
+      "cwd": "${workspaceFolder}"
+    }
   ]
 }
