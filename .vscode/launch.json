@@ -17,10 +17,10 @@
       "console": "integratedTerminal",
       "args": [
         "--model", "gpt-3.5-turbo-0125",
-        "--prompt_type", "agentCoder",
+        "--prompt_type", "zero_shot_cot",
         "--benchmark_type", "all",
-        "--chunk_size", "160",
-        "--delay_seconds", "20"
+        "--chunk_size", "180",
+        "--delay_seconds", "10"
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -28,7 +28,7 @@
       "name": "Debug reflection.py with Args",
       "type": "python",
       "request": "launch",
-      "program": "${workspaceFolder}/src/async_reflection.py",
+      "program": "${workspaceFolder}/src/reflection.py",
       "console": "integratedTerminal",
       "args": [
         "--model_for_init", "gpt-3.5-turbo-0125",
@@ -39,7 +39,7 @@
         "--max_iterations", "4",
         "--benchmark_type", "all",
         "--chunk_size", "12",
-        "--tests_path", ""
+        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json"
       ],
       "cwd": "${workspaceFolder}/src"
     },

@@ -10,25 +10,24 @@ import time
 
 async def async_refine_code(item, model_for_init, model_for_reflection, model_for_refinement, prompt_for_reflection, prompt_for_refinement, max_iterations, test_cases, file_path_for_results):
     generated_code, prompt_tokens, completions_tokens, duration  = await gen_function(item["prompt"], model_for_init)
-    test_results, is_solved = await get_test_results_async(generated_code, test_cases)
-    test_results_as_str = convert_unit_test_results_to_str(test_results)
-
-    for iteration in range(max_iterations):
-        if is_solved :
+    iteration = 0
+    while iteration < max_iterations:
+        test_results, is_solved = await get_test_results_async(generated_code, test_cases)
+        test_results_as_str = convert_unit_test_results_to_str(test_results)
+        if is_solved or iteration == max_iterations - 1:
             break
         reflection, prompt_tokens_for_refl, completion_tokens_for_refl, duration_for_refl  = await gen_reflection(generated_code, test_results_as_str, model_for_reflection, prompt_for_reflection)
         generated_code, prompt_tokens_for_refinement, completions_tokens_for_refinement, duration_for_refinement = await gen_refined_function(item["prompt"], generated_code, test_results_as_str, reflection, model_for_refinement, prompt_for_refinement)
-        test_results, is_solved = await get_test_results_async(generated_code, test_cases)
-        test_results_as_str = convert_unit_test_results_to_str(test_results)
-
         prompt_tokens += prompt_tokens_for_refinement + prompt_tokens_for_refl
         completions_tokens += completions_tokens_for_refinement + completion_tokens_for_refl
         duration += duration_for_refinement + duration_for_refl
         iteration += 1
+        
     results_for_task = {
         "task_id": item["task_id"],
         "generated_code": generated_code,
         "is_solved": is_solved,
+        "iterations": iteration,
         "prompt_tokens": prompt_tokens,
         "completions_tokens": completions_tokens,
         "duration": duration
@@ -63,9 +62,8 @@ async def process_chunks(benchmark_data, model_for_init, model_for_reflection, m
     return all_results
 
 async def main(model_for_init, model_for_reflection, model_for_refinement, prompt_for_reflection, prompt_for_refinement, max_iterations, benchmark_type, chunk_size, tests_path):
-    tests_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json"
+    tests_path = tests_path
     file_name_config = {
-        "rounds": 3,
         "use_gpt-4_at_round": None,
         "prompt_for_reflection": prompt_for_reflection,
         "prompt_for_refinement": prompt_for_refinement,

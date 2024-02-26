@@ -23,7 +23,7 @@ async def main(model, prompt_type, benchmark_type, chunk_size, delay_seconds):
         print(f"Processing chunk {i} to {i+chunk_size}")
         chunk = benchmark_data[i:i+chunk_size]
         
-        if prompt_type == "scot":
+        if prompt_type == "scot" or prompt_type == "synth_few_shot_split":
             preprocessed_data = await preprocess_prompts(chunk, prompt_type)
             preprocessed_prompts = [item[0] for item in preprocessed_data]
             results = await process_chunk(chunk, model, prompt_type, preprocessed_prompts)

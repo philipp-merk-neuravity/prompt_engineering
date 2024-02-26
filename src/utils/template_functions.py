@@ -1,5 +1,5 @@
-from .prompt_templates.pre_template import (SCOT_PSEUDOCODE_GEN_INSTRUCTION, SCOT_PSEUDOCODE_GEN_FEW_SHOT)
-from .prompt_templates.solution_template import (AC_CODE_GEN_INSTRUCTION, IO_CODE_GEN_FUNCTION_SIGNATURE, IO_CODE_GEN_FEW_SHOT, IO_CODE_GEN_INSTRUCTION, SCOT_CODE_GEN_FEW_SHOT, SCOT_CODE_GEN_INSTRUCTION, SYNTH_FEW_SHOT_GEN_FEW_SHOT, SYNTH_FEW_SHOT_GEN_INSTRUCTION)
+from .prompt_templates.pre_template import (SYNTH_FEW_SHOT_GEN_INSTRUCTION_PRE, SYNTH_FEW_SHOT_GEN_FEW_SHOT_PRE, SCOT_PSEUDOCODE_GEN_INSTRUCTION, SCOT_PSEUDOCODE_GEN_FEW_SHOT)
+from .prompt_templates.solution_template import (ZERO_SHOT_COT_PLACEHOLDER, ZERO_SHOT_COT_INSTRUCTION, AC_CODE_GEN_FEW_SHOT, AC_CODE_GEN_INSTRUCTION, SYNTH_FEW_SHOT_GEN_FEW_SHOT_POST, SYNTH_FEW_SHOT_GEN_INSTRUCTION_POST, IO_CODE_GEN_FUNCTION_SIGNATURE, IO_CODE_GEN_FEW_SHOT, IO_CODE_GEN_INSTRUCTION, SCOT_CODE_GEN_FEW_SHOT, SCOT_CODE_GEN_INSTRUCTION, SYNTH_FEW_SHOT_GEN_FEW_SHOT, SYNTH_FEW_SHOT_GEN_INSTRUCTION)
 from .prompt_templates.syntax_correction_template import (SYNTAX_CORRECTION_CODE_SOLUTION, SYNTAX_CORRECTION_FEEDBACK, SYNTAX_CORRECTION_INSTRUCTION)
 from .prompt_templates.reflection_template import (SELF_REFLECTION_CHAT_INSTRUCTION_2, SELF_REFLECTION_FEW_SHOT_2, SELF_REFLECTION_CHAT_INSTRUCTION, SELF_REFLECTION_CURRENT_FEEDBACK, SELF_REFLECTION_FEW_SHOT)
 from .prompt_templates.refinement_template import (REFINEMENT_TASK, REFINEMENT_FEW_SHOT, REFINEMENT_FUNC_SIGNATURE, REFINEMENT_INSTRUCTION, REFINEMENT_PREVIOUS_FUNCTION_IMPL, REFINEMENT_REFLECTION, REFINEMENT_TESTS)
@@ -19,6 +19,11 @@ async def get_messages_for_prompt_preprocessing(function_description: str, promp
         return [
             create_system_message(SCOT_PSEUDOCODE_GEN_INSTRUCTION),
             create_user_message(SCOT_PSEUDOCODE_GEN_FEW_SHOT, function_description=function_description),
+        ]
+    if prompt_type == "synth_few_shot_split":
+        return [
+            create_system_message(SYNTH_FEW_SHOT_GEN_INSTRUCTION_PRE),
+            create_user_message(SYNTH_FEW_SHOT_GEN_FEW_SHOT_PRE, function_description=function_description),
         ]
 
 async def get_messages_for_code_generation(function_description: str, prompt_type="io", preprocessed_prompt=None):
@@ -46,12 +51,15 @@ async def get_messages_for_code_generation(function_description: str, prompt_typ
             create_system_message(IO_CODE_GEN_INSTRUCTION),
             create_user_message(IO_CODE_GEN_FEW_SHOT + IO_CODE_GEN_FUNCTION_SIGNATURE, function_signature=function_description),
         ]
-    if prompt_type == "few_shot":
-        return ""
     if prompt_type == "synth_few_shot":
         return [
             create_system_message(SYNTH_FEW_SHOT_GEN_INSTRUCTION),
             create_user_message(SYNTH_FEW_SHOT_GEN_FEW_SHOT, function_description=function_description),
+        ]
+    if prompt_type == "synth_few_shot_split":
+        return [
+            create_system_message(SYNTH_FEW_SHOT_GEN_INSTRUCTION_POST),
+            create_user_message(SYNTH_FEW_SHOT_GEN_FEW_SHOT_POST, function_description=function_description, preprocessed_prompt=preprocessed_prompt),
         ]
     if prompt_type == "scot":
         return [
@@ -59,11 +67,14 @@ async def get_messages_for_code_generation(function_description: str, prompt_typ
             create_user_message(SCOT_CODE_GEN_FEW_SHOT, function_description=function_description, pseudo_code=preprocessed_prompt),
         ]
     if prompt_type == "zero_shot_cot":
-        return ""
+        return [
+            create_system_message(ZERO_SHOT_COT_INSTRUCTION),
+            create_user_message(ZERO_SHOT_COT_PLACEHOLDER, function_signature=function_description),
+        ]
     if prompt_type == "agentCoder":
         return [
-            create_system_message("You are a Python programming assistant that can answer with json format only."),
-            create_user_message(AC_CODE_GEN_INSTRUCTION, function_description=function_description),
+            create_system_message(AC_CODE_GEN_INSTRUCTION),
+            create_user_message(AC_CODE_GEN_FEW_SHOT, function_description=function_description),
         ]
     
 async def get_messages_for_test_generation(function_signature: str):

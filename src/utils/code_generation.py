@@ -20,9 +20,8 @@ async def evaluate_syntax_for_code_solution(code_solution: str, function_signatu
     return code_solution, prompt_tokens_all, completion_tokens_all, duration_for_syntax_correction
 
 async def gen_preprocessed_prompt(function_signature: str, prompt_type: str) -> str:
-    if (prompt_type == "scot"):
-        messages = get_messages_for_prompt_preprocessing(function_signature)
-        return await get_completion(messages)
+    messages = await get_messages_for_prompt_preprocessing(function_signature, prompt_type)
+    return await get_completion(messages)
 
 async def gen_function(function_description: str, model="gpt-3.5-turbo", prompt_type="io", preprocessed_prompt=None) -> tuple:
     response_format = "text"
@@ -78,17 +77,3 @@ async def gen_reflection_and_refined_function(function_signature: str, function_
         completion_tokens + completion_tokens_for_syntax_correction,
         duration + duration_for_syntax_correction
     )
-# agentCoder
-
-# def gen_function_ac(function_signature: str) -> str:
-#     messages = get_messages_for_code_generation_ac(function_signature)
-#     response = get_completion(messages)
-#     code_solution = response.split("Code Generation")[1]
-#     code_block = parse_code_block(code_solution)
-#     return evaluate_syntax_for_code_solution(code_block)
-
-# def gen_code_from_pseudocode(function_signature, pseudocode: str) -> str:
-#     messages = get_messages_for_code_generation_scot(function_description=function_signature, pseudo_code=pseudocode)
-#     code_solution = get_completion(messages)
-#     code_block = parse_code_block(code_solution)
-#     return evaluate_syntax_for_code_solution(code_block)

@@ -103,13 +103,12 @@ def save_benchmark_results_for_reflection(items, benchmark_type, strategy, file_
     return full_file_path
 
 def create_file_for_reflection(benchmark_type, strategy, file_name_config):
-    # Base directory path as per specifications
+    # Assuming static_path is defined elsewhere in your code
     base_path = f"{static_path}/{benchmark_type}/{strategy}"
     os.makedirs(base_path, exist_ok=True)
     
-    # Construct the name_config from the file_name_config values
+    # Construct the name_config from the file_name_config values, excluding 'rounds'
     name_config_elements = [
-        file_name_config['rounds'],
         file_name_config['prompt_for_reflection'],
         file_name_config['prompt_for_refinement'],
         file_name_config['model_for_reflection'],
