@@ -40,14 +40,19 @@ async def gen_function(function_description: str, model="gpt-3.5-turbo", prompt_
         duration + duration_for_syntax_correction
     )
 
-def gen_tests(function_signature: str, amount=1) -> List[str]:
-    messages = get_messages_for_test_generation(function_signature)
-    tests = get_completion(messages, max_tokens=4096)
-    tests_as_list = convert_tests_to_list(tests)
+async def gen_tests(function_signature: str, model: str, prompt_type: str, amount=1, response_format="text") -> List[str]:
+    response_format = "text"
+    if prompt_type == "agentCoder":
+        response_format = "json_object"
+    messages = await get_messages_for_test_generation(function_signature, prompt_type)
+    tests, prompt_tokens, completion_tokens, duration = await get_completion(messages, max_tokens=4096, model=model, response_format=response_format)
+    tests_as_list = convert_tests_to_list(tests, prompt_type)
     tests_with_function_def = split_tests_into_individual_functions(tests_as_list)
     correct_tests_with_function_def = filter_syntactically_correct_tests_ast(tests_with_function_def)
     tests_as_list = [remove_function_definition_from_test(test) for test in correct_tests_with_function_def]
-    return random.sample(tests_as_list, amount)
+    if amount < len(tests_as_list):
+        tests_as_list = random.sample(tests_as_list, amount)
+    return (tests_as_list, prompt_tokens, completion_tokens, duration)
 
 async def gen_reflection(function_implementation: str, unit_test_results: str, model: str, prompt: str) -> str:
     messages = await get_messages_for_self_reflection(function_implementation, unit_test_results, prompt)

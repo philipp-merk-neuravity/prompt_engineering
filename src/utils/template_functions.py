@@ -3,7 +3,7 @@ from .prompt_templates.solution_template import (ZERO_SHOT_COT_PLACEHOLDER, ZERO
 from .prompt_templates.syntax_correction_template import (SYNTAX_CORRECTION_CODE_SOLUTION, SYNTAX_CORRECTION_FEEDBACK, SYNTAX_CORRECTION_INSTRUCTION)
 from .prompt_templates.reflection_template import (SELF_REFLECTION_CHAT_INSTRUCTION_2, SELF_REFLECTION_FEW_SHOT_2, SELF_REFLECTION_CHAT_INSTRUCTION, SELF_REFLECTION_CURRENT_FEEDBACK, SELF_REFLECTION_FEW_SHOT)
 from .prompt_templates.refinement_template import (REFINEMENT_TASK, REFINEMENT_FEW_SHOT, REFINEMENT_FUNC_SIGNATURE, REFINEMENT_INSTRUCTION, REFINEMENT_PREVIOUS_FUNCTION_IMPL, REFINEMENT_REFLECTION, REFINEMENT_TESTS)
-from .prompt_templates.tests_template import (TEST_GEN_CHAT_INSTRUCTION, TEST_GEN_FEW_SHOT, TEST_GEN_FUNCTION_SIGNATURE)
+from .prompt_templates.tests_template import (TEST_GEN_CHAT_INSTRUCTION, TEST_GEN_FEW_SHOT, TEST_GEN_FUNCTION_SIGNATURE, TEST_GEN_FEW_SHOT_AC, TEST_GEN_INSTRUCTION_AC)
 
 def create_system_message(template, **kwargs):
     return {"role": "system", "content": template.format(**kwargs)}
@@ -77,12 +77,17 @@ async def get_messages_for_code_generation(function_description: str, prompt_typ
             create_user_message(AC_CODE_GEN_FEW_SHOT, function_description=function_description),
         ]
     
-async def get_messages_for_test_generation(function_signature: str):
-    return [
-        create_system_message(TEST_GEN_CHAT_INSTRUCTION),
-        create_user_message(TEST_GEN_FEW_SHOT + TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
-    ]
-
+async def get_messages_for_test_generation(function_signature: str, prompt_type="io"):
+    if prompt_type == "io":
+        return [
+            create_system_message(TEST_GEN_CHAT_INSTRUCTION),
+            create_user_message(TEST_GEN_FEW_SHOT + TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
+        ]
+    if prompt_type == "agentCoder":
+        return [
+            create_system_message(TEST_GEN_INSTRUCTION_AC),
+            create_user_message(TEST_GEN_FEW_SHOT_AC + TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
+        ]
 async def get_messages_for_self_reflection(function_implementation: str, unit_test_results: str, prompt: str):
     if prompt == "reflexion":
         return [

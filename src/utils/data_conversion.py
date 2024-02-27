@@ -3,7 +3,17 @@ import re
 import ast
 import json
 
-def convert_tests_to_list(tests: str) -> List[str]:
+def convert_tests_to_list(tests: str, prompt_type: str) -> List[str]:
+    if prompt_type == "agentCoder":
+        tests_dict = json.loads(tests)
+        assert_statements = []
+        # Iterate through each category of tests ('basic', 'edge', 'large_scale')
+        for category in tests_dict:
+            # Check each item in the list; filter out comments and keep assert statements
+            for item in tests_dict[category]:
+                if item.strip().startswith('assert'):
+                    assert_statements.append(item)
+        return assert_statements
     return tests.split('\n')
     
 def parse_code_block(string: str) -> Optional[str]:
@@ -53,7 +63,7 @@ def filter_syntactically_correct_tests_ast(tests):
 
     return correct_tests
 
-async def split_tests_into_individual_functions(unit_tests: List[str]) -> list:
+def split_tests_into_individual_functions(unit_tests: List[str]) -> list:
     return ["def check(candidate):\n    " + test for test in unit_tests]
 
 def extract_function_name(code):
@@ -66,7 +76,7 @@ def extract_function_name(code):
             return node.name  # Return the name of the first function found
     return None  # Return None if no function definition is found
 
-async def remove_function_definition_from_test(test: str) -> str:
+def remove_function_definition_from_test(test: str) -> str:
     test_without_def = test[test.index("\n") + 1:]
     return "\n".join(line[4:] if line.startswith("    ") else line for line in test_without_def.split("\n"))
 

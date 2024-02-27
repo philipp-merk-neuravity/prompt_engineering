@@ -10,6 +10,30 @@
       "cwd": "${workspaceFolder}"
     },
     {
+      "name": "Debug gen_tests.py with Args",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/gen_tests.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--model", "gpt-3.5-turbo-0125",
+        "--prompt_type", "agentCoder",
+        "--chunk_size", "20",
+      ],
+      "cwd": "${workspaceFolder}/src"
+    },
+    {
+      "name": "Debug eval_tests.py with Args",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/eval_tests.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--path_for_test_cases", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/agentCoder/gpt-3.5-turbo-0125/0/0.jsonl",
+      ],
+      "cwd": "${workspaceFolder}/src"
+    },
+    {
       "name": "Debug simple.py with Args",
       "type": "python",
       "request": "launch",
@@ -43,21 +67,6 @@
       ],
       "cwd": "${workspaceFolder}/src"
     },
-    {
-      "name": "Python: Evaluate Functional Correctness",
-      "type": "python",
-      "request": "launch",
-      "program": "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py",
-      "args": [
-          "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/reflection/standard/gpt-3/11/11.jsonl",
-          "--problem_file=/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl"
-      ],
-      "console": "integratedTerminal",
-      "pythonPath": "/home/neuravity/dev/prompt_engineering/venv/bin/python",
-      "env": {
-          "PYTHONUNBUFFERED": "1"
-      },
-      "cwd": "${workspaceFolder}"
-    }
+  
   ]
 }

@@ -62,6 +62,30 @@ def save_benchmark_results(items, benchmark_type, strategy, prompt_type, model):
     
     return benchmark_results_file_path  # Optionally return the file path for further use
 
+def save_generated_tests(items, prompt_type, model):
+    # Assuming static_path is the base directory where all benchmarks are stored
+
+    base_path = f"{static_path}/test_cases/{prompt_type}/{model}"
+    os.makedirs(base_path, exist_ok=True)
+    
+    # Determine the next available file_id by inspecting existing folders
+    existing_ids = [int(name) for name in os.listdir(base_path) if name.isdigit()]
+    file_id = max(existing_ids) + 1 if existing_ids else 0
+    
+    # Create the specific directory for this file_id
+    specific_path = f"{base_path}/{file_id}"
+    os.makedirs(specific_path, exist_ok=True)  # This correctly creates the directory
+    
+    # Define the file path where the results will be stored
+    benchmark_results_file_path = f"{specific_path}/{file_id}.jsonl"
+    
+    # Write the items to the file
+    with open(benchmark_results_file_path, 'a') as file:
+        for item in items:
+            file.write(json.dumps(item) + '\n')
+    
+    return benchmark_results_file_path  # Optionally return the file path for further use
+
 def save_benchmark_results_for_reflection(items, benchmark_type, strategy, file_name_config):
     # Base directory path as per specifications
     base_path = f"{static_path}/{benchmark_type}/{strategy}"
