@@ -7,14 +7,17 @@ def convert_tests_to_list(tests: str, prompt_type: str) -> List[str]:
     if prompt_type == "agentCoder":
         tests_dict = json.loads(tests)
         assert_statements = []
-        # Iterate through each category of tests ('basic', 'edge', 'large_scale')
+        # Iterate through each category of tests ('basic', 'edge')
         for category in tests_dict:
-            # Check each item in the list; filter out comments and keep assert statements
-            for item in tests_dict[category]:
-                if item.strip().startswith('assert'):
-                    assert_statements.append(item)
+            # Iterate through each test scenario in the category
+            for test_scenario in tests_dict[category]:
+                # Extract the 'test' string from each scenario
+                assert_statements.append(test_scenario['test'])
         return assert_statements
-    return tests.split('\n')
+    parts = tests.split('assert')[1:]
+    # Prepend 'assert ' (with a space) back to each part and strip leading/trailing whitespace/newlines
+    assert_statements = ['assert ' + part.strip() for part in parts]
+    return assert_statements
     
 def parse_code_block(string: str) -> Optional[str]:
 

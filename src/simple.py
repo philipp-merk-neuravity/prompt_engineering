@@ -31,7 +31,8 @@ async def main(model, prompt_type, benchmark_type, chunk_size, delay_seconds):
                      preprocessed_data[idx][1] + results[idx][1],
                      preprocessed_data[idx][2] + results[idx][2],
                      preprocessed_data[idx][3] + results[idx][3]) for idx, result in enumerate(results)]
-        results = await process_chunk(chunk, model, prompt_type)
+        else:
+            results = await process_chunk(chunk, model, prompt_type)
         
         for result, item in zip(results, chunk):
             items_to_save.append({

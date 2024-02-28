@@ -1,0 +1,2983 @@
+[
+    {
+        "task_id": "HumanEval/0",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert has_close_elements([1.0, 2.0, 3.0], 0.5) == False",
+                "assert has_close_elements([1.0, 2.8, 3.0, 4.0, 5.0, 2.0], 0.3) == True",
+                "assert has_close_elements([1.0, 1.1, 2.5, 3.6], 0.15) == True",
+                "assert has_close_elements([0.1, 0.2, 0.4], 0.05) == False",
+                "assert has_close_elements([-1.0, -2.0, -3.0], 1.1) == True",
+                "assert has_close_elements([], 0.5) == False",
+                "assert has_close_elements([1.5], 0.5) == False",
+                "assert has_close_elements([1.0, 2.0, 3.0, 2.1], 0.15) == True",
+                "assert has_close_elements([1.0, 2.0, 3.0, 4.0, 5.0], 10.0) == True"
+            ],
+            "failed_tests": [
+                "assert has_close_elements([10.0, 20.0, 30.0], 9.9) == True (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/1",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert separate_paren_groups('( ) (( )) (( )( ))') == ['()', '(())', '(()())']",
+                "assert separate_paren_groups('((()))(())') == ['((()))', '(())']",
+                "assert separate_paren_groups('()') == ['()']",
+                "assert separate_paren_groups('') == []",
+                "assert separate_paren_groups('((((()))))') == ['((((()))))']",
+                "assert separate_paren_groups('(())()') == ['(())', '()']",
+                "assert separate_paren_groups('((())())') == ['((())())']",
+                "assert separate_paren_groups('()((()))()') == ['()', '((()))', '()']"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/2",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert truncate_number(3.5) == 0.5",
+                "assert truncate_number(0.01) == 0.01",
+                "assert truncate_number(1.0) == 0.0"
+            ],
+            "failed_tests": [
+                "assert truncate_number(10.99) == 0.99 (AssertionError: )",
+                "assert truncate_number(100.001) == 0.001 (AssertionError: )",
+                "assert truncate_number(1234.5678) == 0.5678 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/3",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert below_zero([1, 2, 3]) == False",
+                "assert below_zero([1, 2, -4, 5]) == True",
+                "assert below_zero([-1, -2, -3]) == True",
+                "assert below_zero([100, -50, -50]) == False",
+                "assert below_zero([0, 0, 0, 0]) == False",
+                "assert below_zero([1, -1, 1, -1, 1, -1]) == False",
+                "assert below_zero([5, -10, 15, -20, 25]) == True"
+            ],
+            "failed_tests": [
+                "assert below_zero([10, -5, -3, -2]) == True (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/4",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert mean_absolute_deviation([1.0, 2.0, 3.0, 4.0]) == 1.0",
+                "assert mean_absolute_deviation([1.0, 1.0, 1.0, 1.0]) == 0.0",
+                "assert mean_absolute_deviation([-1.0, 0.0, 1.0]) == 0.6666666666666666",
+                "assert mean_absolute_deviation([5.0]) == 0.0",
+                "assert mean_absolute_deviation([-2.0, -3.0, -4.0, -5.0]) == 1.0"
+            ],
+            "failed_tests": [
+                "assert mean_absolute_deviation([10.0, 12.0, 23.0, 23.0, 16.0]) == 4.8 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/5",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert intersperse([], 4) == []",
+                "assert intersperse([1, 2, 3], 4) == [1, 4, 2, 4, 3]",
+                "assert intersperse([1], 0) == [1]",
+                "assert intersperse([1, 2], -1) == [1, -1, 2]",
+                "assert intersperse([1, 2, 3, 4], 0) == [1, 0, 2, 0, 3, 0, 4]",
+                "assert intersperse([-1, -2, -3], 5) == [-1, 5, -2, 5, -3]",
+                "assert intersperse([100, 200], 50) == [100, 50, 200]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/6",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert parse_nested_parens('(()()) ((())) () ((())()())') == [2, 3, 1, 3]",
+                "assert parse_nested_parens('') == []",
+                "assert parse_nested_parens('() () ()') == [1, 1, 1]",
+                "assert parse_nested_parens('(()) (())') == [2, 2]",
+                "assert parse_nested_parens('() ((())) (((())))') == [1, 3, 4]",
+                "assert parse_nested_parens('(((())))') == [4]"
+            ],
+            "failed_tests": [
+                "assert parse_nested_parens('((( ))) (((())))') == [3, 4] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/7",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert filter_by_substring([], 'a') == []",
+                "assert filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a') == ['abc', 'bacd', 'array']",
+                "assert filter_by_substring(['hello', 'world'], 'x') == []",
+                "assert filter_by_substring(['python', 'java', 'c++', 'javascript'], 'java') == ['java', 'javascript']",
+                "assert filter_by_substring(['123', '456', '789'], '1') == ['123']",
+                "assert filter_by_substring(['test', 'testing', 'tester'], 'test') == ['test', 'testing', 'tester']",
+                "assert filter_by_substring(['uppercase', 'UPPERCASE'], 'UP') == ['UPPERCASE']"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/8",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert sum_product([]) == (0, 1)",
+                "assert sum_product([1, 2, 3, 4]) == (10, 24)",
+                "assert sum_product([1, -1, 1, -1]) == (0, 1)",
+                "assert sum_product([-1, -2, -3, -4]) == (-10, 24)",
+                "assert sum_product([0, 2, 3, 4]) == (9, 0)",
+                "assert sum_product([10]) == (10, 10)",
+                "assert sum_product([2, 2, 2, 2]) == (8, 16)"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/9",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert rolling_max([1, 2, 3, 2, 3, 4, 2]) == [1, 2, 3, 3, 3, 4, 4]",
+                "assert rolling_max([5, 3, 1, 2, 4]) == [5, 5, 5, 5, 5]",
+                "assert rolling_max([-1, -2, -3, -2, -1]) == [-1, -1, -1, -1, -1]",
+                "assert rolling_max([1]) == [1]",
+                "assert rolling_max([]) == []",
+                "assert rolling_max([2, 2, 2, 2, 2]) == [2, 2, 2, 2, 2]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/10",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert is_palindrome(\"radar\") == True",
+                "assert make_palindrome(\"ab\") == \"aba\"",
+                "assert make_palindrome(\"cat\") == \"catac\"",
+                "assert make_palindrome(\"a\") == \"a\"",
+                "assert is_palindrome(\"12321\") == True",
+                "assert is_palindrome(\"level\") == True",
+                "assert is_palindrome(\"a\") == True",
+                "assert is_palindrome(\"123456\") == False",
+                "assert is_palindrome(\"python\") == False",
+                "assert is_palindrome(\"racecar\") == True",
+                "assert make_palindrome(\"123\") == \"12321\""
+            ],
+            "failed_tests": [
+                "assert make_palindrome(\"step\") == \"steppets\" (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/11",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert string_xor('010', '110') == '100'",
+                "assert string_xor('1', '1') == '0'",
+                "assert string_xor('111', '000') == '111'",
+                "assert string_xor('101010', '010101') == '111111'",
+                "assert string_xor('1111', '1111') == '0000'",
+                "assert string_xor('', '') == ''",
+                "assert string_xor('0', '0') == '0'",
+                "assert string_xor('1', '0') == '1'"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/12",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert longest([]) is None",
+                "assert longest(['a', 'b', 'c']) == 'a'",
+                "assert longest(['a', 'bb', 'ccc']) == 'ccc'",
+                "assert longest(['hello', 'world', 'python', 'code']) == 'python'",
+                "assert longest(['tie', 'at', 'first', 'place', 'place']) == 'first'",
+                "assert longest(['short', 'longer', 'longest', 'longer']) == 'longest'"
+            ],
+            "failed_tests": [
+                "assert longest(['all', 'same', 'size']) == 'all' (AssertionError: )",
+                "assert longest(['', 'empty', 'strings', 'here']) == '' (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/13",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert greatest_common_divisor(3, 5) == 1",
+                "assert greatest_common_divisor(25, 15) == 5",
+                "assert greatest_common_divisor(100, 10) == 10",
+                "assert greatest_common_divisor(14, 49) == 7",
+                "assert greatest_common_divisor(17, 17) == 17",
+                "assert greatest_common_divisor(0, 5) == 5",
+                "assert greatest_common_divisor(5, 0) == 5",
+                "assert greatest_common_divisor(0, 0) == 0",
+                "assert greatest_common_divisor(-25, 15) == 5"
+            ],
+            "failed_tests": [
+                "assert greatest_common_divisor(25, -15) == 5 (AssertionError: )",
+                "assert greatest_common_divisor(-25, -15) == 5 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/14",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert all_prefixes(\"abc\") == [\"a\", \"ab\", \"abc\"]",
+                "assert all_prefixes(\"\") == []",
+                "assert all_prefixes(\"a\") == [\"a\"]",
+                "assert all_prefixes(\"ab\") == [\"a\", \"ab\"]",
+                "assert all_prefixes(\"hello\") == [\"h\", \"he\", \"hel\", \"hell\", \"hello\"]",
+                "assert all_prefixes(\"xyz\") == [\"x\", \"xy\", \"xyz\"]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/15",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert string_sequence(0) == '0'",
+                "assert string_sequence(5) == '0 1 2 3 4 5'",
+                "assert string_sequence(1) == '0 1'",
+                "assert string_sequence(-1) == ''",
+                "assert string_sequence(3) == '0 1 2 3'",
+                "assert string_sequence(10) == '0 1 2 3 4 5 6 7 8 9 10'"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/16",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert count_distinct_characters('xyzXYZ') == 3",
+                "assert count_distinct_characters('Jerry') == 4",
+                "assert count_distinct_characters('') == 0",
+                "assert count_distinct_characters('aaaaa') == 1",
+                "assert count_distinct_characters('AbCdEfG') == 7",
+                "assert count_distinct_characters('1234567890') == 10",
+                "assert count_distinct_characters('!@#$%^&*()') == 10",
+                "assert count_distinct_characters('AaBbCcDdEeFf') == 6"
+            ],
+            "failed_tests": [
+                "assert count_distinct_characters('HelloWorld') == 8 (AssertionError: )",
+                "assert count_distinct_characters('NonDistinct') == 8 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/17",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert parse_music('o o| .| o| o| .| .| .| .| o o') == [4, 2, 1, 2, 2, 1, 1, 1, 1, 4, 4]",
+                "assert parse_music('o') == [4]",
+                "assert parse_music('o|') == [2]",
+                "assert parse_music('.|') == [1]",
+                "assert parse_music('o o o') == [4, 4, 4]",
+                "assert parse_music('.| .| .| .|') == [1, 1, 1, 1]",
+                "assert parse_music('') == []",
+                "assert parse_music('o| .| o o| .|') == [2, 1, 4, 2, 1]",
+                "assert parse_music('o| .| .| o') == [2, 1, 1, 4]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/18",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert how_many_times('', 'a') == 0",
+                "assert how_many_times('aaa', 'a') == 3",
+                "assert how_many_times('aaaa', 'aa') == 3",
+                "assert how_many_times('abcabcabc', 'abc') == 3",
+                "assert how_many_times('abcabcabc', 'a') == 3",
+                "assert how_many_times('abcabcabc', 'd') == 0",
+                "assert how_many_times('abababab', 'abab') == 3",
+                "assert how_many_times('hello world', 'o') == 2",
+                "assert how_many_times('hello world', 'hello') == 1",
+                "assert how_many_times('aaaaa', 'aa') == 4",
+                "assert how_many_times('testtesttest', 'testtest') == 2"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/19",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert sort_numbers('three one five') == 'one three five'",
+                "assert sort_numbers('nine eight seven') == 'seven eight nine'",
+                "assert sort_numbers('zero two four six') == 'zero two four six'",
+                "assert sort_numbers('') == ''",
+                "assert sort_numbers('four four four') == 'four four four'",
+                "assert sort_numbers('nine zero one two') == 'zero one two nine'"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/20",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.2]) == (2.0, 2.2)",
+                "assert find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0]) == (2.0, 2.0)",
+                "assert find_closest_elements([-1.0, -2.0, -3.0, -2.5]) == (-2.5, -2.0)",
+                "assert find_closest_elements([0.1, 0.2, 0.3, 0.4, 0.5, 0.55]) == (0.5, 0.55)",
+                "assert find_closest_elements([100.0, 200.0, 300.0, 400.0, 150.0]) == (100.0, 150.0)",
+                "assert find_closest_elements([1.234, 1.233, 1.235]) == (1.233, 1.234)"
+            ],
+            "failed_tests": [
+                "assert find_closest_elements([10.5, 10.1, 10.4, 10.3]) == (10.3, 10.4) (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/21",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0]) == [0.0, 0.25, 0.5, 0.75, 1.0]",
+                "assert rescale_to_unit([10.0, 20.0]) == [0.0, 1.0]",
+                "assert rescale_to_unit([-2.0, 0.0, 2.0]) == [0.0, 0.5, 1.0]",
+                "assert rescale_to_unit([-1.0, -0.5, 0.0, 0.5, 1.0]) == [0.0, 0.25, 0.5, 0.75, 1.0]",
+                "assert rescale_to_unit([2.0, 2.0, 3.0, 3.0, 4.0]) == [0.0, 0.0, 0.5, 0.5, 1.0]"
+            ],
+            "failed_tests": [
+                "assert rescale_to_unit([100.0, 50.0, 75.0]) == [0.0, 0.5, 1.0] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/22",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert filter_integers(['a', 3.14, 5]) == [5]",
+                "assert filter_integers([1, 2, 3, 'abc', {}, []]) == [1, 2, 3]",
+                "assert filter_integers([-1, 0, 1, 2.2, 3.5, '100']) == [-1, 0, 1]",
+                "assert filter_integers([]) == []",
+                "assert filter_integers(['string', {}, [], (), None]) == []"
+            ],
+            "failed_tests": [
+                "assert filter_integers([True, False, 'True', 'False']) == [] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/23",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert strlen('') == 0",
+                "assert strlen('abc') == 3",
+                "assert strlen('hello world') == 11",
+                "assert strlen('1234567890') == 10",
+                "assert strlen(' ') == 1",
+                "assert strlen('!@#$%^&*()') == 10"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/24",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert largest_divisor(15) == 5",
+                "assert largest_divisor(16) == 8",
+                "assert largest_divisor(17) == 1",
+                "assert largest_divisor(2) == 1",
+                "assert largest_divisor(100) == 50",
+                "assert largest_divisor(37) == 1"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/25",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert factorize(8) == [2, 2, 2]",
+                "assert factorize(25) == [5, 5]",
+                "assert factorize(70) == [2, 5, 7]",
+                "assert factorize(1) == []",
+                "assert factorize(2) == [2]",
+                "assert factorize(100) == [2, 2, 5, 5]",
+                "assert factorize(101) == [101]  # Assuming 101 is prime",
+                "assert factorize(60) == [2, 2, 3, 5]",
+                "assert factorize(11) == [11]  # Prime number",
+                "assert factorize(144) == [2, 2, 2, 2, 3, 3]  # 2^4 * 3^2"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/26",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert remove_duplicates([1, 2, 3, 2, 4]) == [1, 3, 4]",
+                "assert remove_duplicates([1, 1, 1, 1, 1]) == []",
+                "assert remove_duplicates([5, 4, 3, 2, 1]) == [5, 4, 3, 2, 1]",
+                "assert remove_duplicates([]) == []",
+                "assert remove_duplicates([1, 2, 2, 3, 3, 3, 4, 4, 4, 4]) == [1]",
+                "assert remove_duplicates([10, 20, 20, 30, 30, 30, 40]) == [10, 40]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/27",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert flip_case('Hello') == 'hELLO'",
+                "assert flip_case('hELLO') == 'Hello'",
+                "assert flip_case('Python') == 'pYTHON'",
+                "assert flip_case('PYTHON') == 'python'",
+                "assert flip_case('python') == 'PYTHON'",
+                "assert flip_case('123') == '123'",
+                "assert flip_case('') == ''",
+                "assert flip_case('123abcABC') == '123ABCabc'"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/28",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert concatenate(['Hello', 'World']) == 'HelloWorld'",
+                "assert concatenate(['', '']) == ''",
+                "assert concatenate(['a', 'b', 'c', 'd', 'e']) == 'abcde'",
+                "assert concatenate([' ', ' ']) == '  '",
+                "assert concatenate(['123', '456', '789']) == '123456789'",
+                "assert concatenate([]) == ''",
+                "assert concatenate(['single']) == 'single'"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/29",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert filter_by_prefix([], 'a') == []",
+                "assert filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a') == ['abc', 'array']",
+                "assert filter_by_prefix(['hello', 'world'], 'h') == ['hello']",
+                "assert filter_by_prefix(['hello', 'world'], 'w') == ['world']",
+                "assert filter_by_prefix(['apple', 'banana', 'apricot', 'cherry'], 'a') == ['apple', 'apricot']",
+                "assert filter_by_prefix(['apple', 'banana', 'apricot', 'cherry'], 'b') == ['banana']",
+                "assert filter_by_prefix(['apple', 'banana', 'apricot', 'cherry'], 'c') == ['cherry']",
+                "assert filter_by_prefix(['apple', 'banana', 'apricot', 'cherry'], 'd') == []",
+                "assert filter_by_prefix(['123', '234', '345'], '2') == ['234']",
+                "assert filter_by_prefix(['', 'notempty'], '') == ['', 'notempty']"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/30",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert get_positive([-1, 2, -4, 5, 6]) == [2, 5, 6]",
+                "assert get_positive([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10]) == [5, 3, 2, 3, 9, 123, 1]",
+                "assert get_positive([-1, -2, -3, -4]) == []",
+                "assert get_positive([0, 0, 0, 0]) == []",
+                "assert get_positive([1, 2, 3, 4]) == [1, 2, 3, 4]",
+                "assert get_positive([]) == []"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/31",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert is_prime(6) == False",
+                "assert is_prime(101) == True",
+                "assert is_prime(11) == True",
+                "assert is_prime(13441) == True",
+                "assert is_prime(61) == True",
+                "assert is_prime(4) == False",
+                "assert is_prime(1) == False",
+                "assert is_prime(2) == True",
+                "assert is_prime(3) == True",
+                "assert is_prime(0) == False",
+                "assert is_prime(-5) == False"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/32",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "import math",
+                "assert round(poly([-1, 0, 2], 3), 2) == 17"
+            ],
+            "failed_tests": [
+                "assert round(poly([3, -2, 1], -1), 2) == 2 (AssertionError: )",
+                "        return 2.0 (IndentationError: unexpected indent (<string>, line 1))",
+                "        return -0.5 (IndentationError: unexpected indent (<string>, line 1))",
+                "assert round(find_zero_mock([1, -4, 4]), 2) == 2.0 (NameError: name 'find_zero_mock' is not defined)",
+                "        return 2.0 (IndentationError: unexpected indent (<string>, line 1))",
+                "assert round(find_zero_mock([1, 2]), 2) == -0.5 (NameError: name 'find_zero_mock' is not defined)",
+                "assert round(find_zero_mock([2, -3, 1]), 2) == 1.5 (NameError: name 'find_zero_mock' is not defined)",
+                "        return 1.5 (IndentationError: unexpected indent (<string>, line 1))",
+                "    return None (IndentationError: unexpected indent (<string>, line 1))",
+                "        return 1.0 (IndentationError: unexpected indent (<string>, line 1))"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/33",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert sort_third([1, 2, 3]) == [1, 2, 3]",
+                "assert sort_third([5, 6, 3, 4, 8, 9, 2]) == [2, 6, 3, 4, 8, 9, 5]",
+                "assert sort_third([3, 2, 1]) == [3, 2, 1]",
+                "assert sort_third([10, 15, 20, 25, 30, 35, 40]) == [10, 15, 20, 25, 30, 35, 40]",
+                "assert sort_third([]) == []",
+                "assert sort_third([1]) == [1]",
+                "assert sort_third([9, 8, 7, 6, 5, 4, 3, 2, 1]) == [3, 8, 7, 6, 5, 4, 9, 2, 1]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/34",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert unique([5, 3, 5, 2, 3, 3, 9, 0, 123]) == [0, 2, 3, 5, 9, 123]",
+                "assert unique([1, 2, 2, 3, 4, 4, 4, 5]) == [1, 2, 3, 4, 5]",
+                "assert unique([]) == []",
+                "assert unique([1]) == [1]",
+                "assert unique([-3, -2, -1, 0, 1, 2, 3]) == [-3, -2, -1, 0, 1, 2, 3]",
+                "assert unique([100, 100, 100]) == [100]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/35",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert max_element([1, 2, 3]) == 3",
+                "assert max_element([5, 3, -5, 2, -3, 3, 9, 0, 123, 1, -10]) == 123",
+                "assert max_element([-5, -3, -2, -1]) == -1",
+                "assert max_element([0, 0, 0, 0]) == 0",
+                "assert max_element([100]) == 100",
+                "assert max_element([-1, 0, 1]) == 1"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/36",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert fizz_buzz(50) == 0",
+                "assert fizz_buzz(78) == 2",
+                "assert fizz_buzz(79) == 3",
+                "assert fizz_buzz(100) == 3",
+                "assert fizz_buzz(200) == 6",
+                "assert fizz_buzz(0) == 0"
+            ],
+            "failed_tests": [
+                "assert fizz_buzz(143) == 9  # 77, 91, and 143 itself contain '7' and are divisible by 11 or 13 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/37",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert sort_even([1, 2, 3]) == [1, 2, 3]",
+                "assert sort_even([5, 6, 3, 4]) == [3, 6, 5, 4]",
+                "assert sort_even([10, 15, 2, 20, 3]) == [2, 15, 3, 20, 10]",
+                "assert sort_even([]) == []",
+                "assert sort_even([1]) == [1]",
+                "assert sort_even([4, 1, 2, 3, 6, 5]) == [2, 1, 4, 3, 6, 5]",
+                "assert sort_even([8, 7, 6, 5, 4, 3, 2, 1]) == [2, 7, 4, 5, 6, 3, 8, 1]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/38",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert encode_cyclic(\"a\") == \"a\", \"Test case 3 failed\"",
+                "assert encode_cyclic(\"\") == \"\", \"Test case 4 failed\"",
+                "assert decode_cyclic(encode_cyclic(\"hello world\")) == \"hello world\", \"Inverse test case 1 failed\"",
+                "assert decode_cyclic(encode_cyclic(\"abcdefg\")) == \"abcdefg\", \"Inverse test case 2 failed\"",
+                "assert decode_cyclic(encode_cyclic(\"a\")) == \"a\", \"Inverse test case 3 failed\"",
+                "assert decode_cyclic(encode_cyclic(\"\")) == \"\", \"Inverse test case 4 failed\"",
+                "assert decode_cyclic(encode_cyclic(\"123456789\")) == \"123456789\", \"Inverse test case 5 failed\""
+            ],
+            "failed_tests": [
+                "assert encode_cyclic(\"abcde\") == \"bcaed\", \"Test case 1 failed\" (AssertionError: Test case 1 failed)",
+                "assert encode_cyclic(\"abcdef\") == \"bcadef\", \"Test case 2 failed\" (AssertionError: Test case 2 failed)",
+                "assert encode_cyclic(\"abcdefg\") == \"bcadefg\", \"Test case 5 failed\" (AssertionError: Test case 5 failed)",
+                "assert encode_cyclic(\"abcdefgh\") == \"bcadefgh\", \"Test case 6 failed\" (AssertionError: Test case 6 failed)"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/39",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert prime_fib(1) == 2",
+                "assert prime_fib(2) == 3",
+                "assert prime_fib(3) == 5",
+                "assert prime_fib(4) == 13",
+                "assert prime_fib(5) == 89",
+                "assert prime_fib(6) == 233",
+                "assert prime_fib(7) == 1597",
+                "assert prime_fib(8) == 28657",
+                "assert prime_fib(9) == 514229"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/40",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert triples_sum_to_zero([1, 3, 5, 0]) == False",
+                "assert triples_sum_to_zero([1, 3, -2, 1]) == True",
+                "assert triples_sum_to_zero([1, 2, 3, 7]) == False",
+                "assert triples_sum_to_zero([2, 4, -5, 3, 9, 7]) == True",
+                "assert triples_sum_to_zero([1]) == False",
+                "assert triples_sum_to_zero([-1, 1, 0]) == True",
+                "assert triples_sum_to_zero([-1, -1, 2]) == True",
+                "assert triples_sum_to_zero([0, 0, 0]) == True",
+                "assert triples_sum_to_zero([10, -4, -6, 4, 2, -2]) == True"
+            ],
+            "failed_tests": [
+                "assert triples_sum_to_zero([-5, -4, -3, 2, 1, 9]) == False (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/41",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert car_race_collision(0) == 0, \"No cars, no collisions.\"",
+                "assert car_race_collision(1) == 1, \"One car from each side results in one collision.\"",
+                "assert car_race_collision(2) == 4, \"Two cars from each side result in four collisions.\"",
+                "assert car_race_collision(3) == 9, \"Three cars from each side result in nine collisions.\"",
+                "assert car_race_collision(10) == 100, \"Ten cars from each side result in one hundred collisions.\"",
+                "assert car_race_collision(5) == 25, \"Five cars from each side result in twenty-five collisions.\""
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/42",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert incr_list([1, 2, 3]) == [2, 3, 4]",
+                "assert incr_list([5, 3, 5, 2, 3, 3, 9, 0, 123]) == [6, 4, 6, 3, 4, 4, 10, 1, 124]",
+                "assert incr_list([-1, -2, -3]) == [0, -1, -2]",
+                "assert incr_list([0, 0, 0]) == [1, 1, 1]",
+                "assert incr_list([]) == []",
+                "assert incr_list([100]) == [101]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/43",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert pairs_sum_to_zero([1, 3, 5, 0]) == False",
+                "assert pairs_sum_to_zero([1, 3, -2, 1]) == False",
+                "assert pairs_sum_to_zero([1, 2, 3, 7]) == False",
+                "assert pairs_sum_to_zero([2, 4, -5, 3, 5, 7]) == True",
+                "assert pairs_sum_to_zero([1]) == False",
+                "assert pairs_sum_to_zero([-1, 1, 3, 5]) == True",
+                "assert pairs_sum_to_zero([-4, 4]) == True",
+                "assert pairs_sum_to_zero([0, 0]) == True",
+                "assert pairs_sum_to_zero([-1, 2, -3, 4]) == False",
+                "assert pairs_sum_to_zero([]) == False"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/44",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert change_base(8, 3) == '22'",
+                "assert change_base(8, 2) == '1000'",
+                "assert change_base(7, 2) == '111'",
+                "assert change_base(10, 5) == '20'",
+                "assert change_base(16, 8) == '20'",
+                "assert change_base(255, 2) == '11111111'",
+                "assert change_base(1, 10) == '1'",
+                "assert change_base(9, 9) == '10'"
+            ],
+            "failed_tests": [
+                "assert change_base(0, 2) == '0' (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/45",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert triangle_area(5, 3) == 7.5",
+                "assert triangle_area(10, 2) == 10.0",
+                "assert triangle_area(0, 5) == 0.0",
+                "assert triangle_area(7, 7) == 24.5",
+                "assert triangle_area(1.5, 4) == 3.0",
+                "assert triangle_area(8, 0) == 0.0"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/46",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert fib4(0) == 0",
+                "assert fib4(1) == 0",
+                "assert fib4(2) == 2",
+                "assert fib4(3) == 0",
+                "assert fib4(4) == 2",
+                "assert fib4(5) == 4",
+                "assert fib4(6) == 8",
+                "assert fib4(7) == 14"
+            ],
+            "failed_tests": [
+                "assert fib4(8) == 26 (AssertionError: )",
+                "assert fib4(9) == 48 (AssertionError: )",
+                "assert fib4(10) == 88 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/47",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert median([3, 1, 2, 4, 5]) == 3",
+                "assert median([1, 2, 3, 4, 5, 6]) == 3.5",
+                "assert median([1]) == 1",
+                "assert median([1, 2]) == 1.5",
+                "assert median([-5, -3, -1, 1, 3, 5]) == 0",
+                "assert median([0, 0, 0, 0]) == 0"
+            ],
+            "failed_tests": [
+                "assert median([-10, 4, 6, 1000, 10, 20]) == 15.0 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/48",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert is_palindrome('') == True",
+                "assert is_palindrome('aba') == True",
+                "assert is_palindrome('aaaaa') == True",
+                "assert is_palindrome('zbcd') == False",
+                "assert is_palindrome('A man, a plan, a canal, Panama') == False  # Considering case sensitivity and non-alphabetic characters",
+                "assert is_palindrome('racecar') == True",
+                "assert is_palindrome('12321') == True",
+                "assert is_palindrome('123456') == False",
+                "assert is_palindrome('Madam') == False  # Case sensitivity",
+                "assert is_palindrome(' ') == True  # Single space is technically a palindrome"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/49",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert modp(3, 5) == 3",
+                "assert modp(1101, 101) == 2",
+                "assert modp(0, 101) == 1",
+                "assert modp(3, 11) == 8",
+                "assert modp(100, 101) == 1",
+                "assert modp(2, 3) == 1",
+                "assert modp(10, 1000) == 24",
+                "assert modp(1, 1) == 0"
+            ],
+            "failed_tests": [
+                "assert modp(5, 2) == 1 (AssertionError: )",
+                "assert modp(123456, 789) == 699 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/50",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert encode_shift(\"abc\") == \"fgh\", \"Test case 1 failed\"",
+                "assert encode_shift(\"xyz\") == \"cde\", \"Test case 2 failed\"",
+                "assert encode_shift(\"hello\") == \"mjqqt\", \"Test case 3 failed\"",
+                "assert encode_shift(\"\") == \"\", \"Test case 4 failed\"",
+                "assert encode_shift(\"abcxyz\") == \"fghcde\", \"Test case 5 failed\"",
+                "assert decode_shift(\"fgh\") == \"abc\", \"Test case 1 failed\"",
+                "assert decode_shift(\"cde\") == \"xyz\", \"Test case 2 failed\"",
+                "assert decode_shift(\"mjqqt\") == \"hello\", \"Test case 3 failed\"",
+                "assert decode_shift(\"\") == \"\", \"Test case 4 failed\"",
+                "assert decode_shift(\"fghcde\") == \"abcxyz\", \"Test case 5 failed\""
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/51",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert remove_vowels('') == ''",
+                "assert remove_vowels(\"abcdef\\nghijklm\") == 'bcdf\\nghjklm'",
+                "assert remove_vowels('abcdef') == 'bcdf'",
+                "assert remove_vowels('aaaaa') == ''",
+                "assert remove_vowels('aaBAA') == 'B'",
+                "assert remove_vowels('zbcd') == 'zbcd'",
+                "assert remove_vowels('AEIOUaeiou') == ''",
+                "assert remove_vowels('Python Programming') == 'Pythn Prgrmmng'",
+                "assert remove_vowels('12345') == '12345'",
+                "assert remove_vowels('!@#$%^&*()') == '!@#$%^&*()'"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/52",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert below_threshold([1, 2, 4, 10], 100) == True",
+                "assert below_threshold([1, 20, 4, 10], 5) == False",
+                "assert below_threshold([], 10) == True  # Edge case: empty list",
+                "assert below_threshold([0, 0, 0], 1) == True  # All elements are zero",
+                "assert below_threshold([-1, -2, -3], 0) == True  # Negative numbers",
+                "assert below_threshold([5, 5, 5], 5) == False  # Edge case: numbers equal to threshold",
+                "assert below_threshold([10, 20, 30], 25) == False  # Not all numbers are below threshold"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/53",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert add(2, 3) == 5",
+                "assert add(5, 7) == 12",
+                "assert add(-1, 1) == 0",
+                "assert add(-5, -7) == -12",
+                "assert add(0, 0) == 0",
+                "assert add(100, 200) == 300"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/54",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert same_chars('eabcdzzzz', 'dddzzzzzzzddeddabc') == True",
+                "assert same_chars('abcd', 'dddddddabc') == True",
+                "assert same_chars('dddddddabc', 'abcd') == True",
+                "assert same_chars('eabcd', 'dddddddabc') == False",
+                "assert same_chars('abcd', 'dddddddabce') == False",
+                "assert same_chars('eabcdzzzz', 'dddzzzzzzzddddabc') == False",
+                "assert same_chars('', '') == True",
+                "assert same_chars('a', 'a') == True",
+                "assert same_chars('abc', 'cba') == True",
+                "assert same_chars('abc', 'def') == False"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/55",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert fib(10) == 55",
+                "assert fib(1) == 1",
+                "assert fib(8) == 21",
+                "assert fib(0) == 0",
+                "assert fib(2) == 1",
+                "assert fib(5) == 5"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/56",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert correct_bracketing(\"<\") == False",
+                "assert correct_bracketing(\"<>\") == True",
+                "assert correct_bracketing(\"<<><>>\") == True",
+                "assert correct_bracketing(\"><<>\") == False",
+                "assert correct_bracketing(\"<<<>>>\") == True",
+                "assert correct_bracketing(\"><\") == False",
+                "assert correct_bracketing(\"<<>>><<\") == False",
+                "assert correct_bracketing(\"\") == True",
+                "assert correct_bracketing(\"<<<<<>>>>>\") == True",
+                "assert correct_bracketing(\"><><><><\") == False"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/57",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert monotonic([1, 2, 4, 20]) == True",
+                "assert monotonic([1, 20, 4, 10]) == False",
+                "assert monotonic([4, 1, 0, -10]) == True",
+                "assert monotonic([10, 10, 10, 10]) == True  # Constant values are considered monotonic",
+                "assert monotonic([-1, -2, -3, -4]) == True  # Monotonically decreasing",
+                "assert monotonic([1]) == True  # Single element lists are considered monotonic",
+                "assert monotonic([]) == True  # Empty list is considered monotonic"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/58",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert common([1, 4, 3, 34, 653, 2, 5], [5, 7, 1, 5, 9, 653, 121]) == [1, 5, 653]",
+                "assert common([5, 3, 2, 8], [3, 2]) == [2, 3]",
+                "assert common([], [1, 2, 3]) == []",
+                "assert common([1, 2, 3], []) == []",
+                "assert common([1, 2, 3], [4, 5, 6]) == []",
+                "assert common(['a', 'b', 'c'], ['a', 'c', 'd']) == ['a', 'c']",
+                "assert common([1, 2, 2, 3, 4], [2, 2, 4, 4]) == [2, 4]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/59",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert largest_prime_factor(13195) == 29",
+                "assert largest_prime_factor(2048) == 2",
+                "assert largest_prime_factor(6936) == 17  # 6936 = 2^3 * 3^2 * 7 * 11, largest prime factor is 17",
+                "assert largest_prime_factor(100) == 5  # 100 = 2^2 * 5^2, largest prime factor is 5",
+                "assert largest_prime_factor(999) == 37  # 999 = 3^3 * 37, largest prime factor is 37"
+            ],
+            "failed_tests": [
+                "assert largest_prime_factor(600851475143) == 6857  # Known from Project Euler Problem 3 (TimeoutError: Test case execution exceeded 10 seconds)"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/60",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert sum_to_n(30) == 465",
+                "assert sum_to_n(100) == 5050",
+                "assert sum_to_n(5) == 15",
+                "assert sum_to_n(10) == 55",
+                "assert sum_to_n(1) == 1",
+                "assert sum_to_n(0) == 0",
+                "assert sum_to_n(-5) == 0  # Assuming the function returns 0 for n <= 0"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/61",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert correct_bracketing(\"(\") == False",
+                "assert correct_bracketing(\")\") == False",
+                "assert correct_bracketing(\"()\") == True",
+                "assert correct_bracketing(\"(()())\") == True",
+                "assert correct_bracketing(\")(()\") == False",
+                "assert correct_bracketing(\"((((()))))\") == True",
+                "assert correct_bracketing(\"((())\") == False",
+                "assert correct_bracketing(\"())(()\") == False",
+                "assert correct_bracketing(\"\") == True",
+                "assert correct_bracketing(\"()()()\") == True"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/62",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert derivative([3, 1, 2, 4, 5]) == [1, 4, 12, 20]",
+                "assert derivative([1, 2, 3]) == [2, 6]",
+                "assert derivative([10]) == []",
+                "assert derivative([5, 4]) == [4]",
+                "assert derivative([2, 0, 3]) == [0, 6]"
+            ],
+            "failed_tests": [
+                "assert derivative([0, 0, 0, 3]) == [0, 0, 6] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/63",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert fibfib(0) == 0",
+                "assert fibfib(1) == 0",
+                "assert fibfib(2) == 1",
+                "assert fibfib(3) == 1",
+                "assert fibfib(4) == 2",
+                "assert fibfib(5) == 4",
+                "assert fibfib(6) == 7",
+                "assert fibfib(7) == 13",
+                "assert fibfib(8) == 24",
+                "assert fibfib(9) == 44",
+                "assert fibfib(10) == 81"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/64",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert vowels_count(\"abcde\") == 2",
+                "assert vowels_count(\"ACEDY\") == 3",
+                "assert vowels_count(\"rhythm\") == 0",
+                "assert vowels_count(\"RHYTHMY\") == 1",
+                "assert vowels_count(\"aeiouy\") == 6",
+                "assert vowels_count(\"AEIOUY\") == 6",
+                "assert vowels_count(\"bcdfg\") == 0",
+                "assert vowels_count(\"BCDFG\") == 0",
+                "assert vowels_count(\"Python\") == 1"
+            ],
+            "failed_tests": [
+                "assert vowels_count(\"\") == 0 (IndexError: string index out of range)",
+                "assert vowels_count(\"PYTHONY\") == 1 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/65",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert circular_shift(12345, 1) == \"51234\"",
+                "assert circular_shift(12345, 2) == \"45123\"",
+                "assert circular_shift(12345, 5) == \"12345\"",
+                "assert circular_shift(12345, 6) == \"54321\"",
+                "assert circular_shift(0, 1) == \"0\"",
+                "assert circular_shift(123, 0) == \"123\"",
+                "assert circular_shift(123, 3) == \"123\""
+            ],
+            "failed_tests": [
+                "assert circular_shift(12345, 10) == \"12345\" (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/66",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert digitSum(\"\") == 0",
+                "assert digitSum(\"abAB\") == 131",
+                "assert digitSum(\"abcCd\") == 67",
+                "assert digitSum(\"helloE\") == 69",
+                "assert digitSum(\"woArBld\") == 131",
+                "assert digitSum(\"aAaaaXa\") == 153",
+                "assert digitSum(\"xyz\") == 0  # Testing with all lowercase",
+                "assert digitSum(\"12345\") == 0  # Testing with digits",
+                "assert digitSum(\"!@#$%^\") == 0  # Testing with special characters"
+            ],
+            "failed_tests": [
+                "assert digitSum(\"XYZ\") == 265  # Testing with all uppercase (AssertionError: )",
+                "assert digitSum(\"AaBbCcDdEeFfGg\") == 461  # Testing with alternating cases (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/67",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert fruit_distribution(\"5 apples and 6 oranges\", 19) == 8",
+                "assert fruit_distribution(\"0 apples and 1 oranges\", 3) == 2",
+                "assert fruit_distribution(\"2 apples and 3 oranges\", 100) == 95",
+                "assert fruit_distribution(\"100 apples and 1 oranges\", 120) == 19",
+                "assert fruit_distribution(\"10 apples and 10 oranges\", 30) == 10",
+                "assert fruit_distribution(\"1 apples and 0 oranges\", 2) == 1"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/68",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert pluck([4, 2, 3]) == [2, 1]",
+                "assert pluck([1, 2, 3]) == [2, 1]",
+                "assert pluck([]) == []",
+                "assert pluck([5, 0, 3, 0, 4, 2]) == [0, 1]",
+                "assert pluck([1, 3, 5, 7]) == []",
+                "assert pluck([2, 4, 6, 8]) == [2, 0]",
+                "assert pluck([11, 22, 33, 44, 55, 2, 4]) == [2, 5]",
+                "assert pluck([0]) == [0, 0]",
+                "assert pluck([1, 3, 5, 7, 2, 4, 6, 8, 0]) == [0, 8]",
+                "assert pluck([2]) == [2, 0]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/69",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert search([4, 1, 2, 2, 3, 1]) == 2",
+                "assert search([1, 2, 2, 3, 3, 3, 4, 4, 4, 4]) == 4",
+                "assert search([5, 5, 4, 4, 4]) == -1",
+                "assert search([1, 1, 1, 1]) == 1",
+                "assert search([3, 3, 3, 2, 2, 1]) == 3",
+                "assert search([10, 10, 10, 10, 10, 10, 10, 10, 10, 10]) == 10",
+                "assert search([2, 2]) == 2"
+            ],
+            "failed_tests": [
+                "assert search([1]) == -1 (AssertionError: )",
+                "assert search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) == -1 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/70",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert strange_sort_list([1, 2, 3, 4]) == [1, 4, 2, 3]",
+                "assert strange_sort_list([5, 5, 5, 5]) == [5, 5, 5, 5]",
+                "assert strange_sort_list([]) == []",
+                "assert strange_sort_list([10, 1, 7, 3]) == [1, 10, 3, 7]",
+                "assert strange_sort_list([-1, -2, -3, -4]) == [-4, -1, -3, -2]",
+                "assert strange_sort_list([1]) == [1]",
+                "assert strange_sort_list([2, 1]) == [1, 2]",
+                "assert strange_sort_list([3, 3, 2, 2, 1, 1]) == [1, 3, 1, 3, 2, 2]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/71",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "import math",
+                "assert triangle_area(1, 2, 10) == -1",
+                "assert triangle_area(0, 4, 5) == -1",
+                "assert triangle_area(1, 1, 2) == -1"
+            ],
+            "failed_tests": [
+                "assert math.isclose(triangle_area(3, 4, 5), 6.00, rel_tol=1e-2) (NameError: name 'math' is not defined)",
+                "assert math.isclose(triangle_area(5, 5, 5), 10.83, rel_tol=1e-2) (NameError: name 'math' is not defined)",
+                "assert math.isclose(triangle_area(10, 6, 8), 24.00, rel_tol=1e-2) (NameError: name 'math' is not defined)",
+                "assert math.isclose(triangle_area(7, 24, 25), 84.00, rel_tol=1e-2) (NameError: name 'math' is not defined)"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/72",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert will_it_fly([1, 2], 5) == False",
+                "assert will_it_fly([3, 2, 3], 1) == False",
+                "assert will_it_fly([3, 2, 3], 9) == True",
+                "assert will_it_fly([3], 5) == True",
+                "assert will_it_fly([1, 2, 1], 4) == True",
+                "assert will_it_fly([1, 2, 2, 1], 10) == True",
+                "assert will_it_fly([1, 2, 3, 4, 5], 15) == False",
+                "assert will_it_fly([], 0) == True",
+                "assert will_it_fly([1, 1, 1, 1], 3) == False",
+                "assert will_it_fly([5, 5, 5, 5], 20) == True"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/73",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert smallest_change([1, 2, 3, 5, 4, 7, 9, 6]) == 4",
+                "assert smallest_change([1, 2, 3, 4, 3, 2, 2]) == 1",
+                "assert smallest_change([1, 2, 3, 2, 1]) == 0",
+                "assert smallest_change([1, 2, 2, 1]) == 0",
+                "assert smallest_change([1, 3, 5, 7, 9, 7, 5, 3, 1]) == 0",
+                "assert smallest_change([1]) == 0",
+                "assert smallest_change([1, 1, 1, 1, 1, 1]) == 0",
+                "assert smallest_change([9, 8, 7, 8, 9]) == 0",
+                "assert smallest_change([10, 20, 30, 40, 50, 40, 30, 20, 10]) == 0"
+            ],
+            "failed_tests": [
+                "assert smallest_change([1, 2, 1, 2, 1, 2, 1]) == 3 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/74",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert total_match([], []) == []",
+                "assert total_match(['hi', 'admin'], ['hI', 'Hi']) == ['hI', 'Hi']",
+                "assert total_match(['hi', 'admin'], ['hi', 'hi', 'admin', 'project']) == ['hi', 'admin']",
+                "assert total_match(['hi', 'admin'], ['hI', 'hi', 'hi']) == ['hI', 'hi', 'hi']",
+                "assert total_match(['4'], ['1', '2', '3', '4', '5']) == ['4']",
+                "assert total_match(['hello', 'world'], ['hello', 'world']) == ['hello', 'world']",
+                "assert total_match(['short', 'list'], ['a', 'much', 'longer', 'list', 'of', 'strings']) == ['short', 'list']",
+                "assert total_match(['equal', 'length'], ['equal', 'length']) == ['equal', 'length']",
+                "assert total_match(['one', 'two', 'three'], ['four']) == ['four']",
+                "assert total_match(['single'], ['double', 'words']) == ['single']"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/75",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert is_multiply_prime(30) == True",
+                "assert is_multiply_prime(42) == True  # 2 * 3 * 7",
+                "assert is_multiply_prime(7) == False  # 7 is prime but not a product of 3 primes",
+                "assert is_multiply_prime(1) == False  # 1 is not a product of primes",
+                "assert is_multiply_prime(97) == False  # 97 is prime",
+                "assert is_multiply_prime(105) == True  # 3 * 5 * 7",
+                "assert is_multiply_prime(77) == False  # 7 * 11 (only 2 primes)",
+                "assert is_multiply_prime(0) == False  # 0 is not a product of primes"
+            ],
+            "failed_tests": [
+                "assert is_multiply_prime(60) == True  # 2 * 3 * 5 * 2 (not strictly 3 primes, but a product of primes) (AssertionError: )",
+                "assert is_multiply_prime(8) == False  # 2 * 2 * 2 (3 times the same prime, but the task might be interpreted as needing 3 distinct primes) (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/76",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert is_simple_power(1, 4) == True",
+                "assert is_simple_power(2, 2) == True",
+                "assert is_simple_power(8, 2) == True",
+                "assert is_simple_power(3, 2) == False",
+                "assert is_simple_power(3, 1) == False",
+                "assert is_simple_power(5, 3) == False",
+                "assert is_simple_power(27, 3) == True",
+                "assert is_simple_power(16, 4) == True",
+                "assert is_simple_power(81, 3) == True"
+            ],
+            "failed_tests": [
+                "assert is_simple_power(64, 4) == False (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/77",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert iscube(-64) == True",
+                "assert iscube(125) == True",
+                "assert iscube(2) == False",
+                "assert iscube(-1) == True",
+                "assert iscube(0) == True",
+                "assert iscube(-125) == True",
+                "assert iscube(64) == True",
+                "assert iscube(8) == True",
+                "assert iscube(-27) == True",
+                "assert iscube(180) == False",
+                "assert iscube(-8) == True",
+                "assert iscube(26) == False"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/78",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert hex_key(\"AB\") == 1",
+                "assert hex_key(\"1077E\") == 2",
+                "assert hex_key(\"ABED1A33\") == 4",
+                "assert hex_key(\"123456789ABCDEF0\") == 6",
+                "assert hex_key(\"2020\") == 2",
+                "assert hex_key(\"\") == 0",
+                "assert hex_key(\"FFFFFFFF\") == 0",
+                "assert hex_key(\"237B\") == 4",
+                "assert hex_key(\"DDDD\") == 4",
+                "assert hex_key(\"89\") == 0"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/79",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert decimal_to_binary(15) == \"db1111db\"",
+                "assert decimal_to_binary(32) == \"db100000db\"",
+                "assert decimal_to_binary(1) == \"db1db\"",
+                "assert decimal_to_binary(0) == \"db0db\"",
+                "assert decimal_to_binary(255) == \"db11111111db\"",
+                "assert decimal_to_binary(2) == \"db10db\"",
+                "assert decimal_to_binary(64) == \"db1000000db\""
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/80",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert is_happy(\"a\") == False",
+                "assert is_happy(\"aa\") == False",
+                "assert is_happy(\"abcd\") == True",
+                "assert is_happy(\"aabb\") == False",
+                "assert is_happy(\"adb\") == True",
+                "assert is_happy(\"xyy\") == False",
+                "assert is_happy(\"xyz\") == True",
+                "assert is_happy(\"xyx\") == False",
+                "assert is_happy(\"abcdefg\") == True",
+                "assert is_happy(\"aabbc\") == False"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/81",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert numerical_letter_grade([4.0, 3.8, 3.4, 3.1, 2.8, 2.4, 2.1, 1.8, 1.4, 1.1, 0.8, 0.5, 0.0]) == ['A+', 'A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'E']",
+                "assert numerical_letter_grade([4.0]) == ['A+']",
+                "assert numerical_letter_grade([0.0]) == ['E']",
+                "assert numerical_letter_grade([]) == []"
+            ],
+            "failed_tests": [
+                "assert numerical_letter_grade([3.5, 2.5, 1.5, 0.5]) == ['A-', 'B', 'C-', 'D-'] (AssertionError: )",
+                "assert numerical_letter_grade([3.75, 2.25, 1.75, 0.75]) == ['A', 'B-', 'C', 'D'] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/82",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [],
+            "failed_tests": [
+                "        return False (IndentationError: unexpected indent (<string>, line 1))",
+                "            return False (IndentationError: unexpected indent (<string>, line 1))",
+                "    return True (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert prime_length('Hello') == is_prime(len('Hello')) (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert prime_length('abcdcba') == is_prime(len('abcdcba')) (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert prime_length('kittens') == is_prime(len('kittens')) (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert prime_length('orange') == is_prime(len('orange')) (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert prime_length('a') == is_prime(len('a')) (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert prime_length('') == is_prime(len('')) (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert prime_length('abcdefg') == is_prime(len('abcdefg')) (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert prime_length('abcdefgh') == is_prime(len('abcdefgh')) (IndentationError: unexpected indent (<string>, line 1))",
+                "test_prime_length() (NameError: name 'test_prime_length' is not defined)"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/83",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert starts_one_ends(2) == 18  # 10-19 and 21, 31, ..., 91",
+                "assert starts_one_ends(3) == 180  # 100-109, 110-119, ..., 910-919 and 201, 301, ..., 991",
+                "assert starts_one_ends(4) == 1800  # Similar pattern, but with an additional digit",
+                "assert starts_one_ends(5) == 18000  # Continuing the pattern",
+                "assert starts_one_ends(6) == 180000  # And so on"
+            ],
+            "failed_tests": [
+                "assert starts_one_ends(1) == 2  # 1 and 1 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/84",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert solve(1000) == \"1\"",
+                "assert solve(150) == \"110\"",
+                "assert solve(147) == \"1100\"",
+                "assert solve(0) == \"0\"",
+                "assert solve(1) == \"1\""
+            ],
+            "failed_tests": [
+                "assert solve(255) == \"11111111\" (AssertionError: )",
+                "assert solve(256) == \"1\" (AssertionError: )",
+                "assert solve(511) == \"111111111\" (AssertionError: )",
+                "assert solve(512) == \"1\" (AssertionError: )",
+                "assert solve(1023) == \"1111111111\" (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/85",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert add([4, 2, 6, 7]) == 2",
+                "assert add([1, 3, 5, 7, 9]) == 0",
+                "assert add([2, 4, 6, 8, 10]) == 12",
+                "assert add([10]) == 0"
+            ],
+            "failed_tests": [
+                "assert add([-2, -4, -6, -8]) == -4 (AssertionError: )",
+                "assert add([0, 1, 2, 3, 4, 5]) == 1 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/86",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert anti_shuffle('Hi') == 'Hi'",
+                "assert anti_shuffle('hello') == 'ehllo'",
+                "assert anti_shuffle('Hello World!!!') == 'Hello !!!Wdlor'",
+                "assert anti_shuffle('') == ''",
+                "assert anti_shuffle('A B C D E F G') == 'A B C D E F G'",
+                "assert anti_shuffle('123 456 789') == '123 456 789'"
+            ],
+            "failed_tests": [
+                "assert anti_shuffle('The quick brown fox') == 'Teh cikqu bnoorw fox' (AssertionError: )",
+                "assert anti_shuffle('jumps over the lazy dog') == 'jmpsu eo rv the alyz dgo' (AssertionError: )",
+                "assert anti_shuffle('!@#$%^&*()') == '!@#$%^&*()' (AssertionError: )",
+                "assert anti_shuffle('multiple    spaces') == 'eilmp tu    acepss' (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/87",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert get_row([], 1) == []",
+                "assert get_row([[], [1], [1, 2, 3]], 3) == [(2, 2)]"
+            ],
+            "failed_tests": [
+                "  [5,4,3,2,1], (IndentationError: unexpected indent (<string>, line 1))",
+                "  [1,2,3,4,5,6], (IndentationError: unexpected indent (<string>, line 1))",
+                "  [7,8,9] (IndentationError: unexpected indent (<string>, line 1))",
+                "  [3,2,1] (IndentationError: unexpected indent (<string>, line 1))",
+                "  [1,2,3], (IndentationError: unexpected indent (<string>, line 1))",
+                "  [1,2,3,4,5,1] (IndentationError: unexpected indent (<string>, line 1))",
+                "  [0,0,0], (IndentationError: unexpected indent (<string>, line 1))",
+                "  [2,2,2], (IndentationError: unexpected indent (<string>, line 1))",
+                "  [9,8,7], (IndentationError: unexpected indent (<string>, line 1))",
+                "  [1,1,1], (IndentationError: unexpected indent (<string>, line 1))"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/88",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert sort_array([]) == [], \"Test with an empty array failed.\"",
+                "assert sort_array([5]) == [5], \"Test with a single-element array failed.\"",
+                "assert sort_array([2, 4, 3, 0, 1, 5]) == [0, 1, 2, 3, 4, 5], \"Test with an even sum (first and last elements) failed.\"",
+                "assert sort_array([2, 4, 3, 0, 1, 5, 6]) == [6, 5, 4, 3, 2, 1, 0], \"Test with an odd sum (first and last elements) failed.\"",
+                "assert sort_array([1, 3, 2]) == [1, 2, 3], \"Test with an odd sum (first and last elements) and a small array failed.\"",
+                "assert sort_array([10, 20, 30]) == [30, 20, 10], \"Test with an even sum (first and last elements) and a small array failed.\"",
+                "assert sort_array([1, 0, 1]) == [1, 1, 0], \"Test with an even sum (first and last elements) and all elements are the same except one failed.\""
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/89",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert encrypt('hi') == 'lm'",
+                "assert encrypt('asdfghjkl') == 'ewhjklnop'",
+                "assert encrypt('gf') == 'kj'",
+                "assert encrypt('et') == 'ix'",
+                "assert encrypt('z') == 'd'",
+                "assert encrypt('y') == 'c'",
+                "assert encrypt('a') == 'e'",
+                "assert encrypt('') == ''",
+                "assert encrypt('xyz') == 'bcd'",
+                "assert encrypt('abc') == 'efg'"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/90",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert next_smallest([1, 2, 3, 4, 5]) == 2",
+                "assert next_smallest([5, 1, 4, 3, 2]) == 2",
+                "assert next_smallest([]) == None",
+                "assert next_smallest([1, 1]) == None",
+                "assert next_smallest([2]) == None",
+                "assert next_smallest([3, 1]) == 3",
+                "assert next_smallest([1, 2, 2, 3, 4]) == 2",
+                "assert next_smallest([-1, -2, -3, -4]) == -3",
+                "assert next_smallest([10, 9, 8, 7, 6, 5, 4, 3, 2, 1]) == 2",
+                "assert next_smallest([1, 3, 5, 7, 9, 11]) == 3"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/91",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert is_bored(\"Hello world\") == 0",
+                "assert is_bored(\"The sky is blue. The sun is shining. I love this weather\") == 1",
+                "assert is_bored(\"I am bored. I am tired. I want to go home.\") == 3",
+                "assert is_bored(\"It's a beautiful day! I think I'll go for a walk. I am happy.\") == 2",
+                "assert is_bored(\"\") == 0"
+            ],
+            "failed_tests": [
+                "assert is_bored(\"I'm not sure if I am bored or just tired.\") == 1 (AssertionError: )",
+                "assert is_bored(\"I. I am. I am bored!\") == 3 (AssertionError: )",
+                "assert is_bored(\"Amazingly, I managed to get bored in a room full of puzzles.\") == 1 (AssertionError: )",
+                "assert is_bored(\"I\") == 1 (AssertionError: )",
+                "assert is_bored(\"I? Really? I! Indeed.\") == 3 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/92",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert any_int(5, 2, 7) == True",
+                "assert any_int(3, 2, 2) == False",
+                "assert any_int(3, -2, 1) == True",
+                "assert any_int(3.6, -2.2, 2) == False",
+                "assert any_int(0, 0, 0) == True",
+                "assert any_int(-5, -3, -2) == True",
+                "assert any_int(10, 5, 5) == True",
+                "assert any_int(1, 1, 2) == True",
+                "assert any_int(1, 2, 3) == True",
+                "assert any_int(10, 0, 10) == True"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/93",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert encode('test') == 'TGST'",
+                "assert encode('This is a message') == 'tHKS KS C MGSSCGG'",
+                "assert encode('') == ''"
+            ],
+            "failed_tests": [
+                "assert encode('HELLO') == 'hJLLM' (AssertionError: )",
+                "assert encode('world') == 'WMRLD' (AssertionError: )",
+                "assert encode('Python') == 'pyTHMN' (AssertionError: )",
+                "assert encode('encode') == 'GMCDKG' (AssertionError: )",
+                "assert encode('AEIOU') == 'CGKMQ' (AssertionError: )",
+                "assert encode('aeiou') == 'cgkmq' (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/94",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [],
+            "failed_tests": [
+                "    assert skjkasdkd([0,3,2,1,3,5,7,4,5,5,5,2,181,32,4,32,3,2,32,324,4,3]) == 10 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert skjkasdkd([1,0,1,8,2,4597,2,1,3,40,1,2,1,2,4,2,5,1]) == 25 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert skjkasdkd([1,3,1,32,5107,34,83278,109,163,23,2323,32,30,1,9,3]) == 13 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert skjkasdkd([0,724,32,71,99,32,6,0,5,91,83,0,5,6]) == 11 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert skjkasdkd([0,81,12,3,1,21]) == 3 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert skjkasdkd([0,8,1,2,1,7]) == 7 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert skjkasdkd([]) == 0  # Assuming the function returns 0 for an empty list (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert skjkasdkd([2, 3, 5, 7, 11, 13, 17, 19, 23, 29]) == 11  # Largest prime is 29, sum of digits is 11 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert skjkasdkd([4, 6, 8, 10]) == 0  # Assuming the function returns 0 if no prime numbers are found (IndentationError: unexpected indent (<string>, line 1))",
+                "test_skjkasdkd() (NameError: name 'test_skjkasdkd' is not defined)"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/95",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert check_dict_case({\"a\":\"apple\", \"b\":\"banana\"}) == True",
+                "assert check_dict_case({\"a\":\"apple\", \"A\":\"banana\", \"B\":\"banana\"}) == False",
+                "assert check_dict_case({\"a\":\"apple\", 8:\"banana\", \"a\":\"apple\"}) == False",
+                "assert check_dict_case({\"Name\":\"John\", \"Age\":\"36\", \"City\":\"Houston\"}) == False",
+                "assert check_dict_case({\"STATE\":\"NC\", \"ZIP\":\"12345\"}) == True",
+                "assert check_dict_case({}) == False",
+                "assert check_dict_case({\"name\":\"John\", \"age\":\"36\"}) == True",
+                "assert check_dict_case({\"Name\":\"John\", \"AGE\":\"36\"}) == False"
+            ],
+            "failed_tests": [
+                "assert check_dict_case({\"123\":\"number\", \"456\":\"number\"}) == True (AssertionError: )",
+                "assert check_dict_case({\"123\":\"number\", \"ABC\":\"letters\"}) == True (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/96",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert count_up_to(5) == [2, 3]",
+                "assert count_up_to(11) == [2, 3, 5, 7]",
+                "assert count_up_to(0) == []",
+                "assert count_up_to(20) == [2, 3, 5, 7, 11, 13, 17, 19]",
+                "assert count_up_to(1) == []",
+                "assert count_up_to(18) == [2, 3, 5, 7, 11, 13, 17]",
+                "assert count_up_to(2) == []",
+                "assert count_up_to(3) == [2]",
+                "assert count_up_to(10) == [2, 3, 5, 7]",
+                "assert count_up_to(22) == [2, 3, 5, 7, 11, 13, 17, 19]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/97",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert multiply(148, 412) == 16",
+                "assert multiply(19, 28) == 72",
+                "assert multiply(2020, 1851) == 0",
+                "assert multiply(14, -15) == 20",
+                "assert multiply(0, 10) == 0",
+                "assert multiply(5, 5) == 25",
+                "assert multiply(-10, 5) == 0",
+                "assert multiply(111, 111) == 1",
+                "assert multiply(12345, 67890) == 0"
+            ],
+            "failed_tests": [
+                "assert multiply(-123, -456) == 18 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/98",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert count_upper('aBCdEf') == 1",
+                "assert count_upper('abcdefg') == 0",
+                "assert count_upper('dBBE') == 0",
+                "assert count_upper('') == 0",
+                "assert count_upper('12345') == 0"
+            ],
+            "failed_tests": [
+                "assert count_upper('ABECEDARIO') == 2 (AssertionError: )",
+                "assert count_upper('aEiOu') == 2 (AssertionError: )",
+                "assert count_upper('AeIoU') == 1 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/99",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert closest_integer(\"10\") == 10",
+                "assert closest_integer(\"15.3\") == 15",
+                "assert closest_integer(\"14.5\") == 15",
+                "assert closest_integer(\"-14.5\") == -15",
+                "assert closest_integer(\"99.99\") == 100",
+                "assert closest_integer(\"-99.99\") == -100",
+                "assert closest_integer(\"0\") == 0"
+            ],
+            "failed_tests": [
+                "assert closest_integer(\"0.1\") == 1 (AssertionError: )",
+                "assert closest_integer(\"-0.1\") == -1 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/100",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert make_a_pile(1) == [1]",
+                "assert make_a_pile(2) == [2, 4]",
+                "assert make_a_pile(3) == [3, 5, 7]",
+                "assert make_a_pile(4) == [4, 6, 8, 10]",
+                "assert make_a_pile(5) == [5, 7, 9, 11, 13]",
+                "assert make_a_pile(6) == [6, 8, 10, 12, 14, 16]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/101",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert words_string(\"Hi, my name is John\") == [\"Hi\", \"my\", \"name\", \"is\", \"John\"]",
+                "assert words_string(\"One, two, three, four, five, six\") == [\"One\", \"two\", \"three\", \"four\", \"five\", \"six\"]",
+                "assert words_string(\"Hello,world\") == [\"Hello\", \"world\"]",
+                "assert words_string(\"  Spaces  before  and  after  \") == [\"Spaces\", \"before\", \"and\", \"after\"]",
+                "assert words_string(\"\") == []",
+                "assert words_string(\"No,spaces,just,commas\") == [\"No\", \"spaces\", \"just\", \"commas\"]",
+                "assert words_string(\"Mixed, separators are not,consistent\") == [\"Mixed\", \"separators\", \"are\", \"not\", \"consistent\"]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/102",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert choose_num(12, 15) == 14",
+                "assert choose_num(13, 12) == -1",
+                "assert choose_num(2, 5) == 4",
+                "assert choose_num(5, 5) == -1",
+                "assert choose_num(4, 4) == 4",
+                "assert choose_num(8, 10) == 10",
+                "assert choose_num(11, 13) == 12",
+                "assert choose_num(1, 1) == -1",
+                "assert choose_num(1, 2) == 2",
+                "assert choose_num(14, 18) == 18"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/103",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert rounded_avg(1, 5) == \"0b11\"",
+                "assert rounded_avg(7, 5) == -1",
+                "assert rounded_avg(10, 20) == \"0b1111\"",
+                "assert rounded_avg(20, 33) == \"0b11010\"",
+                "assert rounded_avg(5, 5) == \"0b101\"",
+                "assert rounded_avg(2, 3) == \"0b10\"",
+                "assert rounded_avg(50, 50) == \"0b110010\"",
+                "assert rounded_avg(15, 10) == -1"
+            ],
+            "failed_tests": [
+                "assert rounded_avg(100, 102) == \"0b110011\" (AssertionError: )",
+                "assert rounded_avg(99, 100) == \"0b1100011\" (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/104",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert unique_digits([15, 33, 1422, 1]) == [1, 15, 33]",
+                "assert unique_digits([152, 323, 1422, 10]) == []",
+                "assert unique_digits([123, 555, 777]) == [555, 777]",
+                "assert unique_digits([111, 222, 333]) == [111, 333]",
+                "assert unique_digits([]) == []",
+                "assert unique_digits([13579, 2468, 97531]) == [13579, 97531]"
+            ],
+            "failed_tests": [
+                "assert unique_digits([124, 456, 789]) == [789] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/105",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert by_length([2, 1, 1, 4, 5, 8, 2, 3]) == [\"Eight\", \"Five\", \"Four\", \"Three\", \"Two\", \"Two\", \"One\", \"One\"]",
+                "assert by_length([]) == []",
+                "assert by_length([1, -1, 55]) == [\"One\"]",
+                "assert by_length([9, 8, 7, 6, 5, 4, 3, 2, 1]) == [\"Nine\", \"Eight\", \"Seven\", \"Six\", \"Five\", \"Four\", \"Three\", \"Two\", \"One\"]",
+                "assert by_length([10, 11, 12, 0, -5, 3]) == [\"Three\"]",
+                "assert by_length([1, 2, 3, 4, 5, 6, 7, 8, 9, 0, -1, 10, 11]) == [\"Nine\", \"Eight\", \"Seven\", \"Six\", \"Five\", \"Four\", \"Three\", \"Two\", \"One\"]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/106",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert f(1) == [1], \"Test case 1 failed\"",
+                "assert f(2) == [1, 2], \"Test case 2 failed\"",
+                "assert f(3) == [1, 2, 6], \"Test case 3 failed\"",
+                "assert f(4) == [1, 2, 6, 24], \"Test case 4 failed\"",
+                "assert f(5) == [1, 2, 6, 24, 15], \"Test case 5 failed\"",
+                "assert f(6) == [1, 2, 6, 24, 15, 720], \"Test case 6 failed\"",
+                "assert f(0) == [], \"Test case 7 failed\"",
+                "assert f(7) == [1, 2, 6, 24, 15, 720, 28], \"Test case 8 failed\""
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/107",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert even_odd_palindrome(3) == (1, 2)",
+                "assert even_odd_palindrome(12) == (4, 6)",
+                "assert even_odd_palindrome(1) == (0, 1)",
+                "assert even_odd_palindrome(2) == (1, 1)",
+                "assert even_odd_palindrome(10) == (4, 5)"
+            ],
+            "failed_tests": [
+                "assert even_odd_palindrome(22) == (9, 9) (AssertionError: )",
+                "assert even_odd_palindrome(100) == (18, 29) (AssertionError: )",
+                "assert even_odd_palindrome(99) == (18, 29) (AssertionError: )",
+                "assert even_odd_palindrome(123) == (18, 29) (AssertionError: )",
+                "assert even_odd_palindrome(1000) == (36, 90) (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/108",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert count_nums([]) == 0",
+                "assert count_nums([-1, 11, -11]) == 1",
+                "assert count_nums([1, 1, 2]) == 3",
+                "assert count_nums([-123, 456, 789]) == 3",
+                "assert count_nums([-5, 0, 5]) == 1",
+                "assert count_nums([10, -20, 30, -40, 50]) == 3",
+                "assert count_nums([-1, -2, -3, -4, -5]) == 0",
+                "assert count_nums([0, 0, 0, 0]) == 0",
+                "assert count_nums([9, 18, 27, 36, 45]) == 5"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/109",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert move_one_ball([3, 4, 5, 1, 2]) == True",
+                "assert move_one_ball([3, 5, 4, 1, 2]) == False",
+                "assert move_one_ball([1, 2, 3, 4, 5]) == True",
+                "assert move_one_ball([5, 1, 2, 3, 4]) == True",
+                "assert move_one_ball([2, 3, 4, 5, 1]) == True",
+                "assert move_one_ball([1]) == True",
+                "assert move_one_ball([]) == True",
+                "assert move_one_ball([5, 4, 3, 2, 1]) == False",
+                "assert move_one_ball([1, 3, 5, 2, 4]) == False",
+                "assert move_one_ball([10, 1, 2, 3, 4, 5, 6, 7, 8, 9]) == True"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/110",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert exchange([1, 2, 3, 4], [1, 2, 3, 4]) == \"YES\"",
+                "assert exchange([1, 2, 3, 4], [1, 5, 3, 4]) == \"NO\"",
+                "assert exchange([2, 4, 6, 8], [1, 3, 5, 7]) == \"YES\"",
+                "assert exchange([1, 3, 5, 7], [2, 4, 6, 8]) == \"YES\"",
+                "assert exchange([1, 3, 5, 7], [1, 3, 5, 7]) == \"NO\"",
+                "assert exchange([2, 4, 6, 8], [2, 4, 6, 8]) == \"YES\"",
+                "assert exchange([1], [2]) == \"YES\"",
+                "assert exchange([2], [1]) == \"YES\"",
+                "assert exchange([1], [1]) == \"NO\"",
+                "assert exchange([2], [2]) == \"YES\""
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/111",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert histogram('a b c') == {'a': 1, 'b': 1, 'c': 1}",
+                "assert histogram('a b b a') == {'a': 2, 'b': 2}",
+                "assert histogram('a b c a b') == {'a': 2, 'b': 2}",
+                "assert histogram('b b b b a') == {'b': 4}",
+                "assert histogram('') == {}",
+                "assert histogram('c c c c c') == {'c': 5}",
+                "assert histogram('x y z x y z x') == {'x': 3}",
+                "assert histogram('m n m n o p q r s t u') == {'m': 2, 'n': 2}",
+                "assert histogram('a') == {'a': 1}"
+            ],
+            "failed_tests": [
+                "assert histogram('a a a b b c') == {'a': 3, 'b': 2} (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/112",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert reverse_delete(\"abcde\", \"ae\") == (\"bcd\", False)",
+                "assert reverse_delete(\"abcdef\", \"b\") == (\"acdef\", False)",
+                "assert reverse_delete(\"abcdedcba\", \"ab\") == (\"cdedc\", True)",
+                "assert reverse_delete(\"radar\", \"r\") == (\"ada\", True)",
+                "assert reverse_delete(\"\", \"a\") == (\"\", True)  # Empty string is technically a palindrome",
+                "assert reverse_delete(\"a\", \"a\") == (\"\", True)  # Removing all characters should also return True for palindrome",
+                "assert reverse_delete(\"abccba\", \"c\") == (\"abba\", True)",
+                "assert reverse_delete(\"sagas\", \"s\") == (\"aga\", True)"
+            ],
+            "failed_tests": [
+                "assert reverse_delete(\"level\", \"v\") == (\"leel\", False) (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/113",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert odd_count(['1234567']) == [\"the number of odd elements 4n the str4ng 4 of the 4nput.\"]",
+                "assert odd_count(['3', \"11111111\"]) == [\"the number of odd elements 1n the str1ng 1 of the 1nput.\", \"the number of odd elements 8n the str8ng 8 of the 8nput.\"]",
+                "assert odd_count(['2468', '13579']) == [\"the number of odd elements 0n the str0ng 0 of the 0nput.\", \"the number of odd elements 5n the str5ng 5 of the 5nput.\"]",
+                "assert odd_count([]) == []"
+            ],
+            "failed_tests": [
+                "assert odd_count(['', '0024', '567']) == [\"the number of odd elements 0n the str0ng 0 of the 0nput.\", \"the number of odd elements 0n the str0ng 0 of the 0nput.\", \"the number of odd elements 3n the str3ng 3 of the 3nput.\"] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/114",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert minSubArraySum([2, 3, 4, 1, 2, 4]) == 1",
+                "assert minSubArraySum([-1, -2, -3]) == -6",
+                "assert minSubArraySum([1, 2, 3, 4, 5]) == 1",
+                "assert minSubArraySum([-1, 0, 1, 2]) == -1",
+                "assert minSubArraySum([-5, -4, -2, -1, 0]) == -12",
+                "assert minSubArraySum([0]) == 0",
+                "assert minSubArraySum([-1]) == -1",
+                "assert minSubArraySum([1, -2, 1]) == -2"
+            ],
+            "failed_tests": [
+                "assert minSubArraySum([10, -2, 3, -1, 5]) == -3 (AssertionError: )",
+                "assert minSubArraySum([-2, -1, -3, -4, -5, -1, -2, -1]) == -23 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/115",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert max_fill([[0,0,1,0], [0,1,0,0], [1,1,1,1]], 1) == 6",
+                "assert max_fill([[0,0,1,1], [0,0,0,0], [1,1,1,1], [0,1,1,1]], 2) == 5",
+                "assert max_fill([[0,0,0], [0,0,0]], 5) == 0",
+                "assert max_fill([[1,1,1], [1,1,1]], 3) == 2",
+                "assert max_fill([[1]], 1) == 1",
+                "assert max_fill([[1,1,1,1,1,1,1,1,1,1]], 10) == 1",
+                "assert max_fill([[1,1,1,1,1,1,1,1,1,1]], 5) == 2",
+                "assert max_fill([[0,0,0,0], [0,0,0,0], [0,0,0,0]], 1) == 0",
+                "assert max_fill([[1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1]], 5) == 3"
+            ],
+            "failed_tests": [
+                "assert max_fill([[1,1,0,0], [0,0,1,1], [1,0,1,0]], 2) == 4 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/116",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert sort_array([3, 8, 3, 6]) == [8, 3, 3, 6]",
+                "assert sort_array([0]) == [0]",
+                "assert sort_array([]) == []"
+            ],
+            "failed_tests": [
+                "assert sort_array([1, 5, 2, 3, 4]) == [1, 2, 3, 4, 5] (AssertionError: )",
+                "assert sort_array([-2, -3, -4, -5, -6]) == [-6, -5, -4, -3, -2] (AssertionError: )",
+                "assert sort_array([1, 0, 2, 3, 4]) == [0, 1, 2, 3, 4] (AssertionError: )",
+                "assert sort_array([10, 11, 12, 13, 14, 15]) == [8, 10, 12, 14, 11, 13, 15] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/117",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert select_words(\"Mary had a little lamb\", 4) == [\"little\"]",
+                "assert select_words(\"Mary had a little lamb\", 3) == [\"Mary\", \"lamb\"]",
+                "assert select_words(\"simple white space\", 2) == []",
+                "assert select_words(\"Hello world\", 4) == [\"world\"]",
+                "assert select_words(\"Uncle sam\", 3) == [\"Uncle\"]",
+                "assert select_words(\"\", 3) == []",
+                "assert select_words(\"a e i o u\", 1) == []",
+                "assert select_words(\"b c d f g\", 1) == [\"b\", \"c\", \"d\", \"f\", \"g\"]"
+            ],
+            "failed_tests": [
+                "assert select_words(\"This is a test sentence\", 2) == [\"is\", \"a\", \"test\"] (AssertionError: )",
+                "assert select_words(\"Another example here\", 5) == [\"Another\"] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/118",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert get_closest_vowel(\"yogurt\") == \"u\"",
+                "assert get_closest_vowel(\"FULL\") == \"U\"",
+                "assert get_closest_vowel(\"quick\") == \"\"",
+                "assert get_closest_vowel(\"ab\") == \"\"",
+                "assert get_closest_vowel(\"Rhythm\") == \"\"",
+                "assert get_closest_vowel(\"bAck\") == \"A\"",
+                "assert get_closest_vowel(\"Almanac\") == \"a\"",
+                "assert get_closest_vowel(\"Z\") == \"\""
+            ],
+            "failed_tests": [
+                "assert get_closest_vowel(\"programming\") == \"a\" (AssertionError: )",
+                "assert get_closest_vowel(\"encyclopedia\") == \"o\" (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/119",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert match_parens(['()(', ')']) == 'Yes'",
+                "assert match_parens([')', ')']) == 'No'",
+                "assert match_parens(['(', ')']) == 'Yes'",
+                "assert match_parens(['(()', '())']) == 'Yes'",
+                "assert match_parens([')(', '']) == 'No'",
+                "assert match_parens(['', '']) == 'Yes'",
+                "assert match_parens(['(', '(']) == 'No'",
+                "assert match_parens([')()', '(()']) == 'Yes'",
+                "assert match_parens([')(', ')(']) == 'No'",
+                "assert match_parens(['(()', ')']) == 'Yes'"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/120",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert maximum([-3, -4, 5], 3) == [-4, -3, 5]",
+                "assert maximum([4, -4, 4], 2) == [4, 4]",
+                "assert maximum([-3, 2, 1, 2, -1, -2, 1], 1) == [2]",
+                "assert maximum([1, 2, 3, 4, 5], 5) == [1, 2, 3, 4, 5]",
+                "assert maximum([1, 2, 3, 4, 5], 0) == []",
+                "assert maximum([-1, -2, -3, -4, -5], 3) == [-3, -2, -1]",
+                "assert maximum([100, 200, 300, 400, 500], 2) == [400, 500]",
+                "assert maximum([0, 0, 0, 0], 2) == [0, 0]",
+                "assert maximum([-1000, 1000, 0], 3) == [-1000, 0, 1000]",
+                "assert maximum([5], 1) == [5]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/121",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert solution([5, 8, 7, 1]) == 12",
+                "assert solution([3, 3, 3, 3, 3]) == 9",
+                "assert solution([30, 13, 24, 321]) == 0",
+                "assert solution([0, 1, 2, 3, 4, 5]) == 0",
+                "assert solution([2, 4, 6, 8, 10]) == 0",
+                "assert solution([1]) == 1",
+                "assert solution([0]) == 0"
+            ],
+            "failed_tests": [
+                "assert solution([1, 2, 3, 4, 5, 6]) == 8 (AssertionError: )",
+                "assert solution([-1, -2, -3, -4, -5, -6]) == -8 (AssertionError: )",
+                "assert solution([11, 22, 33, 44, 55]) == 44 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/122",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert add_elements([111, 21, 3, 4000, 5, 6, 7, 8, 9], 4) == 24",
+                "assert add_elements([10, 20, 30, 40, 50], 5) == 150",
+                "assert add_elements([1, 2, 3, 4, 5], 3) == 6",
+                "assert add_elements([123, 456, 78, 90, 12], 5) == 180",
+                "assert add_elements([0, 0, 0, 0], 4) == 0",
+                "assert add_elements([99, 1, 100, 101], 4) == 100",
+                "assert add_elements([-1, -2, -3, -4, -5], 5) == -15",
+                "assert add_elements([9, 8, 7, 6, 5, 4, 3, 2, 1], 9) == 45",
+                "assert add_elements([1000, 1001, 999, 10, 20], 5) == 30"
+            ],
+            "failed_tests": [
+                "assert add_elements([-10, -20, 30, 40], 4) == 40 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/123",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert get_odd_collatz(1) == [1], \"Test case 1 failed\"",
+                "assert get_odd_collatz(2) == [1], \"Test case 2 failed\"",
+                "assert get_odd_collatz(5) == [1, 5], \"Test case 4 failed\""
+            ],
+            "failed_tests": [
+                "assert get_odd_collatz(3) == [1, 3, 5, 7, 10], \"Test case 3 failed\" (AssertionError: Test case 3 failed)",
+                "assert get_odd_collatz(6) == [1, 5], \"Test case 5 failed\" (AssertionError: Test case 5 failed)",
+                "assert get_odd_collatz(7) == [1, 3, 5, 7, 11, 21, 42], \"Test case 6 failed\" (AssertionError: Test case 6 failed)",
+                "assert get_odd_collatz(10) == [1, 3, 5, 7, 10], \"Test case 7 failed\" (AssertionError: Test case 7 failed)",
+                "assert get_odd_collatz(11) == [1, 3, 5, 7, 10, 11, 17, 26, 34], \"Test case 8 failed\" (AssertionError: Test case 8 failed)",
+                "assert get_odd_collatz(13) == [1, 5, 13, 20, 40], \"Test case 9 failed\" (AssertionError: Test case 9 failed)",
+                "assert get_odd_collatz(15) == [1, 3, 5, 7, 11, 15, 22, 46], \"Test case 10 failed\" (AssertionError: Test case 10 failed)"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/124",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert valid_date('00-00-0000') == False  # Invalid month and day",
+                "assert valid_date('02-28-2021') == True",
+                "assert valid_date('06/04/2020') == False",
+                "assert valid_date('13-01-2020') == False  # Invalid month",
+                "assert valid_date('15-01-2012') == False",
+                "assert valid_date('11-31-2020') == False  # November has 30 days",
+                "assert valid_date('') == False  # Empty string",
+                "assert valid_date('03-11-2000') == True",
+                "assert valid_date('02-29-2020') == True  # Leap year",
+                "assert valid_date('01-01-0001') == True"
+            ],
+            "failed_tests": [
+                "assert valid_date('02-29-2021') == False  # Not a leap year (AssertionError: )",
+                "assert valid_date('12-31-1999') == True (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/125",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert split_words(\"Hello world!\") == [\"Hello\", \"world!\"]",
+                "assert split_words(\"Hello,world!\") == [\"Hello\", \"world!\"]",
+                "assert split_words(\"abcdef\") == 3",
+                "assert split_words(\"Hello world! How are you?\") == [\"Hello\", \"world!\", \"How\", \"are\", \"you?\"]",
+                "assert split_words(\"One,Two,Three,Four\") == [\"One\", \"Two\", \"Three\", \"Four\"]",
+                "assert split_words(\"\") == 0  # No lowercase letters",
+                "assert split_words(\"ABCDEF\") == 0  # No lowercase letters",
+                "assert split_words(\"123 456 789\") == [\"123\", \"456\", \"789\"]"
+            ],
+            "failed_tests": [
+                "assert split_words(\"a,b,c,d,e,f,g\") == 4  # b, d, f have odd order (AssertionError: )",
+                "assert split_words(\"xyz\") == 1  # y has an odd order (AssertionError: )",
+                "assert split_words(\"singleword\") == 0  # No whitespaces, commas, and no lowercase letters with odd order (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/126",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert is_sorted([1, 2]) == True",
+                "assert is_sorted([1, 2, 3, 4, 5, 6, 7]) == True",
+                "assert is_sorted([5]) == True",
+                "assert is_sorted([1, 2, 2, 2, 3, 4]) == False",
+                "assert is_sorted([1, 3, 2, 4, 5, 6, 7]) == False",
+                "assert is_sorted([1, 3, 2, 4, 5]) == False",
+                "assert is_sorted([2, 1]) == False",
+                "assert is_sorted([1, 1, 1, 2, 3, 4, 5]) == False",
+                "assert is_sorted([1]) == True",
+                "assert is_sorted([1, 2, 2, 3, 3, 4]) == True",
+                "assert is_sorted([1, 2, 3, 4, 5]) == True",
+                "assert is_sorted([1, 2, 3, 4, 5, 6]) == True"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/127",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert intersection((1, 2), (2, 3)) == \"NO\"",
+                "assert intersection((-1, 1), (0, 4)) == \"NO\"",
+                "assert intersection((-3, -1), (-5, 5)) == \"YES\"",
+                "assert intersection((5, 7), (7, 9)) == \"NO\"  # Edge case where intervals just touch",
+                "assert intersection((10, 20), (20, 30)) == \"NO\"  # Edge case where intervals just touch",
+                "assert intersection((1, 5), (6, 9)) == \"NO\"  # No intersection",
+                "assert intersection((3, 7), (5, 11)) == \"YES\"  # Intersection length is 2, prime",
+                "assert intersection((0, 0), (0, 0)) == \"NO\"  # Intersection length is 1, not prime",
+                "assert intersection((2, 3), (2, 3)) == \"NO\"  # Intersection length is 1, not prime"
+            ],
+            "failed_tests": [
+                "assert intersection((3, 11), (7, 13)) == \"YES\"  # Intersection length is 4, not prime (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/128",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert prod_signs([1, 2, 2, -4]) == -9",
+                "assert prod_signs([0, 1]) == 0",
+                "assert prod_signs([]) == None",
+                "assert prod_signs([1, 2, 3, 4, 5]) == 15",
+                "assert prod_signs([-1, 0, 1]) == 0",
+                "assert prod_signs([0, 0, 0]) == 0",
+                "assert prod_signs([1]) == 1",
+                "assert prod_signs([-1]) == -1",
+                "assert prod_signs([0]) == 0"
+            ],
+            "failed_tests": [
+                "assert prod_signs([-1, -2, -3]) == 6 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/129",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert minPath([[1, 2, 3], [4, 5, 6], [7, 8, 9]], 3) == [1, 2, 1]",
+                "assert minPath([[5, 9, 3], [4, 1, 6], [7, 8, 2]], 1) == [1]",
+                "assert minPath([[1, 2], [3, 4]], 4) == [1, 2, 1, 2]"
+            ],
+            "failed_tests": [
+                "assert minPath([[10, 12, 11], [9, 8, 7], [6, 5, 4]], 4) == [4, 5, 4, 5] (AssertionError: )",
+                "assert minPath([[3, 2], [1, 4]], 2) == [1, 2] (AssertionError: )",
+                "assert minPath([[7, 6, 5], [4, 3, 2], [1, 9, 8]], 5) == [1, 2, 3, 2, 1] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/130",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert tri(0) == [1]",
+                "assert tri(1) == [1, 3]",
+                "assert tri(2) == [1, 3, 2]",
+                "assert tri(3) == [1, 3, 2, 8]",
+                "assert tri(4) == [1, 3, 2, 8, 3]",
+                "assert len(tri(10)) == 11",
+                "assert tri(10)[0:5] == [1, 3, 2, 8, 3]"
+            ],
+            "failed_tests": [
+                "assert tri(5) == [1, 3, 2, 8, 3, 14] (AssertionError: )",
+                "assert tri(6) == [1, 3, 2, 8, 3, 14, 4] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/131",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert digits(1) == 1",
+                "assert digits(4) == 0",
+                "assert digits(235) == 15",
+                "assert digits(2468) == 0",
+                "assert digits(13579) == 945",
+                "assert digits(123456789) == 945",
+                "assert digits(2222222222) == 0",
+                "assert digits(1111111111) == 1"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/132",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert is_nested('[[]]') == True",
+                "assert is_nested('[]]]]]]][[[[[]') == False",
+                "assert is_nested('[][]') == False",
+                "assert is_nested('[]') == False",
+                "assert is_nested('[[][]]') == True",
+                "assert is_nested('[[]][[') == True",
+                "assert is_nested('[[[[]]]]') == True",
+                "assert is_nested('[[[]]]') == True",
+                "assert is_nested('') == False",
+                "assert is_nested('[[[[[[[]]]]]]]') == True"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/133",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "import math",
+                "assert sum_squares([1, 2, 3]) == 14",
+                "assert sum_squares([1, 4, 9]) == 98",
+                "assert sum_squares([1, 3, 5, 7]) == 84",
+                "assert sum_squares([1.4, 4.2, 0]) == 29",
+                "assert sum_squares([-2.4, 1, 1]) == 6",
+                "assert sum_squares([0, 0, 0]) == 0",
+                "assert sum_squares([-1.5, -2.5, -3.5]) == 14",
+                "assert sum_squares([2.5, 2.5, 2.5]) == 27",
+                "assert sum_squares([]) == 0"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/134",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert check_if_last_char_is_a_letter(\"apple pie\") == False",
+                "assert check_if_last_char_is_a_letter(\"apple pi e\") == True",
+                "assert check_if_last_char_is_a_letter(\"apple pi e \") == False",
+                "assert check_if_last_char_is_a_letter(\"\") == False",
+                "assert check_if_last_char_is_a_letter(\"Hello World!\") == False",
+                "assert check_if_last_char_is_a_letter(\"Hello World\") == False",
+                "assert check_if_last_char_is_a_letter(\"a\") == True",
+                "assert check_if_last_char_is_a_letter(\" \") == False",
+                "assert check_if_last_char_is_a_letter(\"Hello World a\") == True",
+                "assert check_if_last_char_is_a_letter(\"12345\") == False"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/135",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert can_arrange([1, 2, 4, 3, 5]) == 3",
+                "assert can_arrange([1, 2, 3]) == -1",
+                "assert can_arrange([10, 20, 30, 25, 40]) == 3",
+                "assert can_arrange([1, 3, 5, 7, 9]) == -1",
+                "assert can_arrange([2]) == -1",
+                "assert can_arrange([9, 7, 8]) == 1"
+            ],
+            "failed_tests": [
+                "assert can_arrange([5, 4, 3, 2, 1]) == 1 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/136",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert largest_smallest_integers([2, 4, 1, 3, 5, 7]) == (None, 1)",
+                "assert largest_smallest_integers([]) == (None, None)",
+                "assert largest_smallest_integers([0]) == (None, None)",
+                "assert largest_smallest_integers([-1, -2, -3, -4]) == (-1, None)",
+                "assert largest_smallest_integers([1, 2, 3, 4]) == (None, 1)",
+                "assert largest_smallest_integers([-5, -4, -3, 1, 2, 3]) == (-3, 1)",
+                "assert largest_smallest_integers([-2, -1, 0, 1, 2]) == (-1, 1)",
+                "assert largest_smallest_integers([-10, 0, 10]) == (-10, 10)",
+                "assert largest_smallest_integers([-1, -2, 0, 1, 2]) == (-1, 1)"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/137",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [],
+            "failed_tests": [
+                "    assert compare_one(1, 2.5) == 2.5 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(1, \"2,3\") == \"2,3\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(\"5,1\", \"6\") == \"6\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(\"1\", 1) == None (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(3.5, 2) == 3.5 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(\"3,5\", 2) == \"3,5\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(\"3.5\", \"4,2\") == \"4,2\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(0, \"0\") == None (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(-1, \"-2\") == -1 (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert compare_one(\"-1,5\", -1.4) == \"-1,5\" (IndentationError: unexpected indent (<string>, line 1))",
+                "test_compare_one() (NameError: name 'test_compare_one' is not defined)"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/138",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert is_equal_to_sum_even(8) == True",
+                "assert is_equal_to_sum_even(6) == False",
+                "assert is_equal_to_sum_even(4) == False",
+                "assert is_equal_to_sum_even(20) == True",
+                "assert is_equal_to_sum_even(16) == True",
+                "assert is_equal_to_sum_even(28) == True",
+                "assert is_equal_to_sum_even(0) == False",
+                "assert is_equal_to_sum_even(100) == True",
+                "assert is_equal_to_sum_even(2) == False",
+                "assert is_equal_to_sum_even(102) == True"
+            ],
+            "failed_tests": [
+                "assert is_equal_to_sum_even(14) == False (AssertionError: )",
+                "assert is_equal_to_sum_even(10) == False (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/139",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert special_factorial(1) == 1",
+                "assert special_factorial(2) == 2",
+                "assert special_factorial(3) == 12",
+                "assert special_factorial(4) == 288",
+                "assert special_factorial(5) == 34560",
+                "assert special_factorial(6) == 24883200"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/140",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert fix_spaces(\"Example\") == \"Example\"",
+                "assert fix_spaces(\"Example 1\") == \"Example_1\"",
+                "assert fix_spaces(\" Example 2\") == \"_Example_2\"",
+                "assert fix_spaces(\" Example   3\") == \"_Example-3\"",
+                "assert fix_spaces(\"Example    with    multiple    spaces\") == \"Example-with-multiple-spaces\"",
+                "assert fix_spaces(\"NoSpacesHere\") == \"NoSpacesHere\"",
+                "assert fix_spaces(\" \") == \"_\"",
+                "assert fix_spaces(\"   \") == \"-\"",
+                "assert fix_spaces(\"____\") == \"____\"  # No spaces to replace, should remain unchanged"
+            ],
+            "failed_tests": [
+                "assert fix_spaces(\"  Leading and trailing  \") == \"_Leading_and_trailing_\" (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/141",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert file_name_check(\"exa.mple.txt\") == 'No'  # Dot not in the correct position",
+                "assert file_name_check(\"a.txt\") == 'Yes'  # Minimum valid name",
+                "assert file_name_check(\"example.doc\") == 'No'  # Invalid extension",
+                "assert file_name_check(\"example123.txt\") == 'Yes'",
+                "assert file_name_check(\"example1234.txt\") == 'No'  # More than three digits",
+                "assert file_name_check(\"ex.am.ple.txt\") == 'No'  # More than one dot",
+                "assert file_name_check(\"example.txt\") == 'Yes'",
+                "assert file_name_check(\"example.\") == 'No'  # Empty substring after dot",
+                "assert file_name_check(\"exampletxt\") == 'No'  # No dot in the file name",
+                "assert file_name_check(\"ex4ample.exe\") == 'Yes'",
+                "assert file_name_check(\"a123.bak\") == 'No'  # Invalid extension with digits",
+                "assert file_name_check(\".txt\") == 'No'  # Empty substring before dot"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/142",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert sum_squares([1, 2, 3]) == 6",
+                "assert sum_squares([]) == 0",
+                "assert sum_squares([-1, -5, 2, -1, -5]) == -126"
+            ],
+            "failed_tests": [
+                "assert sum_squares([0, 1, 2, 3, 4, 5, 6]) == 92 (AssertionError: )",
+                "assert sum_squares([2, 4, 6, 8, 10, 12, 14, 16]) == 1808 (AssertionError: )",
+                "assert sum_squares([1, 1, 1, 1, 1, 1, 1, 1, 1]) == 3 (AssertionError: )",
+                "assert sum_squares([-3, -3, -3, -3, -3, -3, -3, -3, -3]) == -657 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/143",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [],
+            "failed_tests": [
+                "    assert words_in_sentence(\"This is a test\") == \"is\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert words_in_sentence(\"lets go for swimming\") == \"go for\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert words_in_sentence(\"a\") == \"\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert words_in_sentence(\"prime numbers in a sentence\") == \"prime in a\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert words_in_sentence(\"one two three four five six seven\") == \"two three five seven\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert words_in_sentence(\"I love Python programming\") == \"love Python\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert words_in_sentence(\"abcdefg hijklmnop qrstuv wxyz\") == \"qrstuv\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert words_in_sentence(\" \") == \"\" (IndentationError: unexpected indent (<string>, line 1))",
+                "    assert words_in_sentence(\"p r i m e s\") == \"p r i e s\" (IndentationError: unexpected indent (<string>, line 1))"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/144",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert simplify(\"1/5\", \"5/1\") == True",
+                "assert simplify(\"1/6\", \"2/1\") == False",
+                "assert simplify(\"7/10\", \"10/2\") == False",
+                "assert simplify(\"2/3\", \"3/2\") == True",
+                "assert simplify(\"1/2\", \"2/1\") == True",
+                "assert simplify(\"3/4\", \"4/3\") == True",
+                "assert simplify(\"10/1\", \"1/10\") == True",
+                "assert simplify(\"5/2\", \"2/5\") == True",
+                "assert simplify(\"9/8\", \"8/9\") == True",
+                "assert simplify(\"100/200\", \"200/100\") == True",
+                "assert simplify(\"1/100\", \"100/1\") == True"
+            ],
+            "failed_tests": [
+                "assert simplify(\"3/7\", \"14/6\") == False (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/145",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert order_by_points([1, 11, -1, -11, -12]) == [-1, -11, 1, -12, 11]",
+                "assert order_by_points([]) == []",
+                "assert order_by_points([10, 20, 30, 40]) == [10, 20, 30, 40]",
+                "assert order_by_points([9, 99, 999]) == [9, 99, 999]"
+            ],
+            "failed_tests": [
+                "assert order_by_points([56, 65, 654, 456]) == [56, 65, 456, 654] (AssertionError: )",
+                "assert order_by_points([123, 321, 213]) == [123, 213, 321] (AssertionError: )",
+                "assert order_by_points([-12, -21, -111, -222]) == [-111, -12, -21, -222] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/146",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert specialFilter([15, -73, 14, -15]) == 1",
+                "assert specialFilter([33, -2, -3, 45, 21, 109]) == 2",
+                "assert specialFilter([11, 13, 15, 17, 19]) == 5",
+                "assert specialFilter([-11, -13, -15, -17, -19]) == 0",
+                "assert specialFilter([20, 30, 40, 50]) == 0",
+                "assert specialFilter([]) == 0",
+                "assert specialFilter([102, 202, 302, 402, 502]) == 0"
+            ],
+            "failed_tests": [
+                "assert specialFilter([135, 235, 335, 435, 535]) == 5 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/147",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert get_max_triples(5) == 1",
+                "assert get_max_triples(3) == 0",
+                "assert get_max_triples(6) == 4",
+                "assert get_max_triples(1) == 0",
+                "assert get_max_triples(2) == 0"
+            ],
+            "failed_tests": [
+                "assert get_max_triples(10) == 19 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/148",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert bf(\"Jupiter\", \"Neptune\") == (\"Saturn\", \"Uranus\")",
+                "assert bf(\"Earth\", \"Mercury\") == (\"Venus\",)",
+                "assert bf(\"Mercury\", \"Uranus\") == (\"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\")",
+                "assert bf(\"Uranus\", \"Jupiter\") == (\"Saturn\",)",
+                "assert bf(\"Venus\", \"Venus\") == ()",
+                "assert bf(\"Pluto\", \"Mars\") == ()",
+                "assert bf(\"Sun\", \"Mars\") == ()",
+                "assert bf(\"Saturn\", \"Neptune\") == (\"Uranus\",)"
+            ],
+            "failed_tests": [
+                "assert bf(\"Earth\", \"Mars\") == (\"Venus\",) (AssertionError: )",
+                "assert bf(\"Neptune\", \"Mercury\") == () (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/149",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert sorted_list_sum([\"hello\", \"world\", \"in\", \"a\", \"frame\"]) == [\"in\"]",
+                "assert sorted_list_sum([\"aa\", \"a\", \"aaa\", \"b\", \"bb\", \"bbb\"]) == [\"aa\", \"bb\"]",
+                "assert sorted_list_sum([\"ab\", \"cd\", \"ef\", \"gh\", \"ij\", \"kl\"]) == [\"ab\", \"cd\", \"ef\", \"gh\", \"ij\", \"kl\"]"
+            ],
+            "failed_tests": [
+                "assert sorted_list_sum([\"odd\", \"even\", \"one\", \"two\", \"three\"]) == [\"one\", \"two\", \"even\"] (AssertionError: )",
+                "assert sorted_list_sum([\"flower\", \"rose\", \"a\", \"sunflower\", \"daisy\"]) == [\"rose\", \"daisy\"] (AssertionError: )",
+                "assert sorted_list_sum([\"apple\", \"banana\", \"cherry\"]) == [] (AssertionError: )",
+                "assert sorted_list_sum([\"\"]) == [] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/150",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert x_or_y(7, 34, 12) == 34",
+                "assert x_or_y(15, 8, 5) == 5",
+                "assert x_or_y(2, 10, 20) == 10",
+                "assert x_or_y(4, 0, 1) == 1",
+                "assert x_or_y(11, 22, 33) == 22",
+                "assert x_or_y(1, 3, 4) == 4  # 1 is not considered a prime number",
+                "assert x_or_y(13, 5, 6) == 5",
+                "assert x_or_y(9, 7, 8) == 8"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/151",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert double_the_difference([1, 3, 2, 0]) == 10",
+                "assert double_the_difference([-1, -2, 0]) == 0",
+                "assert double_the_difference([9, -2]) == 81",
+                "assert double_the_difference([0]) == 0",
+                "assert double_the_difference([]) == 0",
+                "assert double_the_difference([1, 2, 3, 4, 5]) == 35",
+                "assert double_the_difference([-3, -5, -7]) == 0",
+                "assert double_the_difference([1.5, 2.5, 3.5]) == 0"
+            ],
+            "failed_tests": [
+                "assert double_the_difference([10, 11, 12, 13, 14]) == 170 (AssertionError: )",
+                "assert double_the_difference([1, 3, 5, 7, 9, 11]) == 385 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/152",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert compare([1,2,3,4,5,1],[1,2,3,4,2,-2]) == [0,0,0,0,3,3]",
+                "assert compare([0,5,0,0,0,4],[4,1,1,0,0,-2]) == [4,4,1,0,0,6]",
+                "assert compare([10,20,30],[10,20,30]) == [0,0,0]",
+                "assert compare([1,1,1,1],[2,2,2,2]) == [1,1,1,1]",
+                "assert compare([],[]) == []",
+                "assert compare([0,0,0,0],[0,0,0,0]) == [0,0,0,0]",
+                "assert compare([5,10,15],[5,9,20]) == [0,1,5]"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/153",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert Strongest_Extension('Slices', ['SErviNGSliCes', 'Cheese', 'StuFfed']) == 'Slices.SErviNGSliCes'",
+                "assert Strongest_Extension('my_class', ['AA', 'Be', 'CC']) == 'my_class.AA'",
+                "assert Strongest_Extension('Data', ['Loader', 'Parser', 'Validator']) == 'Data.Loader'",
+                "assert Strongest_Extension('Fruit', ['Apple', 'Banana', 'Cherry', 'Date']) == 'Fruit.Date'",
+                "assert Strongest_Extension('Algorithm', ['QuickSort', 'MergeSort', 'HeapSort']) == 'Algorithm.HeapSort'"
+            ],
+            "failed_tests": [
+                "assert Strongest_Extension('Model', ['NN', 'CNN', 'RNN', 'DNN']) == 'Model.NN' (AssertionError: )",
+                "assert Strongest_Extension('Vehicle', ['Car', 'Bike', 'Truck', 'Boat']) == 'Vehicle.Boat' (AssertionError: )",
+                "assert Strongest_Extension('Tool', ['Hammer', 'Screwdriver', 'Wrench']) == 'Tool.Wrench' (AssertionError: )",
+                "assert Strongest_Extension('Container', ['Box', 'Bottle', 'Can', 'Jar']) == 'Container.Jar' (AssertionError: )",
+                "assert Strongest_Extension('Planet', ['Mercury', 'Venus', 'Earth', 'Mars']) == 'Planet.Mercury' (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/154",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert cycpattern_check(\"abcd\", \"abd\") == False",
+                "assert cycpattern_check(\"hello\", \"ell\") == True",
+                "assert cycpattern_check(\"whassup\", \"psus\") == False",
+                "assert cycpattern_check(\"abab\", \"baa\") == True",
+                "assert cycpattern_check(\"efef\", \"eeff\") == False",
+                "assert cycpattern_check(\"himenss\", \"simen\") == True",
+                "assert cycpattern_check(\"rotation\", \"tationro\") == True",
+                "assert cycpattern_check(\"123456\", \"561234\") == True"
+            ],
+            "failed_tests": [
+                "assert cycpattern_check(\"abcdefg\", \"efgab\") == True (AssertionError: )",
+                "assert cycpattern_check(\"nopatternhere\", \"patternno\") == False (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/155",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert even_odd_count(12345) == (2, 3)",
+                "assert even_odd_count(-12345) == (2, 3)",
+                "assert even_odd_count(2222) == (4, 0)",
+                "assert even_odd_count(13579) == (0, 5)",
+                "assert even_odd_count(0) == (1, 0)",
+                "assert even_odd_count(-0) == (1, 0)",
+                "assert even_odd_count(24680) == (5, 0)",
+                "assert even_odd_count(-1357) == (0, 4)"
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/156",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert int_to_mini_roman(1) == 'i'",
+                "assert int_to_mini_roman(3) == 'iii'",
+                "assert int_to_mini_roman(9) == 'ix'",
+                "assert int_to_mini_roman(106) == 'cvi'",
+                "assert int_to_mini_roman(294) == 'ccxciv'",
+                "assert int_to_mini_roman(421) == 'cdxxi'",
+                "assert int_to_mini_roman(583) == 'dlxxxiii'",
+                "assert int_to_mini_roman(999) == 'cmxcix'",
+                "assert int_to_mini_roman(1000) == 'm'"
+            ],
+            "failed_tests": [
+                "assert int_to_mini_roman(148) == 'cxlvi' (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/157",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert right_angle_triangle(3, 4, 5) == True",
+                "assert right_angle_triangle(5, 12, 13) == True",
+                "assert right_angle_triangle(1, 2, 3) == False",
+                "assert right_angle_triangle(7, 24, 25) == True",
+                "assert right_angle_triangle(10, 6, 8) == True",
+                "assert right_angle_triangle(1, 1, 1) == False",
+                "assert right_angle_triangle(5, 3, 4) == True",
+                "assert right_angle_triangle(8, 15, 17) == True",
+                "assert right_angle_triangle(12, 5, 13) == True"
+            ],
+            "failed_tests": [
+                "assert right_angle_triangle(0, 0, 0) == False (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/158",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert find_max([\"name\", \"of\", \"string\"]) == \"string\"",
+                "assert find_max([\"name\", \"enam\", \"game\"]) == \"enam\"",
+                "assert find_max([\"aaaaaaa\", \"bb\", \"cc\"]) == \"aaaaaaa\"",
+                "assert find_max([\"hello\", \"world\", \"python\", \"code\"]) == \"python\"",
+                "assert find_max([\"abc\", \"acb\", \"bac\", \"bca\", \"cab\", \"cba\"]) == \"abc\"",
+                "assert find_max([\"a\", \"b\", \"c\", \"d\"]) == \"a\"",
+                "assert find_max([\"zzzzz\", \"yyyy\", \"xxxxx\", \"wwwwww\"]) == \"wwwwww\"",
+                "assert find_max([\"flower\", \"flow\", \"flight\"]) == \"flight\"",
+                "assert find_max([\"dog\", \"racecar\", \"car\"]) == \"racecar\""
+            ],
+            "failed_tests": [
+                "assert find_max([\"\", \" \", \"  \"]) == \"\" (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/159",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert eat(5, 6, 10) == [11, 4]",
+                "assert eat(4, 8, 9) == [12, 1]",
+                "assert eat(1, 10, 10) == [11, 0]",
+                "assert eat(2, 11, 5) == [7, 0]",
+                "assert eat(0, 0, 0) == [0, 0]",
+                "assert eat(10, 5, 5) == [15, 0]",
+                "assert eat(100, 200, 150) == [250, 0]",
+                "assert eat(50, 50, 100) == [100, 50]",
+                "assert eat(0, 1000, 500) == [500, 0]"
+            ],
+            "failed_tests": [
+                "assert eat(500, 500, 1000) == [1000, 0] (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/160",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert do_algebra(['+'], [1, 2]) == 3"
+            ],
+            "failed_tests": [
+                "assert do_algebra(['-', '+'], [5, 3, 2]) == 0 (AssertionError: )",
+                "assert do_algebra(['*', '+', '-'], [2, 3, 4, 1]) == 13 (AssertionError: )",
+                "assert do_algebra(['//', '**', '+'], [8, 2, 3, 1]) == 33 (AssertionError: )",
+                "assert do_algebra(['**', '//', '*'], [2, 3, 2, 4]) == 64 (AssertionError: )",
+                "assert do_algebra(['+', '-', '*', '//', '**'], [1, 2, 3, 4, 5, 2]) == 1 (AssertionError: )"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/161",
+        "is_solved": true,
+        "test_results": {
+            "passed_tests": [
+                "assert solve(\"1234\") == \"4321\"",
+                "assert solve(\"ab\") == \"AB\"",
+                "assert solve(\"#a@C\") == \"#A@c\"",
+                "assert solve(\"HelloWorld\") == \"hELLOwORLD\"",
+                "assert solve(\"Test123\") == \"tEST123\"",
+                "assert solve(\"123$%^\") == \"^%$321\"",
+                "assert solve(\"\") == \"\"",
+                "assert solve(\"aBcDeF\") == \"AbCdEf\"",
+                "assert solve(\"XYZ\") == \"xyz\"",
+                "assert solve(\"123abcXYZ\") == \"123ABCxyz\""
+            ],
+            "failed_tests": []
+        }
+    },
+    {
+        "task_id": "HumanEval/162",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "import hashlib",
+                "assert string_to_md5('') is None"
+            ],
+            "failed_tests": [
+                "assert string_to_md5('Hello world') == hashlib.md5('Hello world'.encode()).hexdigest() (NameError: name 'hashlib' is not defined)",
+                "assert string_to_md5('password123') == hashlib.md5('password123'.encode()).hexdigest() (NameError: name 'hashlib' is not defined)",
+                "assert string_to_md5('123456') == hashlib.md5('123456'.encode()).hexdigest() (NameError: name 'hashlib' is not defined)",
+                "assert string_to_md5('!@#$%^&*()') == hashlib.md5('!@#$%^&*()'.encode()).hexdigest() (NameError: name 'hashlib' is not defined)",
+                "assert string_to_md5('Python3.8') == hashlib.md5('Python3.8'.encode()).hexdigest() (NameError: name 'hashlib' is not defined)"
+            ]
+        }
+    },
+    {
+        "task_id": "HumanEval/163",
+        "is_solved": false,
+        "test_results": {
+            "passed_tests": [
+                "assert generate_integers(2, 8) == [2, 4, 6, 8]",
+                "assert generate_integers(8, 2) == [2, 4, 6, 8]",
+                "assert generate_integers(10, 14) == []",
+                "assert generate_integers(1, 5) == [2, 4]",
+                "assert generate_integers(5, 5) == []"
+            ],
+            "failed_tests": [
+                "assert generate_integers(3, 11) == [4, 6, 8, 10] (AssertionError: )"
+            ]
+        }
+    }
+]

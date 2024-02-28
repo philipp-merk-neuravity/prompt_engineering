@@ -36,7 +36,7 @@ async def gen_function(function_description: str, model="gpt-3.5-turbo", prompt_
     return (
         code_block,
         prompt_tokens + prompt_tokens_for_syntax_correction, 
-        completion_tokens + completion_tokens_for_syntax_correction, 
+        completion_tokens + completion_tokens_for_syntax_correction,
         duration + duration_for_syntax_correction
     )
 

@@ -126,9 +126,9 @@ def save_benchmark_results_for_reflection(items, benchmark_type, strategy, file_
     
     return full_file_path
 
-def create_file_for_reflection(benchmark_type, strategy, file_name_config):
+def create_file_for_reflection(benchmark_type, strategy, file_name_config, test_case_type):
     # Assuming static_path is defined elsewhere in your code
-    base_path = f"{static_path}/{benchmark_type}/{strategy}"
+    base_path = f"{static_path}/{benchmark_type}/{strategy}/{test_case_type}"
     os.makedirs(base_path, exist_ok=True)
     
     # Construct the name_config from the file_name_config values, excluding 'rounds'
@@ -190,7 +190,7 @@ def save_result(item, path):
     with open(path, 'a') as file:  # Open the file in append mode
         file.write(json.dumps(item) + '\n')  # Serialize the item to JSON and append a newline
 
-def load_test_cases():
+def load_test_cases(test_cases_path: str):
     test_cases = []
     with open(test_cases_path, 'r') as file:
         for line in file:
@@ -207,18 +207,28 @@ def load_from_json(file_path):
     with open(file_path, 'r') as file:
         return json.load(file)
     
-def load_data_from_jsonl(file_path):
-    data = []
+def load_from_jsonl(file_path):
+    items = []
+    with open(file_path, 'r', encoding='utf-8') as file:
+        for line in file:
+            item = json.loads(line.strip())
+            items.append(item)
+    return items
+
+def load_multiline_data_from_jsonl(file_path):
     try:
         with open(file_path, 'r') as file:
-            for line in file:
-                # Parse each line as a JSON object and append to the data list
-                data.append(json.loads(line))
+            file_content = file.read()
+            # Wrap the file content in square brackets and replace the last comma with an empty space if needed
+            json_content = "[" + file_content.rstrip(',') + "]"
+            data = json.loads(json_content)
+            return data
     except FileNotFoundError:
         print(f"The file at {file_path} was not found.")
-    except json.JSONDecodeError:
-        print(f"Error decoding JSON from file at {file_path}.")
+        return []
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON from file at {file_path}: {e}")
+        return []
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-    
-    return data
+        return []

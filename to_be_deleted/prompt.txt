@@ -70,7 +70,7 @@ from typing import List
 
 async def async_refine_code(item, model_for_init, model_for_reflection, model_for_refinement, max_iterations, test_cases):
     print(f"Processing item {item['task_id']}")
-    generated_code, prompt_tokens, completions_tokens, duration  = await gen_function(item["prompt"], model_for_init)
+    generated_code, prompt_tokens, completion_tokens, duration  = await gen_function(item["prompt"], model_for_init)
     print(f"Generated code for item {item['task_id']}")
     test_results, is_solved = await get_test_results(generated_code, test_cases)
     

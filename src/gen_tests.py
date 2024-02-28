@@ -37,3 +37,37 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     asyncio.run(main(args.model, args.prompt_type, args.chunk_size))
+
+
+# import asyncio
+# import argparse
+# from utils.code_generation import gen_tests
+# from utils.storage import load_benchmark, save_generated_tests
+# import json
+
+# async def main(model, prompt_type):
+#     benchmark_data = load_benchmark("all")[161:]
+
+#     for benchmark_item in benchmark_data:
+#         print(benchmark_item["task_id"])
+#         generated_tests, tokens_for_prompt, tokens_for_completion, duration = await gen_tests(benchmark_item["prompt"], model, prompt_type, 12)
+#         formatted_test_result = {
+#                 "task_id": benchmark_item["task_id"],
+#                 "generated_tests": generated_tests,
+#                 "prompt_tokens": tokens_for_prompt,
+#                 "completion_tokens": tokens_for_completion,
+#                 "duration": duration
+#         }
+#         # write to: /home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4/0/0.jsonl
+#         with open(f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4/0/0.jsonl", "a") as f:
+#             # use json.dump
+#             json.dump(formatted_test_result, f, indent=4)
+
+# if __name__ == "__main__":
+#     parser = argparse.ArgumentParser(description='Run async tasks with model parameter.')
+#     parser.add_argument('--model', type=str, required=True, help='Model parameter to be used.')
+#     parser.add_argument('--prompt_type', type=str, required=True, help='io, few_shot, agentCoder')
+
+#     args = parser.parse_args()
+
+#     asyncio.run(main(args.model, args.prompt_type))

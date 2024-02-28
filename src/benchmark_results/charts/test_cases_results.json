@@ -1,0 +1,26 @@
+{
+    "gpt3": {
+        "Zero-Shot": {
+            "number_of_solved_tasks": 115,
+            "number_of_failed_tasks": 49,
+            "accuracy": 0.7012195121951219
+        },
+        "agentCoder": {
+            "number_of_solved_tasks": 99,
+            "number_of_failed_tasks": 65,
+            "accuracy": 0.6036585365853658
+        },
+        "1-Shot": {
+                "number_of_solved_tasks": 119,
+                "number_of_failed_tasks": 45,
+                "accuracy": 0.725609756097561
+        }
+    },
+    "gpt4": {
+        "1-Shot": {
+            "number_of_solved_tasks": 88,
+            "number_of_failed_tasks": 76,
+            "accuracy": 0.5365853658536586
+        }
+    }
+}
