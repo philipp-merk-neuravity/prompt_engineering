@@ -120,3 +120,5 @@ Provide the  for the given function_impl and unit test results.:
 {unit_test_results}
 [reflection and refined implementation]:
 """
+
+SELF_REFLECTION_AGENT_CODER_INSTRUCTION = ""

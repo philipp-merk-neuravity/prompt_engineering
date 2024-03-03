@@ -104,6 +104,10 @@ async def get_messages_for_self_reflection(function_implementation: str, unit_te
             create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION),
             create_user_message(SELF_REFLECTION_CURRENT_FEEDBACK, function_implementation=function_implementation, unit_test_results=unit_test_results),
         ]
+    if prompt == "agentCoder":
+        return [
+            
+        ]
 
 async def get_messages_for_refinement(function_signature: str, function_implementation: str, unit_test_results: str, reflection: str, prompt: str):
     if prompt == "reflexion":

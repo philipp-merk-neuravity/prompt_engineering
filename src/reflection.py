@@ -39,13 +39,13 @@ async def async_refine_code(item, model_for_reflection, model_for_refinement, pr
     save_result(results_for_task, file_path_for_results)
     print(f"Task {item['task_id']} is solved: {is_solved}")
 
-def pick_random_test_cases(test_cases, task_id, max_cases=2):
+def pick_random_test_cases(test_cases, task_id, max_cases=1):
     # Filter test cases for the given task_id
     filtered_cases = [test_case for test_cases_group in test_cases
                       for test_case in test_cases_group["tests"] 
                       if test_cases_group["task_id"] == task_id]
-    return filtered_cases
-    # return random.sample(filtered_cases, min(len(filtered_cases), max_cases))
+    # return filtered_cases
+    return random.sample(filtered_cases, min(len(filtered_cases), max_cases))
 
 def get_init_result(init_results, task_id):
     for result in init_results:
@@ -90,7 +90,7 @@ async def main(model_for_reflection, model_for_refinement, prompt_for_reflection
     current_benchmark_results = load_from_jsonl(file_path_for_results)
     benchmark_data = load_benchmark(benchmark_type)
     unresolved_tasks = get_unresolved_tasks(benchmark_data, current_benchmark_results)
-    test_cases = load_from_json(tests_path)
+    test_cases = load_from_jsonl(tests_path)
 
     start_time = time.time()  # Capture start time
     all_results = await process_chunks(unresolved_tasks, model_for_reflection, model_for_refinement, prompt_for_reflection, prompt_for_refinement, max_iterations, test_cases, chunk_size, file_path_for_results, init_results)

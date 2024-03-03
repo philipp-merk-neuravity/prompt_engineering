@@ -16,9 +16,9 @@ file_path_for_performance = static_path + "test_cases_results.json"
 data_performance = read_json_file(file_path_for_performance)
 
 # Process the data for plotting
-methods = list(set(data_performance["gpt3"].keys()) | set(data_performance["gpt4"].keys()))  # Get unique method names
-gpt3_accuracies = [data_performance["gpt3"].get(method, {}).get("accuracy", 0) for method in methods]
-gpt4_accuracies = [data_performance["gpt4"].get(method, {}).get("accuracy", 0) for method in methods]
+methods = list(set(data_performance["gpt-3.5-turbo"].keys()) | set(data_performance["gpt-4-turbo"].keys()))  # Get unique method names
+gpt3_accuracies = [data_performance["gpt-3.5-turbo"].get(method, {}).get("accuracy", 0) for method in methods]
+gpt4_accuracies = [data_performance["gpt-4-turbo"].get(method, {}).get("accuracy", 0) for method in methods]
 
 x = np.arange(len(methods))  # the label locations
 width = 0.35  # the width of the bars
@@ -31,7 +31,8 @@ rects2 = ax.bar(x + width/2, gpt4_accuracies, width, label='GPT-4', color='orang
 ax.set_ylabel('Genauigkeit')
 ax.set_xticks(x)
 ax.set_xticklabels(methods, rotation=45, ha="right")
-ax.legend()
+ax.legend(ncol=2)
+ax.set_ylim([0, max(gpt3_accuracies + gpt4_accuracies) * 1.25])  # Assuming you want to increase space by 20%
 
 # Function to auto-label the bars with their height values
 def autolabel(rects):
@@ -48,10 +49,9 @@ autolabel(rects1)
 autolabel(rects2)
 
 fig.tight_layout()
-
 plt.show()
 
 # save the plot to a file
 
-file_path = static_path + "test_case_results.png"
+file_path = static_path + "test_cases_accuracy.png"
 fig.savefig(file_path)

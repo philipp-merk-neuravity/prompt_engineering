@@ -2,6 +2,21 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "Run CodeT",
+      "type": "python",
+      "request": "launch",
+      "program": "/home/neuravity/dev/prompt_engineering/CodeT/src/main.py",
+      "args": [
+          "--source_path_for_solution", "/home/neuravity/dev/prompt_engineering/CodeT/src/data/dataset/HumanEval_for_code_generation.jsonl",
+          "--predict_path_for_solution", "/home/neuravity/dev/prompt_engineering/CodeT/src/data/generated_data/HumanEval_davinci002_temp0.8_topp0.95_num100_max300_code_solution.jsonl",
+          "--source_path_for_test", "/home/neuravity/dev/prompt_engineering/CodeT/src/data/dataset/HumanEval_for_test_case_generation.jsonl",
+          "--predict_path_for_test", "/home/neuravity/dev/prompt_engineering/CodeT/src/data/generated_data/HumanEval_davinci002_temp0.8_topp0.95_num100_max300_test_case.jsonl",
+          "--timeout", "0.1",
+          "--test_case_limit", "5"
+      ],
+      "console": "integratedTerminal"
+    },
+    {
       "name": "Python Debugger: Current File",
       "type": "debugpy",
       "request": "launch",
@@ -27,8 +42,8 @@
       "program": "${workspaceFolder}/src/gen_tests.py",
       "console": "integratedTerminal",
       "args": [
-        "--model", "gpt-3.5-turbo-0125",
-        "--prompt_type", "few_shot",
+        "--model", "gpt-4-0125-preview",
+        "--prompt_type", "io",
         "--chunk_size", "50"
       ],
       "cwd": "${workspaceFolder}/src"
@@ -40,7 +55,7 @@
       "program": "${workspaceFolder}/src/eval_tests.py",
       "console": "integratedTerminal",
       "args": [
-        "--path_for_test_cases", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/1/1.jsonl",
+        "--path_for_test_cases", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/io/gpt-4-0125-preview/0/0.jsonl",
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -51,16 +66,16 @@
       "program": "${workspaceFolder}/src/simple.py",
       "console": "integratedTerminal",
       "args": [
-        "--model", "gpt-4-0125-preview",
-        "--prompt_type", "agentCoder",
+        "--model", "gpt-3.5-turbo-0125",
+        "--prompt_type", "io",
         "--benchmark_type", "all",
-        "--chunk_size", "57",
+        "--chunk_size", "170",
         "--delay_seconds", "10"
       ],
       "cwd": "${workspaceFolder}/src"
     },
     {
-      "name": "Reflection (Tests: gpt-3.5-turbo-0125, Init: gpt-4)",
+      "name": "Reflection (Tests: gpt-4, Init: gpt-4)",
       "type": "python",
       "request": "launch",
       "program": "${workspaceFolder}/src/reflection.py",
@@ -73,9 +88,9 @@
         "--max_iterations", "4",
         "--benchmark_type", "all",
         "--chunk_size", "50",
-        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/io/gpt-3.5-turbo-0125/2/2.jsonl",
-        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-4-0125-preview/0/0.jsonl",
-        "--test_case_type", "with_gpt-3.5-turbo_test_cases"
+        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4-0125-preview/2/2.jsonl",
+        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-4-0125-preview/1/1.jsonl",
+        "--test_case_type", "with_gpt_4_test_cases"
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -93,29 +108,9 @@
         "--max_iterations", "4",
         "--benchmark_type", "all",
         "--chunk_size", "50",
-        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/0/0.jsonl",
+        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4-0125-preview/2/2.jsonl",
         "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/4/4.jsonl",
-        "--test_case_type", "with_gpt-3.5-turbo_test_cases_4"
-      ],
-      "cwd": "${workspaceFolder}/src"
-    },
-    {
-      "name": "Reflection (Tests: predefined, Init: gpt-3.5-turbo-0125)",
-      "type": "python",
-      "request": "launch",
-      "program": "${workspaceFolder}/src/reflection.py",
-      "console": "integratedTerminal",
-      "args": [
-        "--model_for_reflection", "gpt-3.5-turbo-0125",
-        "--model_for_refinement", "gpt-3.5-turbo-0125",
-        "--prompt_for_reflection", "reflexion_without_few_shot",
-        "--prompt_for_refinement", "reflexion_without_few_shot",
-        "--max_iterations", "4",
-        "--benchmark_type", "all",
-        "--chunk_size", "50",
-        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json",
-        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/4/4.jsonl",
-        "--test_case_type", "with_predefined_test_cases"
+        "--test_case_type", "with_1_gpt-4-turbo_test_cases"
       ],
       "cwd": "${workspaceFolder}/src"
     },

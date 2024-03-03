@@ -17,7 +17,7 @@ for model_version, models in data.items():
     for model_name, metrics in models.items():
         costs.append(metrics['costs'])
         accuracies.append(metrics['accuracy'])
-        labels.append(f"{model_version}_{model_name}")
+        labels.append(f"({model_name}, {model_version})")
 
 # Plotting
 fig, ax = plt.subplots()
@@ -50,5 +50,5 @@ ax.set_xlabel('Kosten in Dollar')
 ax.set_ylabel('Genauigkeit')
 
 # Save to file
-file_path = '/home/neuravity/dev/prompt_engineering/src/benchmark_results/charts/cost_vs_accuracy.png'
+file_path = '/home/neuravity/dev/prompt_engineering/src/benchmark_results/charts/simple_cost_vs_accuracy.png'
 fig.savefig(file_path)
