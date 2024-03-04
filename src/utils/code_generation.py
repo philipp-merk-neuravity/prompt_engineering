@@ -28,7 +28,7 @@ async def gen_function(function_description: str, model="gpt-3.5-turbo", prompt_
     if prompt_type == "synth_few_shot" or prompt_type == "agentCoder":
         response_format = "json_object"
     messages = await get_messages_for_code_generation(function_description, prompt_type, preprocessed_prompt)
-    response, prompt_tokens, completion_tokens, duration = await get_completion(messages, model=model, response_format=response_format, temperature=0.6)
+    response, prompt_tokens, completion_tokens, duration = await get_completion(messages, model=model, response_format=response_format, temperature=0.68)
     if prompt_type == "synth_few_shot" or prompt_type == "agentCoder":
         response = extract_python_code_from_json(response, prompt_type)
     code_block = parse_code_block(response)
