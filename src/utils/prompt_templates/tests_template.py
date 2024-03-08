@@ -1,6 +1,9 @@
+# TEST_GEN_INSTRUCTION_IO = "Write unique, diverse, and intuitive unit tests for functions given the signature and docstring. Answer with code only not in English. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'"
 TEST_GEN_INSTRUCTION_IO = "Write unique, diverse, and intuitive unit tests for functions given the signature and docstring. Answer with code only not in English. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'"
 
 TEST_GEN_CHAT_INSTRUCTION = """You are an AI coding assistant that can write unique, diverse, and intuitive unit tests for functions given the signature and docstring. Answer with code only not in English. Use only assert statements that are independent from each other, as shown in the example without additional code."""
+
+TEST_GEN_ZERO_SHOT_INSTRUCTION = "Write unique, diverse, and intuitive unit tests for functions given the signature and docstring. Answer with code only containing comments. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'. Think step by step by providing comments before each assert statement."
 
 TEST_GEN_FEW_SHOT = """
 Example:
@@ -76,3 +79,51 @@ def has_close_elements(numbers: List[float], threshold: float) -> bool:
 **example end**
 **Task**:
 '''
+
+TEST_REFINEMENT_INSTRUCTION = "You are a Python programming assistant that can refine a given test case, given the function signature and the original test case. Provide a short explanation, if the test case is correct or incorrect. Provide the refined or original test case after your explanation, in the the format: python```assert <test>```"
+
+TEST_REFINEMENT_PlACEHOLDER = """
+[func signature]:
+{function_signature}
+[original test]:
+{test}
+[Explanation and refined test]:
+"""
+
+TEST_DETECTION_INSTRUCTION = "Given the following list of unit tests and the docstring for a specific function, check whether the ouput for each test is correct. Respond in the exact same json format as the example."
+
+TEST_DETECTION_PLACEHOLDER = """
+**Example**:
+[func signature]:
+from typing import List\n\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n
+[generated tests]:
+assert remove_duplicates([10, 20, 20, 10, 30]) == [10, 20, 30]
+assert remove_duplicates([-1, -2, -2, -1, -3]) == [-1, -2, -3]
+assert remove_duplicates([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]
+[response]:
+{{
+  tests: [
+    {{
+        "test": "assert remove_duplicates([10, 20, 20, 10, 30]) == [10, 20, 30]",
+        "analysis": "The test expects duplicates to be reduced to a single instance, which conflicts with the function's design to remove all occurrences of duplicates.",
+        "is_correct": false
+    }},
+    {{
+        "test": "assert remove_duplicates([-1, -2, -2, -1, -3]) == [-1, -2, -3]",
+        "analysis": "This test misunderstands the function's purpose. It expects a preservation of one instance of each number, whereas the function aims to eliminate all repeated numbers.",
+        "is_correct": false
+    }},
+    {{
+        "test": "assert remove_duplicates([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]",
+        "analysis": "Since there are no duplicates in the input list, the function's output correctly matches the input list, aligning with the expected behavior.",
+        "is_correct": true
+    }}
+  ]
+}}
+**Task**:
+[func signature]:
+{function_signature}
+[generated tests]:
+{tests}
+[response]:
+"""

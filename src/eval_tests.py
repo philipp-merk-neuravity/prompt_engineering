@@ -80,7 +80,7 @@ async def main(path_for_test_cases):
         for test_item in test_cases:
             if benchmark_item["task_id"] == test_item["task_id"]:
                 code_solution = benchmark_item["prompt"] + benchmark_item["canonical_solution"]
-                task = run_test_case_in_executor(executor, code_solution, test_item["generated_tests"])
+                task = run_test_case_in_executor(executor, code_solution, test_item["tests"])
                 tasks.append(task)
 
     results = await asyncio.gather(*tasks)

@@ -39,10 +39,10 @@ async def async_refine_code(item, model_for_reflection, model_for_refinement, pr
     save_result(results_for_task, file_path_for_results)
     print(f"Task {item['task_id']} is solved: {is_solved}")
 
-def pick_random_test_cases(test_cases, task_id, max_cases=1):
+def pick_random_test_cases(test_cases, task_id, max_cases=4):
     # Filter test cases for the given task_id
     filtered_cases = [test_case for test_cases_group in test_cases
-                      for test_case in test_cases_group["tests"] 
+                      for test_case in test_cases_group["tests"]
                       if test_cases_group["task_id"] == task_id]
     # return filtered_cases
     return random.sample(filtered_cases, min(len(filtered_cases), max_cases))
@@ -68,6 +68,7 @@ async def process_single_chunk(chunk, model_for_reflection, model_for_refinement
     ]
     print(f"Processing {len(tasks)} items")
     return await asyncio.gather(*tasks)
+
 async def process_chunks(benchmark_data, model_for_reflection, model_for_refinement, prompt_for_reflection, prompt_for_refinement, max_iterations, tests_cases, chunk_size, file_path_for_results, init_results):
     chunks = [benchmark_data[i:i + chunk_size] for i in range(0, len(benchmark_data), chunk_size)]
     all_results = []

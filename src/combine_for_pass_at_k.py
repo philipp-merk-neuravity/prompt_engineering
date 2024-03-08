@@ -1,11 +1,11 @@
 from utils.storage import load_from_jsonl
 
 paths =  [
-    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/0/0.jsonl_results.jsonl",
-    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/1/1.jsonl_results.jsonl",
-    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/2/2.jsonl_results.jsonl",
-    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/3/3.jsonl_results.jsonl",
-    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/4/4.jsonl_results.jsonl"
+    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125-temp-0_68/12/12.jsonl_results.jsonl",
+    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125-temp-0_68/13/13.jsonl_results.jsonl",
+    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125-temp-0_68/14/14.jsonl_results.jsonl",
+    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125-temp-0_68/15/15.jsonl_results.jsonl",
+    "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125-temp-0_68/16/16.jsonl_results.jsonl"
     ]
 
 

@@ -4,6 +4,9 @@ import ast
 import json
 
 def convert_tests_to_list(tests: str, prompt_type: str) -> List[str]:
+    # first extract python```code``` block
+    tests = parse_code_block(tests)
+
     if prompt_type == "agentCoder":
         tests_dict = json.loads(tests)
         assert_statements = []
@@ -17,6 +20,8 @@ def convert_tests_to_list(tests: str, prompt_type: str) -> List[str]:
     parts = tests.split('assert')[1:]
     # Prepend 'assert ' (with a space) back to each part and strip leading/trailing whitespace/newlines
     assert_statements = ['assert ' + part.strip() for part in parts]
+    # Remove the comment from each assert statement using "#" as the delimiter
+    assert_statements = [assert_statement.split('#')[0].strip() for assert_statement in assert_statements]
     return assert_statements
     
 def parse_code_block(string: str) -> Optional[str]:

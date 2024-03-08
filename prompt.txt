@@ -1,0 +1,18 @@
+[function]:
+from typing import List\n\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n
+    import collections\n    c = collections.Counter(numbers)\n    return [n for n in numbers if c[n] <= 1]\n
+[generated tests]:
+
+"test_results": {
+    "passed_tests": [
+        "assert remove_duplicates([1, 2, 3, 2, 4]) == [1, 3, 4]",
+        "assert remove_duplicates([1, 1, 1, 1, 1]) == []",
+        "assert remove_duplicates([5, 5, 4, 4, 3, 2, 1]) == [3, 2, 1]",
+        "assert remove_duplicates([]) == []",
+        "assert remove_duplicates([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]"
+    ],
+    "failed_tests": [
+        "assert remove_duplicates([10, 20, 20, 10, 30]) == [10, 20, 30] (AssertionError: )",
+        "assert remove_duplicates([-1, -2, -2, -1, -3]) == [-1, -2, -3] (AssertionError: )"
+    ]
+}

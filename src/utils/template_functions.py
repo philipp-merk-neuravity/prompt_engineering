@@ -3,7 +3,7 @@ from .prompt_templates.solution_template import (ZERO_SHOT_COT_PLACEHOLDER, ZERO
 from .prompt_templates.syntax_correction_template import (SYNTAX_CORRECTION_CODE_SOLUTION, SYNTAX_CORRECTION_FEEDBACK, SYNTAX_CORRECTION_INSTRUCTION)
 from .prompt_templates.reflection_template import (SELF_REFLECTION_CHAT_INSTRUCTION_2, SELF_REFLECTION_FEW_SHOT_2, SELF_REFLECTION_CHAT_INSTRUCTION, SELF_REFLECTION_CURRENT_FEEDBACK, SELF_REFLECTION_FEW_SHOT)
 from .prompt_templates.refinement_template import (REFINEMENT_TASK, REFINEMENT_FEW_SHOT, REFINEMENT_FUNC_SIGNATURE, REFINEMENT_INSTRUCTION, REFINEMENT_PREVIOUS_FUNCTION_IMPL, REFINEMENT_REFLECTION, REFINEMENT_TESTS)
-from .prompt_templates.tests_template import (TEST_GEN_INSTRUCTION_IO, TEST_GEN_CHAT_INSTRUCTION, TEST_GEN_FEW_SHOT, TEST_GEN_FUNCTION_SIGNATURE, TEST_GEN_FEW_SHOT_AC, TEST_GEN_INSTRUCTION_AC)
+from .prompt_templates.tests_template import (TEST_DETECTION_INSTRUCTION, TEST_DETECTION_PLACEHOLDER, TEST_REFINEMENT_INSTRUCTION, TEST_REFINEMENT_PlACEHOLDER, TEST_GEN_ZERO_SHOT_INSTRUCTION, TEST_GEN_INSTRUCTION_IO, TEST_GEN_CHAT_INSTRUCTION, TEST_GEN_FEW_SHOT, TEST_GEN_FUNCTION_SIGNATURE, TEST_GEN_FEW_SHOT_AC, TEST_GEN_INSTRUCTION_AC)
 
 def create_system_message(template, **kwargs):
     return {"role": "system", "content": template.format(**kwargs)}
@@ -68,13 +68,8 @@ async def get_messages_for_code_generation(function_description: str, prompt_typ
         ]
     if prompt_type == "zero_shot_cot":
         return [
-            create_system_message(ZERO_SHOT_COT_INSTRUCTION),
-            create_user_message(ZERO_SHOT_COT_PLACEHOLDER, function_signature=function_description),
-        ]
-    if prompt_type == "agentCoder":
-        return [
-            create_system_message(AC_CODE_GEN_INSTRUCTION),
-            create_user_message(AC_CODE_GEN_FEW_SHOT, function_description=function_description),
+            create_system_message(TEST_GEN_ZERO_SHOT_INSTRUCTION),
+            create_user_message(TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_description),
         ]
     
 async def get_messages_for_test_generation(function_signature: str, prompt_type="io"):
@@ -88,11 +83,24 @@ async def get_messages_for_test_generation(function_signature: str, prompt_type=
             create_system_message(TEST_GEN_CHAT_INSTRUCTION),
             create_user_message(TEST_GEN_FEW_SHOT + TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
         ]
-    if prompt_type == "agentCoder":
+    if prompt_type == "zero_shot_cot":
         return [
-            create_system_message(TEST_GEN_INSTRUCTION_AC),
-            create_user_message(TEST_GEN_FEW_SHOT_AC + TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
+            create_system_message(TEST_GEN_ZERO_SHOT_INSTRUCTION),
+            create_user_message(TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
         ]
+    
+async def get_messages_for_test_refinement(test: str, function_signature: str):
+    return [
+        create_system_message(TEST_REFINEMENT_INSTRUCTION),
+        create_user_message(TEST_REFINEMENT_PlACEHOLDER, function_signature=function_signature, test=test),
+    ]
+
+async def get_messages_for_test_detection(tests: str, function_signature: str):
+    return [
+        create_system_message(TEST_DETECTION_INSTRUCTION),
+        create_user_message(TEST_DETECTION_PLACEHOLDER, function_signature=function_signature, tests=tests),
+    ]
+
 async def get_messages_for_self_reflection(function_implementation: str, unit_test_results: str, prompt: str):
     if prompt == "reflexion":
         return [
@@ -103,10 +111,6 @@ async def get_messages_for_self_reflection(function_implementation: str, unit_te
         return [
             create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION),
             create_user_message(SELF_REFLECTION_CURRENT_FEEDBACK, function_implementation=function_implementation, unit_test_results=unit_test_results),
-        ]
-    if prompt == "agentCoder":
-        return [
-            
         ]
 
 async def get_messages_for_refinement(function_signature: str, function_implementation: str, unit_test_results: str, reflection: str, prompt: str):

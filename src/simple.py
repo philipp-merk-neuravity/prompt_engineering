@@ -57,5 +57,4 @@ if __name__ == "__main__":
     parser.add_argument('--delay_seconds', type=int, required=True, help='Delay in seconds between processing chunks to handle rate limits.')
 
     args = parser.parse_args()
-
     asyncio.run(main(args.model, args.prompt_type, args.benchmark_type, args.chunk_size, args.delay_seconds))
