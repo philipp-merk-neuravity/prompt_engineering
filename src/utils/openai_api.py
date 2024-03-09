@@ -17,7 +17,7 @@ client = AsyncOpenAI(
 @retry(wait=wait_random_exponential(min=1, max=180), stop=stop_after_attempt(6))
 async def get_completion(
     messages,
-    temperature=0.0,
+    temperature=0.2,
     model="gpt-3.5-turbo",
     max_tokens=4095,
     response_format="text"

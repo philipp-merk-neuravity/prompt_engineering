@@ -38,10 +38,9 @@ def load_benchmark_results(benchmark_results_file_path: str):
             
     return np.array(json_objects, dtype=object)
 
-def save_benchmark_results(items, benchmark_type, strategy, prompt_type, model):
+def save_benchmark_results(items, benchmark_type, strategy, prompt_type, model, temperature):
     # Assuming static_path is the base directory where all benchmarks are stored
-
-    base_path = f"{static_path}/{benchmark_type}/{strategy}/{prompt_type}/{model}"
+    base_path = f"{static_path}/{benchmark_type}/{strategy}/{temperature}/{prompt_type}/{model}"
     os.makedirs(base_path, exist_ok=True)
     
     # Determine the next available file_id by inspecting existing folders

@@ -23,12 +23,12 @@ async def gen_preprocessed_prompt(function_signature: str, prompt_type: str) -> 
     messages = await get_messages_for_prompt_preprocessing(function_signature, prompt_type)
     return await get_completion(messages)
 
-async def gen_function(function_description: str, model="gpt-3.5-turbo", prompt_type="io", preprocessed_prompt=None) -> tuple:
+async def gen_function(function_description: str, model="gpt-3.5-turbo", prompt_type="io", preprocessed_prompt=None, temperature=0.2) -> tuple:
     response_format = "text"
     if prompt_type == "synth_few_shot" or prompt_type == "agentCoder":
         response_format = "json_object"
     messages = await get_messages_for_code_generation(function_description, prompt_type, preprocessed_prompt)
-    response, prompt_tokens, completion_tokens, duration = await get_completion(messages, model=model, response_format=response_format, temperature=0.2)
+    response, prompt_tokens, completion_tokens, duration = await get_completion(messages, model=model, response_format=response_format, temperature=temperature)
     if prompt_type == "synth_few_shot" or prompt_type == "agentCoder":
         response = extract_python_code_from_json(response, prompt_type)
     code_block = parse_code_block(response)

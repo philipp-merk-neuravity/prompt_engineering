@@ -68,10 +68,11 @@
       "console": "integratedTerminal",
       "args": [
         "--model", "gpt-3.5-turbo-0125",
-        "--prompt_type", "scot",
+        "--prompt_type", "io",
         "--benchmark_type", "all",
-        "--chunk_size", "87",
-        "--delay_seconds", "20"
+        "--chunk_size", "166",
+        "--delay_seconds", "20",
+        "--temperature", "0.2"
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -109,9 +110,9 @@
         "--max_iterations", "4",
         "--benchmark_type", "all",
         "--chunk_size", "50",
-        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/with_refinement/gpt-4-0125-preview/combined_results.jsonl",
+        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4-0125-preview/with_refinement/gpt-4-0125-preview/combined_results.jsonl",
         "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/4/4.jsonl",
-        "--test_case_type", "gpt3.5_gpt3.5_gpt4"
+        "--test_case_type", "gpt3.5_gpt4_gpt4"
       ],
       "cwd": "${workspaceFolder}/src"
     },

@@ -8,14 +8,14 @@ async def preprocess_prompts(chunk, prompt_type):
     tasks = [gen_preprocessed_prompt(item["prompt"], prompt_type) for item in chunk]
     return await asyncio.gather(*tasks)
 
-async def process_chunk(chunk, model, prompt_type, preprocessed_prompts: List[str]=None ):
+async def process_chunk(chunk, model, prompt_type, preprocessed_prompts: List[str]=None, temperature: float=0.2):
     if preprocessed_prompts is not None:
         tasks = [gen_function(item["prompt"], model, prompt_type, preprocessed_prompts[idx]) for idx, item in enumerate(chunk)]
     else:
-        tasks = [gen_function(item["prompt"], model, prompt_type) for item in chunk]
+        tasks = [gen_function(item["prompt"], model, prompt_type, temperature=temperature) for item in chunk]
     return await asyncio.gather(*tasks)
 
-async def main(model, prompt_type, benchmark_type, chunk_size, delay_seconds):
+async def main(model, prompt_type, benchmark_type, chunk_size, delay_seconds, temperature):
     benchmark_data = load_benchmark(benchmark_type)
     items_to_save = []
 
@@ -32,7 +32,7 @@ async def main(model, prompt_type, benchmark_type, chunk_size, delay_seconds):
                      preprocessed_data[idx][2] + results[idx][2],
                      preprocessed_data[idx][3] + results[idx][3]) for idx, result in enumerate(results)]
         else:
-            results = await process_chunk(chunk, model, prompt_type)
+            results = await process_chunk(chunk, model, prompt_type, temperature=temperature)
         
         for result, item in zip(results, chunk):
             items_to_save.append({
@@ -46,7 +46,7 @@ async def main(model, prompt_type, benchmark_type, chunk_size, delay_seconds):
         # Delay after each chunk is processed before starting the next chunk
         await asyncio.sleep(delay_seconds)
 
-    save_benchmark_results(items_to_save, benchmark_type, "simple", prompt_type, model)
+    save_benchmark_results(items_to_save, benchmark_type, "simple", prompt_type, model, temperature)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run async tasks with model parameter.')
@@ -55,6 +55,7 @@ if __name__ == "__main__":
     parser.add_argument('--benchmark_type', type=str, required=True, help='"all" or "50"')
     parser.add_argument('--chunk_size', type=int, required=True, help='Number of items to process at a time to handle rate limits.')
     parser.add_argument('--delay_seconds', type=int, required=True, help='Delay in seconds between processing chunks to handle rate limits.')
+    parser.add_argument('--temperature', type=float, required=False, default=0.2, help='Temperature parameter for code generation.')
 
     args = parser.parse_args()
-    asyncio.run(main(args.model, args.prompt_type, args.benchmark_type, args.chunk_size, args.delay_seconds))
+    asyncio.run(main(args.model, args.prompt_type, args.benchmark_type, args.chunk_size, args.delay_seconds, args.temperature))
