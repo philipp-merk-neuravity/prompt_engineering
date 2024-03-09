@@ -15,6 +15,7 @@ def load_benchmark(type: str = 'all'):
         benchmark_data_path = humanEval_file_path
     elif type == '50':
         benchmark_data_path = humanEval_50_file_path
+
     try:
         # Open the .jsonl file directly without gzip
         with open(benchmark_data_path, 'r', encoding='utf-8') as file:

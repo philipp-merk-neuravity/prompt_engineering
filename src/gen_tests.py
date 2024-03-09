@@ -9,7 +9,7 @@ async def process_chunk(chunk, model, prompt_type, model_for_refinement, use_ref
 
 async def main(model, prompt_type, chunk_size, model_for_refinement):
     use_refinement = model_for_refinement != ""
-    benchmark_data = load_benchmark("all")
+    benchmark_data = load_benchmark("all")[2:3]
     items_to_save = []
 
     for i in range(0, len(benchmark_data), chunk_size):

@@ -78,11 +78,11 @@ async def gen_tests(function_signature: str, model: str, prompt_type: str, amoun
 
 async def gen_reflection(function_implementation: str, unit_test_results: str, model: str, prompt: str) -> str:
     messages = await get_messages_for_self_reflection(function_implementation, unit_test_results, prompt)
-    return await get_completion(messages, model=model)
+    return await get_completion(messages, model=model, temperature=0.2)
 
 async def gen_refined_function(function_signature: str, function_implementation: str, unit_test_results: str, reflection: str, model: str, prompt: str) -> str:
     messages = await get_messages_for_refinement(function_signature, function_implementation, unit_test_results, reflection, prompt)
-    refined_function, prompt_tokens, completion_tokens, duration = await get_completion(messages, model=model)
+    refined_function, prompt_tokens, completion_tokens, duration = await get_completion(messages, model=model, temperature=0.8)
     code_block = parse_code_block(refined_function)
     code_block, prompt_tokens_for_syntax_correction, completion_tokens_for_syntax_correction, duration_for_syntax_correction = await evaluate_syntax_for_code_solution(code_block, function_signature)
     return (

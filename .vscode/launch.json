@@ -44,7 +44,7 @@
       "args": [
         "--model", "gpt-3.5-turbo-0125",
         "--prompt_type", "few_shot",
-        "--chunk_size", "1",
+        "--chunk_size", "50",
         "--model_for_refinement", "gpt-3.5-turbo-0125",
       ],
       "cwd": "${workspaceFolder}/src"
@@ -56,7 +56,7 @@
       "program": "${workspaceFolder}/src/eval_tests.py",
       "console": "integratedTerminal",
       "args": [
-        "--path_for_test_cases", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/io/gpt-3.5-turbo-0125/3/3.jsonl",
+        "--path_for_test_cases", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test.jsonl",
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -70,9 +70,9 @@
         "--model", "gpt-3.5-turbo-0125",
         "--prompt_type", "io",
         "--benchmark_type", "all",
-        "--chunk_size", "166",
+        "--chunk_size", "86",
         "--delay_seconds", "20",
-        "--temperature", "0.2"
+        "--temperature", "0.8"
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -107,12 +107,12 @@
         "--model_for_refinement", "gpt-3.5-turbo-0125",
         "--prompt_for_reflection", "reflexion_without_few_shot",
         "--prompt_for_refinement", "reflexion_without_few_shot",
-        "--max_iterations", "4",
+        "--max_iterations", "6",
         "--benchmark_type", "all",
         "--chunk_size", "50",
-        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4-0125-preview/with_refinement/gpt-4-0125-preview/combined_results.jsonl",
-        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/io/gpt-3.5-turbo-0125/4/4.jsonl",
-        "--test_case_type", "gpt3.5_gpt4_gpt4"
+        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json",
+        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/0.2/io/gpt-3.5-turbo-0125/4/4.jsonl",
+        "--test_case_type", "gpt3.5_predefined"
       ],
       "cwd": "${workspaceFolder}/src"
     },

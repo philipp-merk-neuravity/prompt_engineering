@@ -15,13 +15,18 @@ async def async_refine_code(item, model_for_reflection, model_for_refinement, pr
     completion_tokens = init_result["completion_tokens"]
     duration = init_result["duration"]
     iteration = 0
+    best_solution = generated_code
+    best_test_coverage = 0
     while iteration < max_iterations:
         test_results, is_solved = await get_test_results_async(generated_code, test_cases)
         test_results_as_str = convert_unit_test_results_to_str(test_results)
+        if len(test_results["passed_tests"]) > best_test_coverage:
+            best_solution = generated_code
+            best_test_coverage = len(test_results["passed_tests"])
         if is_solved or iteration == max_iterations - 1:
             break
-        reflection, prompt_tokens_for_refl, completion_tokens_for_refl, duration_for_refl  = await gen_reflection(generated_code, test_results_as_str, model_for_reflection, prompt_for_reflection)
-        generated_code, prompt_tokens_for_refinement, completions_tokens_for_refinement, duration_for_refinement = await gen_refined_function(item["prompt"], generated_code, test_results_as_str, reflection, model_for_refinement, prompt_for_refinement)
+        reflection, prompt_tokens_for_refl, completion_tokens_for_refl, duration_for_refl  = await gen_reflection(best_solution, test_results_as_str, model_for_reflection, prompt_for_reflection)
+        generated_code, prompt_tokens_for_refinement, completions_tokens_for_refinement, duration_for_refinement = await gen_refined_function(item["prompt"], best_solution, test_results_as_str, reflection, model_for_refinement, prompt_for_refinement)
         prompt_tokens += prompt_tokens_for_refinement + prompt_tokens_for_refl
         completion_tokens += completions_tokens_for_refinement + completion_tokens_for_refl
         duration += duration_for_refinement + duration_for_refl
@@ -29,7 +34,7 @@ async def async_refine_code(item, model_for_reflection, model_for_refinement, pr
         
     results_for_task = {
         "task_id": item["task_id"],
-        "generated_code": generated_code,
+        "generated_code": best_solution,
         "is_solved": is_solved,
         "iterations": iteration,
         "prompt_tokens": prompt_tokens,
@@ -44,7 +49,7 @@ def pick_random_test_cases(test_cases, task_id, max_cases=4):
     filtered_cases = [test_case for test_cases_group in test_cases
                       for test_case in test_cases_group["tests"]
                       if test_cases_group["task_id"] == task_id]
-    # return filtered_cases
+    return filtered_cases
     return random.sample(filtered_cases, min(len(filtered_cases), max_cases))
 
 def get_init_result(init_results, task_id):
@@ -91,7 +96,8 @@ async def main(model_for_reflection, model_for_refinement, prompt_for_reflection
     current_benchmark_results = load_from_jsonl(file_path_for_results)
     benchmark_data = load_benchmark(benchmark_type)
     unresolved_tasks = get_unresolved_tasks(benchmark_data, current_benchmark_results)
-    test_cases = load_from_jsonl(tests_path)
+    # test_cases = load_from_jsonl(tests_path)
+    test_cases = load_multiline_data_from_jsonl(tests_path)[0]
 
     start_time = time.time()  # Capture start time
     all_results = await process_chunks(unresolved_tasks, model_for_reflection, model_for_refinement, prompt_for_reflection, prompt_for_refinement, max_iterations, test_cases, chunk_size, file_path_for_results, init_results)

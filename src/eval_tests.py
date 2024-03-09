@@ -67,7 +67,7 @@ async def run_test_case_in_executor(executor, code_solution, test_cases):
     return test_results, is_solved
 
 async def main(path_for_test_cases):
-    benchmark_data = load_benchmark("all")
+    benchmark_data = load_benchmark("all")[:1]
     # test_cases = (path_for_test_cases)
     test_cases = load_test_cases(path_for_test_cases)
     all_test_results = []

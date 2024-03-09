@@ -68,7 +68,7 @@ def check_test_accuracy(code_solution: str, test_cases: list):
         except Exception as e:
             return False, test_case_str + f" ({type(e).__name__}: {str(e)})"
 
-    def run_test_case_with_timeout(test_case_str, timeout=10):
+    def run_test_case_with_timeout(test_case_str, timeout=9120):
         # Create a Queue to hold the result
         queue = multiprocessing.Queue()
 
