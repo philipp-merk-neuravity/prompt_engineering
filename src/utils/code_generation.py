@@ -9,14 +9,16 @@ async def evaluate_syntax_for_code_solution(code_solution: str, function_signatu
     prompt_tokens_all = 0
     completion_tokens_all = 0
     duration_for_syntax_correction = 0
-    while not is_syntax_correct:
+    iteration = 0
+    while not is_syntax_correct and iteration < 5:
         messages = await get_messages_for_syntax_correction(function_signature, code_solution, error_message)
-        code_solution, prompt_tokens, completion_tokens, duration = await get_completion(messages)
+        code_solution, prompt_tokens, completion_tokens, duration = await get_completion(messages, temperature=0.8)
         duration_for_syntax_correction += duration
         prompt_tokens_all += prompt_tokens
         completion_tokens_all += completion_tokens
         code_solution = parse_code_block(code_solution)
         is_syntax_correct, error_message = check_is_syntax_correct(code_solution)
+        iteration += 1
     return code_solution, prompt_tokens_all, completion_tokens_all, duration_for_syntax_correction
 
 async def gen_preprocessed_prompt(function_signature: str, prompt_type: str) -> str:
@@ -78,7 +80,7 @@ async def gen_tests(function_signature: str, model: str, prompt_type: str, amoun
 
 async def gen_reflection(function_implementation: str, unit_test_results: str, model: str, prompt: str) -> str:
     messages = await get_messages_for_self_reflection(function_implementation, unit_test_results, prompt)
-    return await get_completion(messages, model=model, temperature=0.2)
+    return await get_completion(messages, model=model, temperature=0.8)
 
 async def gen_refined_function(function_signature: str, function_implementation: str, unit_test_results: str, reflection: str, model: str, prompt: str) -> str:
     messages = await get_messages_for_refinement(function_signature, function_implementation, unit_test_results, reflection, prompt)

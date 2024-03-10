@@ -49,14 +49,22 @@ def convert_unit_test_results_to_str(unit_test_results: object) -> str:
     unit_test_results_as_str = f"Passed Tests:\n{unit_test_results['passed_tests']}\nFailed Tests:\n{unit_test_results['failed_tests']}"
     return unit_test_results_as_str
 
+import ast
+
 def check_is_syntax_correct(code):
     try:
+        namespace = {}
+        exec("from typing import *\n" + code, namespace)
         ast.parse(code)
-        return True, None  # No error message since the code is correct
+        return True, None  # No error message since the code is deemed correct
     except SyntaxError as e:
-        # Creating a detailed error message
+        # Creating a detailed error message for syntax errors
         error_message = f"Syntax error: {e.msg} at line {e.lineno}, offset {e.offset}"
         return False, error_message
+    except Exception as e:
+        # Catching other exceptions and returning a generic error message
+        return False, f"Error: {str(e)}"
+
 
 def filter_syntactically_correct_tests_ast(tests):
     correct_tests = []
