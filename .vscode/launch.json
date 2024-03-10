@@ -56,7 +56,7 @@
       "program": "${workspaceFolder}/src/eval_tests.py",
       "console": "integratedTerminal",
       "args": [
-        "--path_for_test_cases", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test.jsonl",
+        "--path_for_test_cases", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4-0125-preview/with_refinement/gpt-4-0125-preview/3/3.jsonl",
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -109,7 +109,7 @@
         "--prompt_for_refinement", "reflexion_without_few_shot",
         "--max_iterations", "10",
         "--benchmark_type", "all",
-        "--chunk_size", "25",
+        "--chunk_size", "50",
         "--tests_path", "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json",
         "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/0.2/io/gpt-3.5-turbo-0125/4/4.jsonl",
         "--test_case_type", "gpt3.5_predefined"

@@ -9,5 +9,5 @@ PYTHON_INTERPRETER_PATH="/home/neuravity/dev/prompt_engineering/venv/bin/activat
 # --model_for_refinement: Can be either unset as "" or: gpt-3.5-turbo-0125, gpt-4-0125-preview
 
 source "$PYTHON_INTERPRETER_PATH"
-python3 "$PYTHON_SCRIPT" --model "gpt-4-0125-preview" --prompt_type "few_shot" --chunk_size "50" --model_for_refinement "gpt-4-0125-preview"
+python3 "$PYTHON_SCRIPT" --model "gpt-3.5-turbo-0125" --prompt_type "few_shot" --chunk_size "50" --model_for_refinement "gpt-3.5-turbo-0125"
 deactivate
