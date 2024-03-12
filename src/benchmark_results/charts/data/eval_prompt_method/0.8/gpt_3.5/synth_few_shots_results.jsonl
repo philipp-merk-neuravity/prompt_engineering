@@ -1,0 +1,10 @@
+{"accuracy": {"pass@1": 0.6481707317073171}, "prompt_tokens": 156606.9, "completion_tokens": 71687.4, "duration": 1689.3855704545974, "cost": {"input": 0.07830345, "output": 0.10753109999999999, "total": 0.18583455}}
+{"accuracy": {"pass@2": 0.7192411924119241}, "prompt_tokens": 313213.8, "completion_tokens": 143374.8, "duration": 3378.771140909195, "cost": {"input": 0.1566069, "output": 0.21506219999999998, "total": 0.3716691}}
+{"accuracy": {"pass@3": 0.7547764227642276}, "prompt_tokens": 469820.7, "completion_tokens": 215062.2, "duration": 5068.156711363792, "cost": {"input": 0.23491035000000002, "output": 0.3225933, "total": 0.55750365}}
+{"accuracy": {"pass@4": 0.7768583042973288}, "prompt_tokens": 626427.6, "completion_tokens": 286749.6, "duration": 6757.54228181839, "cost": {"input": 0.3132138, "output": 0.43012439999999996, "total": 0.7433382}}
+{"accuracy": {"pass@5": 0.7920780100658149}, "prompt_tokens": 783034.5, "completion_tokens": 358437.0, "duration": 8446.927852272987, "cost": {"input": 0.39151725, "output": 0.5376555, "total": 0.92917275}}
+{"accuracy": {"pass@6": 0.8032520325203253}, "prompt_tokens": 939641.4, "completion_tokens": 430124.4, "duration": 10136.313422727584, "cost": {"input": 0.46982070000000004, "output": 0.6451866, "total": 1.1150073}}
+{"accuracy": {"pass@7": 0.8118394308943089}, "prompt_tokens": 1096248.3, "completion_tokens": 501811.8, "duration": 11825.698993182183, "cost": {"input": 0.54812415, "output": 0.7527176999999999, "total": 1.3008418499999999}}
+{"accuracy": {"pass@8": 0.8186991869918698}, "prompt_tokens": 1252855.2, "completion_tokens": 573499.2, "duration": 13515.08456363678, "cost": {"input": 0.6264276, "output": 0.8602487999999999, "total": 1.4866764}}
+{"accuracy": {"pass@9": 0.824390243902439}, "prompt_tokens": 1409462.1, "completion_tokens": 645186.6, "duration": 15204.470134091378, "cost": {"input": 0.70473105, "output": 0.9677798999999999, "total": 1.67251095}}
+{"accuracy": {"pass@10": 0.8292682926829268}, "prompt_tokens": 1566069.0, "completion_tokens": 716874.0, "duration": 16893.855704545975, "cost": {"input": 0.7830345, "output": 1.075311, "total": 1.8583455}}

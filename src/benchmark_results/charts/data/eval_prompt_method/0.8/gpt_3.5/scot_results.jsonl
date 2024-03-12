@@ -1,0 +1,10 @@
+{"accuracy": {"pass@1": 0.6701219512195122}, "prompt_tokens": 105756.5, "completion_tokens": 31032.3, "duration": 1172.579757618904, "cost": {"input": 0.05287825, "output": 0.04654845, "total": 0.0994267}}
+{"accuracy": {"pass@2": 0.7196476964769648}, "prompt_tokens": 211513.0, "completion_tokens": 62064.6, "duration": 2345.159515237808, "cost": {"input": 0.1057565, "output": 0.0930969, "total": 0.1988534}}
+{"accuracy": {"pass@3": 0.7480691056910569}, "prompt_tokens": 317269.5, "completion_tokens": 93096.9, "duration": 3517.7392728567124, "cost": {"input": 0.15863475, "output": 0.13964534999999997, "total": 0.29828009999999994}}
+{"accuracy": {"pass@4": 0.7675958188153311}, "prompt_tokens": 423026.0, "completion_tokens": 124129.2, "duration": 4690.319030475616, "cost": {"input": 0.211513, "output": 0.1861938, "total": 0.3977068}}
+{"accuracy": {"pass@5": 0.7820605884630275}, "prompt_tokens": 528782.5, "completion_tokens": 155161.5, "duration": 5862.898788094521, "cost": {"input": 0.26439125, "output": 0.23274225, "total": 0.4971335}}
+{"accuracy": {"pass@6": 0.7933507549361207}, "prompt_tokens": 634539.0, "completion_tokens": 186193.8, "duration": 7035.478545713425, "cost": {"input": 0.3172695, "output": 0.27929069999999995, "total": 0.5965601999999999}}
+{"accuracy": {"pass@7": 0.8025406504065041}, "prompt_tokens": 740295.5, "completion_tokens": 217226.1, "duration": 8208.05830333233, "cost": {"input": 0.37014775, "output": 0.32583915, "total": 0.6959869000000001}}
+{"accuracy": {"pass@8": 0.81029810298103}, "prompt_tokens": 846052.0, "completion_tokens": 248258.4, "duration": 9380.638060951233, "cost": {"input": 0.423026, "output": 0.3723876, "total": 0.7954136}}
+{"accuracy": {"pass@9": 0.8170731707317073}, "prompt_tokens": 951808.5, "completion_tokens": 279290.7, "duration": 10553.217818570138, "cost": {"input": 0.47590425, "output": 0.41893605000000006, "total": 0.8948403}}
+{"accuracy": {"pass@10": 0.823170731707317}, "prompt_tokens": 1057565.0, "completion_tokens": 310323.0, "duration": 11725.797576189041, "cost": {"input": 0.5287825, "output": 0.4654845, "total": 0.994267}}

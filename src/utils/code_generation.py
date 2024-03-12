@@ -73,9 +73,10 @@ async def gen_tests(function_signature: str, model: str, prompt_type: str, amoun
         tests_as_list = random.sample(tests_as_list, amount)
     if use_refinement:
         tests_as_list, prompt_tokens_filter, completion_tokens_filter, duration_filter = await remove_flawed_tests(tests_as_list, model_for_refinement, function_signature)
-        prompt_tokens += prompt_tokens_filter
-        completion_tokens += completion_tokens_filter
-        duration += duration_filter
+        # prompt_tokens += prompt_tokens_filter
+        # completion_tokens += completion_tokens_filter
+        # duration += duration_filter
+        return (tests_as_list, prompt_tokens, completion_tokens, duration, prompt_tokens_filter, completion_tokens_filter, duration_filter)
     return (tests_as_list, prompt_tokens, completion_tokens, duration)
 
 async def gen_reflection(function_implementation: str, unit_test_results: str, model: str, prompt: str) -> str:

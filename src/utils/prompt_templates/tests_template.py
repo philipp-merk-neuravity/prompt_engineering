@@ -82,7 +82,7 @@ def has_close_elements(numbers: List[float], threshold: float) -> bool:
 **Task**:
 '''
 
-TEST_REFINEMENT_INSTRUCTION = "You are a Python programming assistant that can refine a given test case, given the function signature and the original test case. Provide a short explanation, if the test case is correct or incorrect. Provide the refined or original test case after your explanation, in the the format: python```assert <test>```"
+TEST_REFINEMENT_INSTRUCTION = "You are a Python programming assistant that can refine a given test case, given the function signature and the original test case. Provide a short explanation, if the test case is correct or incorrect. Provide the refined or original test case after your explanation, in the the format: ```pythonassert <test>```"
 
 TEST_REFINEMENT_PlACEHOLDER = """
 [func signature]:

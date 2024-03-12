@@ -1,0 +1,42 @@
+{
+    "Zero-Shot": [
+        {
+            "sample_size": 1,
+            "normalized_accuracy": 0.6530612244897922,
+            "normalized_cost": 0.0,
+            "utility_score": 0.5224489795918338,
+            "accuracy": 0.8499999999999999,
+            "total_cost": 0.713928
+        }
+    ],
+    "SCoT": [
+        {
+            "sample_size": 1,
+            "normalized_accuracy": 0.0,
+            "normalized_cost": 0.43978960877968837,
+            "utility_score": -0.08795792175593768,
+            "accuracy": 0.8109756097560976,
+            "total_cost": 2.08051
+        }
+    ],
+    "Synth. Few-Shots": [
+        {
+            "sample_size": 1,
+            "normalized_accuracy": 0.632653061224488,
+            "normalized_cost": 1.0,
+            "utility_score": 0.30612244897959034,
+            "accuracy": 0.848780487804878,
+            "total_cost": 3.821282
+        }
+    ],
+    "Zero-Shot CoT": [
+        {
+            "sample_size": 1,
+            "normalized_accuracy": 1.0,
+            "normalized_cost": 0.0990070651750653,
+            "utility_score": 0.780198586964987,
+            "accuracy": 0.8707317073170733,
+            "total_cost": 1.0215779999999999
+        }
+    ]
+}

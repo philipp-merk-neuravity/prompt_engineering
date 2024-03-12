@@ -85,9 +85,14 @@ async def main(path_for_test_cases):
 
     results = await asyncio.gather(*tasks)
 
+    all_prompt_tokens = 0
+    all_completion_tokens = 0
+
     for result, (benchmark_item, test_item) in zip(results, [(benchmark_item, test_item) for benchmark_item in benchmark_data for test_item in test_cases if benchmark_item["task_id"] == test_item["task_id"]]):
         test_results, is_solved = result
-        all_test_results.append({"task_id": benchmark_item["task_id"], "is_solved": is_solved, "test_results": test_results})
+        all_prompt_tokens += test_item["prompt_tokens"]
+        all_completion_tokens += test_item["completion_tokens"]
+        all_test_results.append({"task_id": benchmark_item["task_id"], "is_solved": is_solved, "test_results": test_results, "prompt_tokens": test_item["prompt_tokens"], "completion_tokens": test_item["completion_tokens"]})
 
     # Process results and write to files
     folder_path = path_for_test_cases.rsplit("/", 1)[0]
@@ -102,7 +107,9 @@ async def main(path_for_test_cases):
         json.dump({
             "number_of_solved_tasks": number_of_solved_tasks,
             "number_of_failed_tasks": number_of_failed_tasks,
-            "accuracy": accuracy
+            "accuracy": accuracy,
+            "prompt_tokens": all_prompt_tokens,
+            "completion_tokens": all_completion_tokens
         }, f, indent=4)
 
 if __name__ == "__main__":

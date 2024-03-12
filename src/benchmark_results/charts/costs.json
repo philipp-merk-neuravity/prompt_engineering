@@ -1,10 +1,10 @@
 {
-    "gpt3": {
-        "input": "0.0005", 
-        "output": "0.0015"
+    "gpt-3.5-turbo-0125": {
+        "input": 0.5, 
+        "output": 1.5
     },
-    "gpt4": {
-        "input": "0.01",
-        "output": "0.03"
+    "gpt-4-0125-preview": {
+        "input": 10,
+        "output": 30
     }
 }

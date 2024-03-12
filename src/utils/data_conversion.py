@@ -4,7 +4,7 @@ import ast
 import json
 
 def convert_tests_to_list(tests: str, prompt_type: str) -> List[str]:
-    # first extract python```code``` block
+    # first extract ```pythoncode``` block
     tests = parse_code_block(tests)
 
     if prompt_type == "agentCoder":

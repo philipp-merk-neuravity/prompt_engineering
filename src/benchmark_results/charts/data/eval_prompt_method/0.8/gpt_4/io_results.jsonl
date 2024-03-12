@@ -1,0 +1,10 @@
+{"accuracy": {"pass@1": 0.8426829268292683}, "prompt_tokens": 30579.0, "completion_tokens": 13796.2, "duration": 1029.7402725696563, "cost": {"input": 0.30579, "output": 0.413886, "total": 0.719676}}
+{"accuracy": {"pass@2": 0.8792682926829267}, "prompt_tokens": 61158.0, "completion_tokens": 27592.4, "duration": 2059.4805451393127, "cost": {"input": 0.61158, "output": 0.827772, "total": 1.439352}}
+{"accuracy": {"pass@3": 0.895630081300813}, "prompt_tokens": 91737.0, "completion_tokens": 41388.6, "duration": 3089.220817708969, "cost": {"input": 0.91737, "output": 1.241658, "total": 2.159028}}
+{"accuracy": {"pass@4": 0.9063298490127759}, "prompt_tokens": 122316.0, "completion_tokens": 55184.8, "duration": 4118.961090278625, "cost": {"input": 1.22316, "output": 1.655544, "total": 2.878704}}
+{"accuracy": {"pass@5": 0.9140534262485481}, "prompt_tokens": 152895.0, "completion_tokens": 68981.0, "duration": 5148.701362848282, "cost": {"input": 1.52895, "output": 2.06943, "total": 3.59838}}
+{"accuracy": {"pass@6": 0.9198025551684088}, "prompt_tokens": 183474.0, "completion_tokens": 82777.2, "duration": 6178.441635417938, "cost": {"input": 1.83474, "output": 2.483316, "total": 4.318056}}
+{"accuracy": {"pass@7": 0.9241869918699187}, "prompt_tokens": 214053.0, "completion_tokens": 96573.4, "duration": 7208.181907987595, "cost": {"input": 2.14053, "output": 2.897202, "total": 5.037732}}
+{"accuracy": {"pass@8": 0.9276422764227642}, "prompt_tokens": 244632.0, "completion_tokens": 110369.6, "duration": 8237.92218055725, "cost": {"input": 2.44632, "output": 3.311088, "total": 5.757408}}
+{"accuracy": {"pass@9": 0.9304878048780487}, "prompt_tokens": 275211.0, "completion_tokens": 124165.8, "duration": 9267.662453126908, "cost": {"input": 2.75211, "output": 3.724974, "total": 6.477084}}
+{"accuracy": {"pass@10": 0.9329268292682927}, "prompt_tokens": 305790.0, "completion_tokens": 137962.0, "duration": 10297.402725696564, "cost": {"input": 3.0579, "output": 4.13886, "total": 7.19676}}

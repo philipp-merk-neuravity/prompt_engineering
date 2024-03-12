@@ -23,7 +23,10 @@ async def main(model, prompt_type, chunk_size, model_for_refinement):
                 "tests": result[0],
                 "prompt_tokens": result[1],
                 "completion_tokens": result[2],
-                "duration": result[3]
+                "duration": result[3],
+                "prompt_tokens_filter": result[4] if use_refinement else [],
+                "completion_tokens_filter": result[5] if use_refinement else [],
+                "duration_filter": result[6] if use_refinement else 0
             })
         print(f"Processed {len(items_to_save)} items")
 

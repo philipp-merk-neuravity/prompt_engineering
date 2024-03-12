@@ -1,76 +1,66 @@
 {
     "gpt-3.5-turbo": {
-        "AgentCoder": {
-            "accuracy": 0.6463414634146342,
-            "prompt_tokens": 83551,
-            "completion_tokens": 51189,
-            "duration": 1136.0886709690094,
-            "costs": 0.118559
-        },
         "Zero-Shot": {
-            "accuracy": 0.725609756097561,
-            "prompt_tokens": 30875,
-            "completion_tokens": 9982,
-            "duration": 821.653222322464,
-            "costs": 0.0304105
+            "accuracy": 0.7024390243902439,
+            "prompt_tokens": 30638.2,
+            "completion_tokens": 9938.4,
+            "costs": 0.0302267
         },
         "SCoT": {
-            "accuracy": 0.676829268292683,
-            "prompt_tokens": 105860,
-            "completion_tokens": 30881,
-            "duration": 1457.9406669139862,
-            "costs": 0.09925149999999999
+            "accuracy": 0.6756097560975609,
+            "prompt_tokens": 105766.4,
+            "completion_tokens": 30756.2,
+            "costs": 0.09901750000000001
         },
-        "Synth. Few-Shot": {
-            "accuracy": 0.6402439024390244,
-            "prompt_tokens": 75635,
-            "completion_tokens": 84941,
-            "duration": 1771.2158563137054,
-            "costs": 0.16522900000000001
+        "Synth. Few-Shots": {
+            "accuracy": 0.65,
+            "prompt_tokens": 74199.4,
+            "completion_tokens": 84703.6,
+            "costs": 0.1641551
         },
-        "Synth. Few-Shot (split)": {
-            "accuracy": 0.6524390243902439,
-            "prompt_tokens": 155576,
-            "completion_tokens": 71118,
-            "duration": 2266.6500487327576,
-            "costs": 0.184465
+        "Synth. Few-Shots (split)": {
+            "accuracy": 0.6463414634146342,
+            "prompt_tokens": 156552.6,
+            "completion_tokens": 71425.8,
+            "costs": 0.18541500000000002
+        },
+        "Chain-of-Thought": {
+            "accuracy": 0.6707317073170732,
+            "prompt_tokens": 28917.0,
+            "completion_tokens": 18158.4,
+            "costs": 0.0416961
         }
     },
     "gpt-4-turbo": {
-        "AgentCoder": {
-            "accuracy": 0.823170731707317,
-            "prompt_tokens": 85683,
-            "completion_tokens": 55364,
-            "duration": 2525.251647233963,
-            "costs": 2.51775
-        },
         "Zero-Shot": {
-            "accuracy": 0.8597560975609756,
-            "prompt_tokens": 30579,
-            "completion_tokens": 13951,
-            "duration": 962.6497073173523,
-            "costs": 0.72432
+            "accuracy": 0.8499999999999999,
+            "prompt_tokens": 30579.0,
+            "completion_tokens": 13604.6,
+            "costs": 0.713928
         },
         "SCoT": {
             "accuracy": 0.8109756097560976,
-            "prompt_tokens": 105600,
-            "completion_tokens": 34567,
-            "duration": 1862.4423685073853,
-            "costs": 2.09301
+            "prompt_tokens": 105727.0,
+            "completion_tokens": 34108.0,
+            "costs": 2.08051
         },
-        "Synth. Few-Shot": {
-            "accuracy": 0.8292682926829268,
-            "prompt_tokens": 75290,
-            "completion_tokens": 93374,
-            "duration": 4456.74848985672,
-            "costs": 3.5541199999999997
+        "Synth. Few-Shots": {
+            "accuracy": 0.8426829268292683,
+            "prompt_tokens": 75793.4,
+            "completion_tokens": 92937.0,
+            "costs": 3.546044
         },
-        "Synth. Few-Shot (split)": {
-            "accuracy": 0.8658536585365854,
-            "prompt_tokens": 156235,
-            "completion_tokens": 75069,
-            "duration": 2536.6554625034332,
-            "costs": 3.81442
+        "Synth. Few-Shots (split)": {
+            "accuracy": 0.848780487804878,
+            "prompt_tokens": 156483.8,
+            "completion_tokens": 75214.8,
+            "costs": 3.821282
+        },
+        "Chain-of-Thought": {
+            "accuracy": 0.8707317073170733,
+            "prompt_tokens": 28917.0,
+            "completion_tokens": 24413.6,
+            "costs": 1.0215779999999999
         }
     }
 }

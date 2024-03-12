@@ -1,0 +1,62 @@
+{
+    "Zero-Shot": [
+        {
+            "accuracy": {
+                "pass@1": 0.8499999999999999
+            },
+            "prompt_tokens": 30579.0,
+            "completion_tokens": 13604.6,
+            "duration": 993.913710308075,
+            "cost": {
+                "input": 0.30579,
+                "output": 0.408138,
+                "total": 0.713928
+            }
+        }
+    ],
+    "SCoT": [
+        {
+            "accuracy": {
+                "pass@1": 0.8109756097560976
+            },
+            "prompt_tokens": 105727.0,
+            "completion_tokens": 34108.0,
+            "duration": 1783.227141571045,
+            "cost": {
+                "input": 1.05727,
+                "output": 1.02324,
+                "total": 2.08051
+            }
+        }
+    ],
+    "Synth. Few-Shots": [
+        {
+            "accuracy": {
+                "pass@1": 0.848780487804878
+            },
+            "prompt_tokens": 156483.8,
+            "completion_tokens": 75214.8,
+            "duration": 2413.3477478981017,
+            "cost": {
+                "input": 1.564838,
+                "output": 2.256444,
+                "total": 3.821282
+            }
+        }
+    ],
+    "Zero-Shot CoT": [
+        {
+            "accuracy": {
+                "pass@1": 0.8707317073170733
+            },
+            "prompt_tokens": 28917.0,
+            "completion_tokens": 24413.6,
+            "duration": 1627.5465029716493,
+            "cost": {
+                "input": 0.28917,
+                "output": 0.732408,
+                "total": 1.0215779999999999
+            }
+        }
+    ]
+}

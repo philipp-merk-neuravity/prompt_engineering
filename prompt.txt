@@ -1,18 +1,48 @@
-[function]:
-from typing import List\n\n\ndef remove_duplicates(numbers: List[int]) -> List[int]:\n    \"\"\" From a list of integers, remove all elements that occur more than once.\n    Keep order of elements left the same as in the input.\n    >>> remove_duplicates([1, 2, 3, 2, 4])\n    [1, 3, 4]\n    \"\"\"\n
-    import collections\n    c = collections.Counter(numbers)\n    return [n for n in numbers if c[n] <= 1]\n
-[generated tests]:
+Task:
+Create a python program that uses the file_path and example content to create a plot with 1 stroke. The x axis represents the iterations and the y axis the accuracy for pass@1 ranging from 0 to 1
 
-"test_results": {
-    "passed_tests": [
-        "assert remove_duplicates([1, 2, 3, 2, 4]) == [1, 3, 4]",
-        "assert remove_duplicates([1, 1, 1, 1, 1]) == []",
-        "assert remove_duplicates([5, 5, 4, 4, 3, 2, 1]) == [3, 2, 1]",
-        "assert remove_duplicates([]) == []",
-        "assert remove_duplicates([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]"
-    ],
-    "failed_tests": [
-        "assert remove_duplicates([10, 20, 20, 10, 30]) == [10, 20, 30] (AssertionError: )",
-        "assert remove_duplicates([-1, -2, -2, -1, -3]) == [-1, -2, -3] (AssertionError: )"
-    ]
-}
+example_content from file:
+{"accuracy": {"pass@1": 0.8085365853658536}, "prompt_tokens": 146338.4, "completion_tokens": 23059.4, "duration": 1142.497777557373}
+
+file_path:
+.
+├── 0
+│   ├── iteration_0.jsonl
+│   ├── iteration_0.jsonl_results.jsonl
+│   └── iteration_0.jsonl_stats.json
+├── 1
+│   ├── iteration_1.jsonl
+│   ├── iteration_1.jsonl_results.jsonl
+│   └── iteration_1.jsonl_stats.json
+├── 2
+│   ├── iteration_2.jsonl
+│   ├── iteration_2.jsonl_results.jsonl
+│   └── iteration_2.jsonl_stats.json
+├── 3
+│   ├── iteration_3.jsonl
+│   ├── iteration_3.jsonl_results.jsonl
+│   └── iteration_3.jsonl_stats.json
+├── 4
+│   ├── iteration_4.jsonl
+│   ├── iteration_4.jsonl_results.jsonl
+│   └── iteration_4.jsonl_stats.json
+├── 5
+│   ├── iteration_5.jsonl
+│   ├── iteration_5.jsonl_results.jsonl
+│   └── iteration_5.jsonl_stats.json
+├── 6
+│   ├── iteration_6.jsonl
+│   ├── iteration_6.jsonl_results.jsonl
+│   └── iteration_6.jsonl_stats.json
+├── 7
+│   ├── iteration_7.jsonl
+│   ├── iteration_7.jsonl_results.jsonl
+│   └── iteration_7.jsonl_stats.json
+├── 8
+│   ├── iteration_8.jsonl
+│   ├── iteration_8.jsonl_results.jsonl
+│   └── iteration_8.jsonl_stats.json
+└── 9
+    ├── iteration_9.jsonl
+    ├── iteration_9.jsonl_results.jsonl
+    └── iteration_9.jsonl_stats.json

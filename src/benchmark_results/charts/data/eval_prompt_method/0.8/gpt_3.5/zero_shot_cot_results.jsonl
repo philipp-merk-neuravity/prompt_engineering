@@ -1,0 +1,10 @@
+{"accuracy": {"pass@1": 0.6414634146341462}, "prompt_tokens": 114587.3, "completion_tokens": 44931.5, "duration": 1225.663069677353, "cost": {"input": 0.05729365, "output": 0.06739725, "total": 0.12469090000000001}}
+{"accuracy": {"pass@2": 0.7246612466124661}, "prompt_tokens": 229174.6, "completion_tokens": 89863.0, "duration": 2451.326139354706, "cost": {"input": 0.1145873, "output": 0.1347945, "total": 0.24938180000000001}}
+{"accuracy": {"pass@3": 0.7660569105691059}, "prompt_tokens": 343761.9, "completion_tokens": 134794.5, "duration": 3676.9892090320586, "cost": {"input": 0.17188095, "output": 0.20219175, "total": 0.37407270000000004}}
+{"accuracy": {"pass@4": 0.7923925667828108}, "prompt_tokens": 458349.2, "completion_tokens": 179726.0, "duration": 4902.652278709412, "cost": {"input": 0.2291746, "output": 0.269589, "total": 0.49876360000000003}}
+{"accuracy": {"pass@5": 0.8106368563685638}, "prompt_tokens": 572936.5, "completion_tokens": 224657.5, "duration": 6128.3153483867645, "cost": {"input": 0.28646825, "output": 0.33698625, "total": 0.6234545}}
+{"accuracy": {"pass@6": 0.8238966318234611}, "prompt_tokens": 687523.8, "completion_tokens": 269589.0, "duration": 7353.978418064117, "cost": {"input": 0.3437619, "output": 0.4043835, "total": 0.7481454000000001}}
+{"accuracy": {"pass@7": 0.8338922764227642}, "prompt_tokens": 802111.1, "completion_tokens": 314520.5, "duration": 8579.64148774147, "cost": {"input": 0.40105555, "output": 0.47178075, "total": 0.8728363}}
+{"accuracy": {"pass@8": 0.8417344173441735}, "prompt_tokens": 916698.4, "completion_tokens": 359452.0, "duration": 9805.304557418824, "cost": {"input": 0.4583492, "output": 0.539178, "total": 0.9975272000000001}}
+{"accuracy": {"pass@9": 0.8481707317073172}, "prompt_tokens": 1031285.7, "completion_tokens": 404383.5, "duration": 11030.967627096175, "cost": {"input": 0.51564285, "output": 0.60657525, "total": 1.1222181}}
+{"accuracy": {"pass@10": 0.8536585365853658}, "prompt_tokens": 1145873.0, "completion_tokens": 449315.0, "duration": 12256.630696773529, "cost": {"input": 0.5729365, "output": 0.6739725, "total": 1.246909}}

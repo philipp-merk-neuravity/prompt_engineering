@@ -1,0 +1,5 @@
+{"accuracy": {"pass@1": 0.6865853658536585}, "prompt_tokens": 160659.6, "completion_tokens": 92441.8, "duration": 4598.738367652893, "cost": {"input": 1.606596, "output": 2.773254, "total": 4.37985}}
+{"accuracy": {"pass@2": 0.776219512195122}, "prompt_tokens": 321319.2, "completion_tokens": 184883.6, "duration": 9197.476735305787, "cost": {"input": 3.213192, "output": 5.546508, "total": 8.7597}}
+{"accuracy": {"pass@3": 0.8195121951219511}, "prompt_tokens": 481978.8, "completion_tokens": 277325.4, "duration": 13796.215102958678, "cost": {"input": 4.819788, "output": 8.319762, "total": 13.13955}}
+{"accuracy": {"pass@4": 0.846341463414634}, "prompt_tokens": 642638.4, "completion_tokens": 369767.2, "duration": 18394.953470611574, "cost": {"input": 6.426384, "output": 11.093016, "total": 17.5194}}
+{"accuracy": {"pass@5": 0.8658536585365854}, "prompt_tokens": 803298.0, "completion_tokens": 462209.0, "duration": 22993.691838264465, "cost": {"input": 8.03298, "output": 13.86627, "total": 21.899250000000002}}

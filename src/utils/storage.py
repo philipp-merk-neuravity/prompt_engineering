@@ -128,6 +128,46 @@ def save_benchmark_results_for_reflection(items, benchmark_type, strategy, file_
     
     return full_file_path
 
+def create_file_for_iterative_sampling(test_case_type):
+    base_path = f"{static_path}/all/iterative_sampling/{test_case_type}"
+    os.makedirs(base_path, exist_ok=True)
+
+    # get the highest prefix
+    highest_prefix = -1
+    for entry in os.listdir(base_path):
+        if os.path.isdir(os.path.join(base_path, entry)):
+            try:
+                prefix = int(entry.split('_')[0])
+                highest_prefix = max(highest_prefix, prefix)
+            except ValueError:
+                continue
+
+    # check if the file has less than 164 items
+    if highest_prefix != -1:
+        latest_dir_name = f"{highest_prefix}_{test_case_type}"
+        latest_file_name = f"{latest_dir_name}.jsonl"
+        full_dir_path = os.path.join(base_path, latest_dir_name)
+        full_file_path = os.path.join(full_dir_path, latest_file_name)
+
+        if os.path.exists(full_file_path):
+            with open(full_file_path, 'r') as file:
+                items = file.readlines()
+                if len(items) < 164:
+                    return full_file_path
+
+    # if the process reaches here, it means a new file is needed
+    new_prefix = highest_prefix + 1
+    new_dir_name = f"{new_prefix}_{test_case_type}"
+    new_file_name = f"{new_dir_name}.jsonl"
+    full_new_dir_path = os.path.join(base_path, new_dir_name)
+    full_new_file_path = os.path.join(full_new_dir_path, new_file_name)
+
+    os.makedirs(full_new_dir_path, exist_ok=True)
+
+    open(full_new_file_path, 'w').close()
+
+    return full_new_file_path
+    
 def create_file_for_reflection(benchmark_type, strategy, file_name_config, test_case_type):
     # Assuming static_path is defined elsewhere in your code
     base_path = f"{static_path}/{benchmark_type}/{strategy}/{test_case_type}"

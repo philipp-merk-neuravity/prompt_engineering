@@ -1,0 +1,330 @@
+{
+    "Zero-Shot": [
+        {
+            "sample_size": 1,
+            "normalized_accuracy": 0.25000000000000067,
+            "normalized_cost": 0.0,
+            "utility_score": 0.20000000000000054,
+            "accuracy": 0.6945121951219513,
+            "total_cost": 0.03029345
+        },
+        {
+            "sample_size": 2,
+            "normalized_accuracy": 0.5721583652618137,
+            "normalized_cost": 0.016571437339544026,
+            "utility_score": 0.4544124047415422,
+            "accuracy": 0.7628726287262872,
+            "total_cost": 0.0605869
+        },
+        {
+            "sample_size": 3,
+            "normalized_accuracy": 0.7045019157088117,
+            "normalized_cost": 0.03314287467908805,
+            "utility_score": 0.5569729576312318,
+            "accuracy": 0.7909552845528454,
+            "total_cost": 0.09088035
+        },
+        {
+            "sample_size": 4,
+            "normalized_accuracy": 0.7810618500273676,
+            "normalized_cost": 0.04971431201863207,
+            "utility_score": 0.6149066176181677,
+            "accuracy": 0.8072009291521487,
+            "total_cost": 0.1211738
+        },
+        {
+            "sample_size": 5,
+            "normalized_accuracy": 0.8338578726509764,
+            "normalized_cost": 0.0662857493581761,
+            "utility_score": 0.6538291482491461,
+            "accuracy": 0.8184039876113047,
+            "total_cost": 0.15146725
+        },
+        {
+            "sample_size": 6,
+            "normalized_accuracy": 0.8738368910782703,
+            "normalized_cost": 0.08285718669772013,
+            "utility_score": 0.6824980755230723,
+            "accuracy": 0.8268873403019744,
+            "total_cost": 0.1817607
+        },
+        {
+            "sample_size": 7,
+            "normalized_accuracy": 0.905890804597701,
+            "normalized_cost": 0.09942862403726414,
+            "utility_score": 0.7048269188707079,
+            "accuracy": 0.8336890243902438,
+            "total_cost": 0.21205415
+        },
+        {
+            "sample_size": 8,
+            "normalized_accuracy": 0.9323116219667944,
+            "normalized_cost": 0.11600006137680817,
+            "utility_score": 0.7226492852980739,
+            "accuracy": 0.8392953929539295,
+            "total_cost": 0.2423476
+        },
+        {
+            "sample_size": 9,
+            "normalized_accuracy": 0.9540229885057476,
+            "normalized_cost": 0.13257149871635218,
+            "utility_score": 0.7367040910613277,
+            "accuracy": 0.8439024390243903,
+            "total_cost": 0.27264104999999994
+        },
+        {
+            "sample_size": 10,
+            "normalized_accuracy": 0.9712643678160919,
+            "normalized_cost": 0.14914293605589624,
+            "utility_score": 0.7471829070416944,
+            "accuracy": 0.8475609756097561,
+            "total_cost": 0.3029345
+        }
+    ],
+    "SCoT": [
+        {
+            "sample_size": 1,
+            "normalized_accuracy": 0.1350574712643684,
+            "normalized_cost": 0.03781798773180447,
+            "utility_score": 0.10048237946513383,
+            "accuracy": 0.6701219512195122,
+            "total_cost": 0.0994267
+        },
+        {
+            "sample_size": 2,
+            "normalized_accuracy": 0.3684546615581103,
+            "normalized_cost": 0.09220741280315296,
+            "utility_score": 0.27632224668585764,
+            "accuracy": 0.7196476964769648,
+            "total_cost": 0.1988534
+        },
+        {
+            "sample_size": 3,
+            "normalized_accuracy": 0.5023946360153259,
+            "normalized_cost": 0.14659683787450142,
+            "utility_score": 0.3725963412373604,
+            "accuracy": 0.7480691056910569,
+            "total_cost": 0.29828009999999994
+        },
+        {
+            "sample_size": 4,
+            "normalized_accuracy": 0.5944170771756986,
+            "normalized_cost": 0.20098626294584995,
+            "utility_score": 0.4353364091513889,
+            "accuracy": 0.7675958188153311,
+            "total_cost": 0.3977068
+        },
+        {
+            "sample_size": 5,
+            "normalized_accuracy": 0.6625843824119689,
+            "normalized_cost": 0.25537568801719845,
+            "utility_score": 0.4789923683261355,
+            "accuracy": 0.7820605884630275,
+            "total_cost": 0.4971335
+        },
+        {
+            "sample_size": 6,
+            "normalized_accuracy": 0.7157909140667761,
+            "normalized_cost": 0.3097651130885468,
+            "utility_score": 0.5106797086357114,
+            "accuracy": 0.7933507549361207,
+            "total_cost": 0.5965601999999999
+        },
+        {
+            "sample_size": 7,
+            "normalized_accuracy": 0.759099616858238,
+            "normalized_cost": 0.3641545381598954,
+            "utility_score": 0.5344487858546114,
+            "accuracy": 0.8025406504065041,
+            "total_cost": 0.6959869000000001
+        },
+        {
+            "sample_size": 8,
+            "normalized_accuracy": 0.7956577266922105,
+            "normalized_cost": 0.4185439632312439,
+            "utility_score": 0.5528173887075196,
+            "accuracy": 0.81029810298103,
+            "total_cost": 0.7954136
+        },
+        {
+            "sample_size": 9,
+            "normalized_accuracy": 0.8275862068965516,
+            "normalized_cost": 0.47293338830259235,
+            "utility_score": 0.567482287856723,
+            "accuracy": 0.8170731707317073,
+            "total_cost": 0.8948403
+        },
+        {
+            "sample_size": 10,
+            "normalized_accuracy": 0.8563218390804597,
+            "normalized_cost": 0.5273228133739408,
+            "utility_score": 0.5795929085895796,
+            "accuracy": 0.823170731707317,
+            "total_cost": 0.994267
+        }
+    ],
+    "Synth. Few-Shots": [
+        {
+            "sample_size": 1,
+            "normalized_accuracy": 0.03160919540229939,
+            "normalized_cost": 0.08508570639441038,
+            "utility_score": 0.008270215042957434,
+            "accuracy": 0.6481707317073171,
+            "total_cost": 0.18583455
+        },
+        {
+            "sample_size": 2,
+            "normalized_accuracy": 0.3665389527458494,
+            "normalized_cost": 0.18674285012836478,
+            "utility_score": 0.2558825921710066,
+            "accuracy": 0.7192411924119241,
+            "total_cost": 0.3716691
+        },
+        {
+            "sample_size": 3,
+            "normalized_accuracy": 0.5340038314176248,
+            "normalized_cost": 0.28839999386231924,
+            "utility_score": 0.369523066361636,
+            "accuracy": 0.7547764227642276,
+            "total_cost": 0.55750365
+        },
+        {
+            "sample_size": 4,
+            "normalized_accuracy": 0.6380678708264924,
+            "normalized_cost": 0.39005713759627353,
+            "utility_score": 0.4324428691419392,
+            "accuracy": 0.7768583042973288,
+            "total_cost": 0.7433382
+        },
+        {
+            "sample_size": 5,
+            "normalized_accuracy": 0.7097929209998176,
+            "normalized_cost": 0.491714281330228,
+            "utility_score": 0.46949148053380846,
+            "accuracy": 0.7920780100658149,
+            "total_cost": 0.92917275
+        },
+        {
+            "sample_size": 6,
+            "normalized_accuracy": 0.762452107279694,
+            "normalized_cost": 0.5933714250641824,
+            "utility_score": 0.4912874008109188,
+            "accuracy": 0.8032520325203253,
+            "total_cost": 1.1150073
+        },
+        {
+            "sample_size": 7,
+            "normalized_accuracy": 0.8029214559386971,
+            "normalized_cost": 0.6950285687981367,
+            "utility_score": 0.5033314509913304,
+            "accuracy": 0.8118394308943089,
+            "total_cost": 1.3008418499999999
+        },
+        {
+            "sample_size": 8,
+            "normalized_accuracy": 0.8352490421455936,
+            "normalized_cost": 0.7966857125320912,
+            "utility_score": 0.5088620912100567,
+            "accuracy": 0.8186991869918698,
+            "total_cost": 1.4866764
+        },
+        {
+            "sample_size": 9,
+            "normalized_accuracy": 0.8620689655172413,
+            "normalized_cost": 0.8983428562660456,
+            "utility_score": 0.509986601160584,
+            "accuracy": 0.824390243902439,
+            "total_cost": 1.67251095
+        },
+        {
+            "sample_size": 10,
+            "normalized_accuracy": 0.8850574712643677,
+            "normalized_cost": 1.0,
+            "utility_score": 0.5080459770114942,
+            "accuracy": 0.8292682926829268,
+            "total_cost": 1.8583455
+        }
+    ],
+    "Zero-Shot CoT": [
+        {
+            "sample_size": 1,
+            "normalized_accuracy": 0.0,
+            "normalized_cost": 0.051638272553563236,
+            "utility_score": -0.010327654510712648,
+            "accuracy": 0.6414634146341462,
+            "total_cost": 0.12469090000000001
+        },
+        {
+            "sample_size": 2,
+            "normalized_accuracy": 0.39208173690932335,
+            "normalized_cost": 0.1198479824466705,
+            "utility_score": 0.2896957930381246,
+            "accuracy": 0.7246612466124661,
+            "total_cost": 0.24938180000000001
+        },
+        {
+            "sample_size": 3,
+            "normalized_accuracy": 0.5871647509578554,
+            "normalized_cost": 0.18805769233977776,
+            "utility_score": 0.43212026229832873,
+            "accuracy": 0.7660569105691059,
+            "total_cost": 0.37407270000000004
+        },
+        {
+            "sample_size": 4,
+            "normalized_accuracy": 0.7112753147235912,
+            "normalized_cost": 0.256267402232885,
+            "utility_score": 0.517766771332296,
+            "accuracy": 0.7923925667828108,
+            "total_cost": 0.49876360000000003
+        },
+        {
+            "sample_size": 5,
+            "normalized_accuracy": 0.797254150702427,
+            "normalized_cost": 0.32447711212599223,
+            "utility_score": 0.5729078981367433,
+            "accuracy": 0.8106368563685638,
+            "total_cost": 0.6234545
+        },
+        {
+            "sample_size": 6,
+            "normalized_accuracy": 0.8597427476737822,
+            "normalized_cost": 0.39268682201909955,
+            "utility_score": 0.609256833735206,
+            "accuracy": 0.8238966318234611,
+            "total_cost": 0.7481454000000001
+        },
+        {
+            "sample_size": 7,
+            "normalized_accuracy": 0.9068486590038314,
+            "normalized_cost": 0.4608965319122068,
+            "utility_score": 0.6332996208206239,
+            "accuracy": 0.8338922764227642,
+            "total_cost": 0.8728363
+        },
+        {
+            "sample_size": 8,
+            "normalized_accuracy": 0.9438058748403582,
+            "normalized_cost": 0.5291062418053141,
+            "utility_score": 0.6492234515112238,
+            "accuracy": 0.8417344173441735,
+            "total_cost": 0.9975272000000001
+        },
+        {
+            "sample_size": 9,
+            "normalized_accuracy": 0.9741379310344833,
+            "normalized_cost": 0.5973159516984212,
+            "utility_score": 0.6598471544879024,
+            "accuracy": 0.8481707317073172,
+            "total_cost": 1.1222181
+        },
+        {
+            "sample_size": 10,
+            "normalized_accuracy": 1.0,
+            "normalized_cost": 0.6655256615915286,
+            "utility_score": 0.6668948676816944,
+            "accuracy": 0.8536585365853658,
+            "total_cost": 1.246909
+        }
+    ]
+}
