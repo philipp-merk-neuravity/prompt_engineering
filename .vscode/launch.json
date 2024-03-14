@@ -67,12 +67,12 @@
       "program": "${workspaceFolder}/src/simple.py",
       "console": "integratedTerminal",
       "args": [
-        "--model", "gpt-3.5-turbo-0125",
-        "--prompt_type", "scot",
+        "--model", "gpt-4-0125-preview",
+        "--prompt_type", "io",
         "--benchmark_type", "all",
-        "--chunk_size", "86",
+        "--chunk_size", "179",
         "--delay_seconds", "20",
-        "--temperature", "0.8"
+        "--temperature", "0.2"
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -83,8 +83,8 @@
       "program": "${workspaceFolder}/src/reflection_2.py",
       "console": "integratedTerminal",
       "args": [
-        "--model_for_reflection", "gpt-4-0125-preview",
-        "--model_for_refinement", "gpt-4-0125-preview",
+        "--model_for_reflection", "gpt-3.5-turbo-0125",
+        "--model_for_refinement", "gpt-3.5-turbo-0125",
         "--prompt_for_reflection", "reflexion_without_few_shot",
         "--prompt_for_refinement", "reflexion_without_few_shot",
         "--max_iterations", "10",

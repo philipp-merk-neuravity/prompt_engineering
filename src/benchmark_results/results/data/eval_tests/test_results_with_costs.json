@@ -1,0 +1,37 @@
+[
+    {
+        "model": "gpt-3.5-turbo-0125",
+        "refinement_model": "gpt-3.5-turbo-0125",
+        "accuracy": 0.8170731707317073,
+        "type": "with_refinement",
+        "total_cost": 0.171365
+    },
+    {
+        "model": "gpt-3.5-turbo-0125",
+        "refinement_model": "gpt-4-0125-preview",
+        "accuracy": 0.8780487804878049,
+        "type": "with_refinement",
+        "total_cost": 2.543142
+    },
+    {
+        "model": "gpt-3.5-turbo-0125",
+        "refinement_model": null,
+        "accuracy": 0.75,
+        "type": "without_refinement",
+        "total_cost": 0.0504715
+    },
+    {
+        "model": "gpt-4-0125-preview",
+        "refinement_model": "gpt-4-0125-preview",
+        "accuracy": 0.8170731707317073,
+        "type": "with_refinement",
+        "total_cost": 4.06613
+    },
+    {
+        "model": "gpt-4-0125-preview",
+        "refinement_model": null,
+        "accuracy": 0.6707317073170732,
+        "type": "without_refinement",
+        "total_cost": 1.37705
+    }
+]
