@@ -168,58 +168,91 @@ def create_file_for_iterative_sampling(test_case_type):
 
     return full_new_file_path
     
-def create_file_for_reflection(benchmark_type, strategy, file_name_config, test_case_type):
-    # Assuming static_path is defined elsewhere in your code
-    base_path = f"{static_path}/{benchmark_type}/{strategy}/{test_case_type}"
-    os.makedirs(base_path, exist_ok=True)
+# def create_file_for_reflection(strategy, folder_path_config, file_name_config):
+#     # Assuming static_path is defined elsewhere in your code
+#     base_path = f"{static_path}/{strategy}"
+#     os.makedirs(base_path, exist_ok=True)
     
-    # Construct the name_config from the file_name_config values, excluding 'rounds'
-    name_config_elements = [
-        file_name_config['prompt_for_reflection'],
-        file_name_config['prompt_for_refinement'],
-        file_name_config['model_for_reflection'],
-        file_name_config['model_for_refinement']
-    ]
-    if file_name_config.get('use_gpt-4_at_round') is not None:
-        name_config_elements.append(str(file_name_config['use_gpt-4_at_round']))
-    name_config = "_".join(map(str, name_config_elements))
+#     # Construct the name_config from the file_name_config values, excluding 'rounds'
+#     name_config = "_".join([str(file_name_config[key]) for key in file_name_config])
     
-    # Find the highest existing prefix for the given name_config
-    highest_prefix = -1
-    for entry in os.listdir(base_path):
-        if os.path.isdir(os.path.join(base_path, entry)) and name_config in entry:
-            try:
-                prefix = int(entry.split('_')[0])
-                highest_prefix = max(highest_prefix, prefix)
-            except ValueError:
-                continue
+#     # Find the highest existing prefix for the given name_config
+#     highest_prefix = -1
+#     for entry in os.listdir(base_path):
+#         if os.path.isdir(os.path.join(base_path, entry)) and name_config in entry:
+#             try:
+#                 prefix = int(entry.split('_')[0])
+#                 highest_prefix = max(highest_prefix, prefix)
+#             except ValueError:
+#                 continue
     
-    # Determine the path of the latest file if it exists
-    if highest_prefix != -1:
-        latest_dir_name = f"{highest_prefix}_{name_config}"
-        latest_file_name = f"{latest_dir_name}.jsonl"
-        full_dir_path = os.path.join(base_path, latest_dir_name)
-        full_file_path = os.path.join(full_dir_path, latest_file_name)
+#     # Determine the path of the latest file if it exists
+#     if highest_prefix != -1:
+#         latest_dir_name = f"{highest_prefix}_{name_config}"
+#         latest_file_name = f"{latest_dir_name}.jsonl"
+#         full_dir_path = os.path.join(base_path, latest_dir_name)
+#         full_file_path = os.path.join(full_dir_path, latest_file_name)
         
-        # Check if the file has less than 164 items
-        if os.path.exists(full_file_path):
-            with open(full_file_path, 'r') as file:
-                items = file.readlines()
-                if len(items) < 164:
-                    # Return the current file path if not finished
-                    return full_file_path
+#         # Check if the file has less than 164 items
+#         if os.path.exists(full_file_path):
+#             with open(full_file_path, 'r') as file:
+#                 items = file.readlines()
+#                 if len(items) < 164:
+#                     # Return the current file path if not finished
+#                     return full_file_path
     
-    # If the process reaches here, it means a new file is needed
-    new_prefix = highest_prefix + 1
-    new_dir_name = f"{new_prefix}_{name_config}"
-    new_file_name = f"{new_dir_name}.jsonl"
-    full_new_dir_path = os.path.join(base_path, new_dir_name)
-    full_new_file_path = os.path.join(full_new_dir_path, new_file_name)
+#     # If the process reaches here, it means a new file is needed
+#     new_prefix = highest_prefix + 1
+#     new_dir_name = f"{new_prefix}_{name_config}"
+#     new_file_name = f"{new_dir_name}.jsonl"
+#     full_new_dir_path = os.path.join(base_path, new_dir_name)
+#     full_new_file_path = os.path.join(full_new_dir_path, new_file_name)
     
-    os.makedirs(full_new_dir_path, exist_ok=True)  # Ensure the directory is created
-    open(full_new_file_path, 'w').close()  # Create an empty file
+#     os.makedirs(full_new_dir_path, exist_ok=True)  # Ensure the directory is created
+#     open(full_new_file_path, 'w').close()  # Create an empty file
     
-    return full_new_file_path
+#     return full_new_file_path
+
+def create_file_for_reflection(static_path, folder_path_config, file_name_config):
+    import os
+    
+    # Building the correct base path from the folder_path_config, handling mixed types
+    base_path = static_path
+    for folder_names in folder_path_config:
+        # Convert all elements to string and then join them
+        folder_name = "_".join([str(element) for element in folder_names])
+        base_path = os.path.join(base_path, folder_name)
+        os.makedirs(base_path, exist_ok=True)  # Ensure the directory exists
+
+    # Determine the highest numerical folder
+    subfolders = [f for f in os.listdir(base_path) if f.isdigit()]
+    highest_num = max(map(int, subfolders)) if subfolders else -1
+
+    # Path for the highest existing or new numerical folder
+    num_folder_path = os.path.join(base_path, str(highest_num))
+    
+    # Constructing the file name from file_name_config, correctly joining elements
+    file_name = "_".join(file_name_config) + ".jsonl"
+    full_file_path = os.path.join(num_folder_path, file_name)
+
+    # Checking if the file exists in the highest numerical folder and its line count
+    if os.path.exists(full_file_path):
+        with open(full_file_path, 'r') as file:
+            items = file.readlines()
+            if len(items) < 164:
+                # If the file exists and has less than 164 lines, return its path
+                return full_file_path
+
+    # If reaching this point, either no suitable file was found or we need a new folder
+    new_num = highest_num + 1
+    new_num_folder_path = os.path.join(base_path, str(new_num))
+    os.makedirs(new_num_folder_path, exist_ok=True)  # Create the new numerical folder
+
+    # New file path in the new numerical folder
+    new_full_file_path = os.path.join(new_num_folder_path, file_name)
+    open(new_full_file_path, 'w').close()  # Create an empty new file
+    
+    return new_full_file_path
 
 def save_result(item, path):
     """

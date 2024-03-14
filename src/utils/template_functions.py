@@ -107,7 +107,7 @@ async def get_messages_for_self_reflection(function_implementation: str, unit_te
             create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION),
             create_user_message(SELF_REFLECTION_FEW_SHOT + SELF_REFLECTION_CURRENT_FEEDBACK, function_implementation=function_implementation, unit_test_results=unit_test_results),
         ]
-    if prompt == "reflexion_without_few_shot":
+    if prompt == "simple":
         return [
             create_system_message(SELF_REFLECTION_CHAT_INSTRUCTION),
             create_user_message(SELF_REFLECTION_CURRENT_FEEDBACK, function_implementation=function_implementation, unit_test_results=unit_test_results),
@@ -124,7 +124,7 @@ async def get_messages_for_refinement(function_signature: str, function_implemen
             create_ai_message(REFINEMENT_REFLECTION, reflection_on_previous_implementation=reflection),
             create_user_message(REFINEMENT_FUNC_SIGNATURE),
         ]
-    if prompt == "reflexion_without_few_shot":
+    if prompt == "simple":
         return [
             create_system_message(REFINEMENT_INSTRUCTION),
             create_user_message(REFINEMENT_TASK, function_signature=function_signature),
