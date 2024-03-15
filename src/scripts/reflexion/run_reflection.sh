@@ -8,6 +8,6 @@ python3 "/home/neuravity/dev/prompt_engineering/src/reflection.py" \
   --chunk_size "57" \
   --tests_path "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json" \
   --file_path_for_init "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/0.6/io/gpt-4-0125-preview/init_file/combined_results.jsonl" \
-  --temp_for_reflection "0.6" \
+  --temp_for_reflection "0.8" \
   --temp_for_refinement "0.6" \
   --test_type "predefined" \

@@ -7,11 +7,13 @@ mapping = {
     "simple_simple": {
         "0.8_0.8": {
            "gpt-3.5-turbo-0125": {
+              "use_next": ["predefined"],
               "use_best": ["predefined"]
            }
         },
-        "0.6_0.6": {
+        "0.8_0.6": {
             "gpt-4-0125-preview": {
+                "use_next": ["predefined"],
                 "use_best": ["predefined"]
             }
         },
@@ -33,7 +35,8 @@ for method, temp_model_mapping in mapping.items():
             for reflection_type, test_types in reflection_types.items():
                 for test_type in test_types:
                     current_path = f"{base_path}/{method}/{temp}/{model}/{reflection_type}/{test_type}"
-                    max_items = 0
+                    max_iterations = 10
+                    max_items = 5
                     items_for_iteration_all = {
                         0: [],
                         1: [],
@@ -46,28 +49,25 @@ for method, temp_model_mapping in mapping.items():
                         8: [],
                         9: []
                     }
-                    if model == "gpt-3.5-turbo-0125":
-                        max_items = 5
-                    elif model == "gpt-4-0125-preview":
-                        max_items = 3
                     for i in range(max_items):
                         current_file_i = f"{current_path}/{i}/{i}.jsonl"
                         current_file_i_content = []
                         with open(current_file_i, "r") as f:
                             for line in f:
                                 current_file_i_content.append(json.loads(line))
-                        for i in range(10):
+                        for i in range(max_iterations):
                             items_for_iteration = []
                             for item in current_file_i_content:
                                 iteration_states = item["iteration_states"]
                                 best_item_for_round_i = get_item_for_round(iteration_states, i)
                                 if best_item_for_round_i is not None:
+                                    best_item_for_round_i["task_id"] = item["task_id"]
                                     items_for_iteration.append(best_item_for_round_i)
                             items_for_iteration_all[i].extend(items_for_iteration)
                     # save to current path
                     for i in range(10):
                         k = i + 1
-                        current_file_i = f"{current_path}/results_for_{max_items}/{k}/combined_results.jsonl"
+                        current_file_i = f"{current_path}/results_for_10/{k}/combined_results.jsonl"
                         os.makedirs(os.path.dirname(current_file_i), exist_ok=True)
                         # create the file first
                         with open(current_file_i, "w") as f:

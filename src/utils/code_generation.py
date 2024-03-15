@@ -19,6 +19,7 @@ async def evaluate_syntax_for_code_solution(code_solution: str, function_signatu
         code_solution = parse_code_block(code_solution)
         is_syntax_correct, error_message = check_is_syntax_correct(code_solution)
         iteration += 1
+        print(iteration)
     return code_solution, prompt_tokens_all, completion_tokens_all, duration_for_syntax_correction
 
 async def gen_preprocessed_prompt(function_signature: str, prompt_type: str) -> str:

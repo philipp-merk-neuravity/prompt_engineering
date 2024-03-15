@@ -14,13 +14,13 @@ mapping = {
     #     "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
     # },
     "0.6": {
-        "io": ["gpt-3.5-turbo-0125"],
+        "io": ["gpt-4-0125-preview"],
         "scot": ["gpt-4-0125-preview"],
         "synth_few_shot_split": ["gpt-4-0125-preview"],
         "zero_shot_cot": ["gpt-4-0125-preview"],
     },
     "0.8": {
-        "io": ["gpt-4-0125-preview"],
+        "io": ["gpt-3.5-turbo-0125"],
         "scot": ["gpt-3.5-turbo-0125"],
         "synth_few_shot_split": ["gpt-3.5-turbo-0125"],
         "zero_shot_cot": ["gpt-3.5-turbo-0125"],
@@ -39,7 +39,6 @@ for temp, method_model_mapping in mapping.items():
                 # read the stats file
                 with open(current_path_i, "r") as f:
                     stats = json.load(f)
-                    # {"accuracy": {"pass@1": 0.7060975609756098}, "prompt_tokens": 30727.0, "completion_tokens": 9902.4, "duration": 654.6775565385818}
                 results.append({
                     "temp": temp,
                     "method": method,

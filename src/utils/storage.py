@@ -213,7 +213,7 @@ def create_file_for_iterative_sampling(test_case_type):
     
 #     return full_new_file_path
 
-def create_file_for_reflection(static_path, folder_path_config, file_name_config):
+def create_file_for_reflection(static_path, folder_path_config):
     import os
     
     # Building the correct base path from the folder_path_config, handling mixed types
@@ -232,7 +232,7 @@ def create_file_for_reflection(static_path, folder_path_config, file_name_config
     num_folder_path = os.path.join(base_path, str(highest_num))
     
     # Constructing the file name from file_name_config, correctly joining elements
-    file_name = "_".join(file_name_config) + ".jsonl"
+    file_name = f"{highest_num}.jsonl"
     full_file_path = os.path.join(num_folder_path, file_name)
 
     # Checking if the file exists in the highest numerical folder and its line count
@@ -247,12 +247,13 @@ def create_file_for_reflection(static_path, folder_path_config, file_name_config
     new_num = highest_num + 1
     new_num_folder_path = os.path.join(base_path, str(new_num))
     os.makedirs(new_num_folder_path, exist_ok=True)  # Create the new numerical folder
-
     # New file path in the new numerical folder
+    file_name = f"{new_num}.jsonl"
     new_full_file_path = os.path.join(new_num_folder_path, file_name)
     open(new_full_file_path, 'w').close()  # Create an empty new file
     
     return new_full_file_path
+
 
 def save_result(item, path):
     """
