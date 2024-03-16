@@ -3,11 +3,11 @@ import argparse
 from utils.code_generation import gen_tests
 from utils.storage import load_benchmark, save_generated_tests
 
-async def process_chunk(chunk, model, prompt_type, model_for_refinement, use_refinement):
-    tasks = [gen_tests(item["prompt"], model, prompt_type, model_for_refinement=model_for_refinement, use_refinement=use_refinement) for item in chunk]
+async def process_chunk(chunk, model, prompt_type, model_for_refinement, use_refinement, temperature):
+    tasks = [gen_tests(item["prompt"], model, prompt_type, model_for_refinement=model_for_refinement, use_refinement=use_refinement, temperature=temperature) for item in chunk]
     return await asyncio.gather(*tasks)
 
-async def main(model, prompt_type, chunk_size, model_for_refinement):
+async def main(model, prompt_type, chunk_size, model_for_refinement, temperature):
     use_refinement = model_for_refinement != ""
     benchmark_data = load_benchmark("all")
     items_to_save = []
@@ -15,7 +15,7 @@ async def main(model, prompt_type, chunk_size, model_for_refinement):
     for i in range(0, len(benchmark_data), chunk_size):
         print(f"Processing chunk {i} to {i+chunk_size}")
         chunk = benchmark_data[i:i+chunk_size]
-        results = await process_chunk(chunk, model, prompt_type, model_for_refinement, use_refinement)
+        results = await process_chunk(chunk, model, prompt_type, model_for_refinement, use_refinement, temperature)
 
         for result, item in zip(results, chunk):
             items_to_save.append({
@@ -24,13 +24,13 @@ async def main(model, prompt_type, chunk_size, model_for_refinement):
                 "prompt_tokens": result[1],
                 "completion_tokens": result[2],
                 "duration": result[3],
-                "prompt_tokens_filter": result[4] if use_refinement else [],
-                "completion_tokens_filter": result[5] if use_refinement else [],
+                "prompt_tokens_filter": result[4] if use_refinement else 0,
+                "completion_tokens_filter": result[5] if use_refinement else 0,
                 "duration_filter": result[6] if use_refinement else 0
             })
         print(f"Processed {len(items_to_save)} items")
 
-    save_generated_tests(items_to_save, prompt_type, model, model_for_refinement, use_refinement)
+    save_generated_tests(items_to_save, prompt_type, model, model_for_refinement, use_refinement, temperature)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run async tasks with model parameter.')
@@ -38,10 +38,11 @@ if __name__ == "__main__":
     parser.add_argument('--prompt_type', type=str, required=True, help='io, few_shot, agentCoder')
     parser.add_argument('--chunk_size', type=int, required=True, help='Number of items to process at a time to handle rate limits.')
     parser.add_argument('--model_for_refinement', type=str, required=False, help='Model parameter to be used for test refinement.')
+    parser.add_argument('--temperature', type=float, required=True, help='Temperature parameter for generation.')
 
     args = parser.parse_args()
 
-    asyncio.run(main(args.model, args.prompt_type, args.chunk_size, args.model_for_refinement))
+    asyncio.run(main(args.model, args.prompt_type, args.chunk_size, args.model_for_refinement, args.temperature))
 
 # import asyncio
 # import argparse

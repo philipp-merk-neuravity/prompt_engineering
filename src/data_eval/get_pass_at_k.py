@@ -7,20 +7,20 @@ problem_file_path="/home/neuravity/dev/prompt_engineering/src/human_eval/data/Hu
 base_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple"
 
 mapping = {
-    "0.2": {
-        "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
-    },
-    "0.4": {
-        "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
-    },
+    # "0.2": {
+    #     "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
+    # },
+    # "0.4": {
+    #     "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
+    # },
     "0.6": {
-        "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
+        "io": ["gpt-4-0125-preview"],
         "scot": ["gpt-4-0125-preview"],
         "synth_few_shot_split": ["gpt-4-0125-preview"],
         "zero_shot_cot": ["gpt-4-0125-preview"],
     },
     "0.8": {
-        "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
+        "io": ["gpt-3.5-turbo-0125"],
         "scot": ["gpt-3.5-turbo-0125"],
         "synth_few_shot_split": ["gpt-3.5-turbo-0125"],
         "zero_shot_cot": ["gpt-3.5-turbo-0125"],

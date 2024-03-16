@@ -3,7 +3,7 @@ TEST_GEN_INSTRUCTION_IO = "Write unique, diverse, and intuitive unit tests for f
 
 TEST_GEN_CHAT_INSTRUCTION = """You are an AI coding assistant that can write unique, diverse, and intuitive unit tests for functions given the signature and docstring. Answer with code only not in English. Use only assert statements that are independent from each other, as shown in the example without additional code."""
 
-TEST_GEN_CHAT_INSTRUCTION_SAVE="Create correct unit tests for the given function signature and docstring. Be careful to use inputs for you assert statements that you are likely to generate the correct output for. Answer with code only not in English. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'."
+TEST_GEN_CHAT_INSTRUCTION_SAVE="You are an AI coding assistant that can write unique, diverse and intuitive unit tests for the given function signature and docstring. Answer with code only not in English. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'."
 
 TEST_GEN_ZERO_SHOT_INSTRUCTION = "Write unique, diverse, and intuitive unit tests for functions given the signature and docstring. Answer with code only containing comments. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'. Think step by step by providing comments before each assert statement."
 

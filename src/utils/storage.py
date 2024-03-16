@@ -62,12 +62,12 @@ def save_benchmark_results(items, benchmark_type, strategy, prompt_type, model, 
     
     return benchmark_results_file_path  # Optionally return the file path for further use
 
-def save_generated_tests(items, prompt_type, model, model_for_refinement, use_refinement):
+def save_generated_tests(items, prompt_type, model, model_for_refinement, use_refinement, temperature):
     base_path = ""
     if use_refinement:
-        base_path = f"{static_path}/test_cases/{prompt_type}/{model}/with_refinement/{model_for_refinement}"
+        base_path = f"{static_path}/test_cases/{temperature}/{prompt_type}/{model}/with_refinement/{model_for_refinement}"
     else:
-        base_path = f"{static_path}/test_cases/{prompt_type}/{model}/without_refinement"
+        base_path = f"{static_path}/test_cases/{temperature}/{prompt_type}/{model}/without_refinement"
     os.makedirs(base_path, exist_ok=True)
     
     # Determine the next available file_id by inspecting existing folders

@@ -62,10 +62,10 @@ async def remove_flawed_tests(tests: List[str], model: str, function_signature: 
     return tests_as_list, prompt_tokens, completion_tokens, duration
 
 
-async def gen_tests(function_signature: str, model: str, prompt_type: str, amount=4, response_format="text", model_for_refinement="gpt-4-0125-preview", use_refinement=False) -> List[str]:
+async def gen_tests(function_signature: str, model: str, prompt_type: str, amount=4, response_format="text", model_for_refinement="gpt-4-0125-preview", use_refinement=False, temperature=0.2) -> List[str]:
     response_format = "text"
     messages = await get_messages_for_test_generation(function_signature, prompt_type)
-    tests, prompt_tokens, completion_tokens, duration = await get_completion(messages, max_tokens=4096, model=model, response_format=response_format)
+    tests, prompt_tokens, completion_tokens, duration = await get_completion(messages, max_tokens=4096, model=model, response_format=response_format, temperature=temperature)
     tests_as_list = convert_tests_to_list(tests, prompt_type)
     tests_with_function_def = split_tests_into_individual_functions(tests_as_list)
     correct_tests_with_function_def = filter_syntactically_correct_tests_ast(tests_with_function_def)
@@ -74,9 +74,6 @@ async def gen_tests(function_signature: str, model: str, prompt_type: str, amoun
         tests_as_list = random.sample(tests_as_list, amount)
     if use_refinement:
         tests_as_list, prompt_tokens_filter, completion_tokens_filter, duration_filter = await remove_flawed_tests(tests_as_list, model_for_refinement, function_signature)
-        # prompt_tokens += prompt_tokens_filter
-        # completion_tokens += completion_tokens_filter
-        # duration += duration_filter
         return (tests_as_list, prompt_tokens, completion_tokens, duration, prompt_tokens_filter, completion_tokens_filter, duration_filter)
     return (tests_as_list, prompt_tokens, completion_tokens, duration)
 
