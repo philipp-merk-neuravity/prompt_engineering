@@ -126,8 +126,10 @@ async def main(model_for_reflection, model_for_refinement, prompt_for_reflection
     current_benchmark_results = load_from_jsonl(file_path_for_results)
     benchmark_data = load_benchmark(benchmark_type)
     unresolved_tasks = get_unresolved_tasks(benchmark_data, current_benchmark_results)
-    # test_cases = load_from_jsonl(tests_path)
-    test_cases = load_multiline_data_from_jsonl(tests_path)[0]
+    if test_type == "predefined":
+        test_cases = load_multiline_data_from_jsonl(tests_path)[0]
+    else:
+        test_cases = load_from_jsonl(tests_path)
 
     start_time = time.time()  # Capture start time
     all_results = await process_chunks(unresolved_tasks, model_for_reflection, model_for_refinement, prompt_for_reflection, prompt_for_refinement, max_iterations, test_cases, chunk_size, file_path_for_results, init_results, temp_for_reflection=temp_for_reflection , temp_for_refinement=temp_for_refinement)

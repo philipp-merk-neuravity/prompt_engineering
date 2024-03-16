@@ -1,7 +1,7 @@
 import numpy as np
 import json
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.4/few_shot/gpt-3.5-turbo-0125/without_refinement"
+path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4-0125-preview/with_refinement/gpt-4-0125-preview"
 
 def estimator(n: int, c: int, k: int) -> float:
     """ 
@@ -15,7 +15,7 @@ def estimator(n: int, c: int, k: int) -> float:
 
 all_results = []
 
-for i in range(0, 5):
+for i in range(0, 4):
     with open(f"{path}/{i}/test_results.json") as f:
         # load all data first
         data = json.load(f)

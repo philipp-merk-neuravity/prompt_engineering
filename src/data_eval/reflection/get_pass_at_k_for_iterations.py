@@ -8,16 +8,14 @@ problem_file_path="/home/neuravity/dev/prompt_engineering/src/human_eval/data/Hu
 
 mapping = {
     "simple_simple": {
-        "0.8_0.8": {
-           "gpt-3.5-turbo-0125": {
-                "use_next": ["predefined"],
-                "use_best": ["predefined"]
-           }
-        },
+        # "0.8_0.8": {
+        #    "gpt-3.5-turbo-0125": {
+        #       "use_next": ["gpt_3.5-turbo-0125_gpt-4-0125-preview"],
+        #    }
+        # },
         "0.8_0.6": {
             "gpt-4-0125-preview": {
-                "use_best": ["predefined"],
-                "use_next": ["predefined"]
+                "use_next_x_use_best": ["gpt_3.5-turbo-0125_gpt-4-0125-preview"],
             }
         },
     }
