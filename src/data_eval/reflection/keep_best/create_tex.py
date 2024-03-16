@@ -3,8 +3,8 @@ import pandas as pd
 import json
 
 # Your data goes here; assume it's named `data` and already imported
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_refl_keep_best/combined_results.jsonl"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_refl_keep_best"
+path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_gen_tests/reflection/combined_results.jsonl"
+save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_gen_tests/reflection"
 
 with open(path, "r") as f:
     data = [json.loads(line) for line in f]
