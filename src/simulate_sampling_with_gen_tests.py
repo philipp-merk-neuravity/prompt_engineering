@@ -5,7 +5,7 @@ import re
 import subprocess
 
 # Paths
-method = "scot"
+method = "io"
 model = "gpt-4-0125-preview"
 temperature = "0.6"
 test_type = "tests_4"
