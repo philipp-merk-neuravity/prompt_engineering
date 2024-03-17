@@ -15,7 +15,7 @@ mapping = {
         # },
         "0.8_0.6": {
             "gpt-4-0125-preview": {
-                "use_next_x_use_best": ["gpt_3.5-turbo-0125_gpt-4-0125-preview"],
+                "use_next_x_use_best": ["predefined"],
             }
         },
     }

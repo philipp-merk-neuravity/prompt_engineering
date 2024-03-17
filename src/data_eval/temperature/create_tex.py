@@ -18,7 +18,7 @@ def df_to_latex(df, index, columns):
     # Pivot the DataFrame to get the desired shape
     pivot_df = df.pivot(index=index, columns=columns, values='accuracy')
     # Convert the pivoted DataFrame to LaTeX
-    return pivot_df.to_latex(float_format="{:0.2f}".format)
+    return pivot_df.to_latex(float_format="{:0.3f}".format)
 
 # Generate and print LaTeX tables for each model
 for model, model_df in dfs.items():

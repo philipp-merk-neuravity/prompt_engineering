@@ -1,8 +1,8 @@
 import pandas as pd
 import json
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_prompt_method/results_prompt_method.jsonl"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_prompt_method"
+path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_gen_tests/sampling/sampling_gen_test.jsonl"
+save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_gen_tests/sampling"
 
 with open(path, "r") as f:
     data = [json.loads(line) for line in f]
@@ -18,7 +18,7 @@ def df_to_latex(df, index, columns, values):
     # Pivot the DataFrame to get the desired shape with specified rows (index) and columns
     pivot_df = df.pivot(index=index, columns=columns, values=values)
     # Convert the pivoted DataFrame to LaTeX format
-    return pivot_df.to_latex(index=True, float_format="{:0.2f}".format)
+    return pivot_df.to_latex(index=True, float_format="{:0.3f}".format)
 
 # Split the DataFrame into separate DataFrames for each model
 models = df['model'].unique()

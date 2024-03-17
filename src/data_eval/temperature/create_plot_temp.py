@@ -34,9 +34,8 @@ def plot_data_for_model(model_data, model_name):
     for temp, values in data_by_temp.items():
         plt.plot(values["k"], values["accuracy"], label=f'Temp: {temp}')
     
-    plt.title(f'Accuracy vs. k for {model_name}')
-    plt.xlabel('k (pass@k)')
-    plt.ylabel('Accuracy')
+    plt.xlabel('pass@k')
+    plt.ylabel('Genauigkeit')
     plt.legend()
     plt.grid(True)
     # save

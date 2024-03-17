@@ -42,8 +42,8 @@
       "program": "${workspaceFolder}/src/gen_tests.py",
       "console": "integratedTerminal",
       "args": [
-        "--model", "gpt-4-0125-preview",
-        "--prompt_type", "few_shot",
+        "--model", "gpt-3.5-turbo-0125",
+        "--prompt_type", "codeT",
         "--chunk_size", "50",
         "--model_for_refinement", "",
         "--temperature", "0.2"

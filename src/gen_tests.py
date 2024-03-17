@@ -4,7 +4,7 @@ from utils.code_generation import gen_tests
 from utils.storage import load_benchmark, save_generated_tests
 
 async def process_chunk(chunk, model, prompt_type, model_for_refinement, use_refinement, temperature):
-    tasks = [gen_tests(item["prompt"], model, prompt_type, model_for_refinement=model_for_refinement, use_refinement=use_refinement, temperature=temperature) for item in chunk]
+    tasks = [gen_tests(item["prompt"], model, prompt_type, model_for_refinement=model_for_refinement, use_refinement=use_refinement, temperature=temperature, amount=10) for item in chunk]
     return await asyncio.gather(*tasks)
 
 async def main(model, prompt_type, chunk_size, model_for_refinement, temperature):

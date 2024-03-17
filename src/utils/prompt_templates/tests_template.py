@@ -129,3 +129,11 @@ assert remove_duplicates([1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5]
 {tests}
 [response]:
 """
+
+TEST_CODET_INSTRUCTION = "You are a Python programming assistant that can create unit tests only. Do not restate the function signature or docstring. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'"
+
+TEST_CODET_PLACEHOLDER = """
+{function_signature}
+# check the correctness of {function_name}
+assert
+"""

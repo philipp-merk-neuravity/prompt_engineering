@@ -15,7 +15,7 @@ def df_to_latex(df, filename, index='model', columns='refinement_model'):
     
     selected_df = df[[index, columns, 'accuracy', 'total_cost']]
     
-    latex_str = selected_df.to_latex(index=False, float_format="{:0.2f}".format, 
+    latex_str = selected_df.to_latex(index=False, float_format="{:0.3f}".format, 
                                       header=["Model", "Refinement Model", "Accuracy", "Costs"])
     with open(f"{save_path}/{filename}_latex_table.tex", "w") as f:
         f.write(latex_str)

@@ -19,7 +19,7 @@ df = pd.DataFrame(data)
 pivot_table = df.pivot_table(index=['model', 'reflection_type'], columns='iteration', values='accuracy_pass@1', aggfunc='first')
 
 # Convert pivot table to LaTeX format, with 'float_format' to ensure the rounding is applied
-latex_table = pivot_table.to_latex(float_format="%.2f")
+latex_table = pivot_table.to_latex(float_format="%.3f")
 
 # Save or print the LaTeX table
 with open(f"{save_path}/latex_table.tex", "w") as f:

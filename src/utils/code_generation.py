@@ -1,6 +1,6 @@
 from .openai_api import get_completion
 from .template_functions import get_messages_for_test_detection, get_messages_for_test_refinement, get_messages_for_reflection_and_refinement, get_messages_for_refinement, get_messages_for_code_generation, get_messages_for_syntax_correction, get_messages_for_test_generation, get_messages_for_prompt_preprocessing, get_messages_for_self_reflection
-from .data_conversion import extract_python_code_from_json, parse_code_block, convert_tests_to_list, check_is_syntax_correct, split_tests_into_individual_functions, filter_syntactically_correct_tests_ast, remove_function_definition_from_test
+from .data_conversion import extract_function_name, extract_python_code_from_json, parse_code_block, convert_tests_to_list, check_is_syntax_correct, split_tests_into_individual_functions, filter_syntactically_correct_tests_ast, remove_function_definition_from_test
 import random
 from typing import List
 
@@ -61,10 +61,10 @@ async def remove_flawed_tests(tests: List[str], model: str, function_signature: 
 
     return tests_as_list, prompt_tokens, completion_tokens, duration
 
-
 async def gen_tests(function_signature: str, model: str, prompt_type: str, amount=4, response_format="text", model_for_refinement="gpt-4-0125-preview", use_refinement=False, temperature=0.2) -> List[str]:
     response_format = "text"
-    messages = await get_messages_for_test_generation(function_signature, prompt_type)
+    function_name = extract_function_name(function_signature)
+    messages = await get_messages_for_test_generation(function_signature, prompt_type, function_name)
     tests, prompt_tokens, completion_tokens, duration = await get_completion(messages, max_tokens=4096, model=model, response_format=response_format, temperature=temperature)
     tests_as_list = convert_tests_to_list(tests, prompt_type)
     tests_with_function_def = split_tests_into_individual_functions(tests_as_list)

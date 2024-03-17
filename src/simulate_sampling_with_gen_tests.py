@@ -6,11 +6,12 @@ import subprocess
 
 # Paths
 method = "io"
-model = "gpt-3.5-turbo-0125"
-temperature = "0.8"
-save_path = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple_gen_tests/{temperature}/{method}/{model}"
+model = "gpt-4-0125-preview"
+temperature = "0.6"
+test_type = "tests_4"
+save_path = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simpe_check_tests/{temperature}/{method}/{model}/{test_type}"
 path_for_samples = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/{temperature}/{method}/{model}"
-path_for_tests = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/with_refinement/gpt-4-0125-preview/init/init.jsonl"
+path_for_tests = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/codeT/gpt-4-0125-preview/without_refinement/0/0.jsonl"
 predefined_tests_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json"
 evaluation_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
 script_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
@@ -155,6 +156,7 @@ def main():
         with open(f"{save_path}/{i}/combined_results.jsonl", "w") as f:
             for result in best_samples[i]:
                 f.write(json.dumps(result) + "\n")
+
     for i in range(max_sample_size):
         current_results_path = f"{save_path}/{i}/combined_results.jsonl"
         calculate_pass_at_k_per_sample_size(current_results_path)
