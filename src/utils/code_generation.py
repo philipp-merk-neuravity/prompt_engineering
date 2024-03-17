@@ -62,10 +62,17 @@ async def remove_flawed_tests(tests: List[str], model: str, function_signature: 
     return tests_as_list, prompt_tokens, completion_tokens, duration
 
 async def gen_tests(function_signature: str, model: str, prompt_type: str, amount=4, response_format="text", model_for_refinement="gpt-4-0125-preview", use_refinement=False, temperature=0.2) -> List[str]:
-    response_format = "text"
     function_name = extract_function_name(function_signature)
-    messages = await get_messages_for_test_generation(function_signature, prompt_type, function_name)
-    tests, prompt_tokens, completion_tokens, duration = await get_completion(messages, max_tokens=4096, model=model, response_format=response_format, temperature=temperature)
+    if prompt_type == "synth_few_shot":
+        response_format = "json_object"
+        messages_pre = await get_messages_for_test_generation(function_signature, "synth_few_shot_pre")
+        preprocessed_prompt = await get_completion(messages_pre, response_format=response_format)
+        response_format = "text"
+        messages = await get_messages_for_test_generation(function_signature, prompt_type, function_name, preprocessed_prompt)
+        tests, prompt_tokens, completion_tokens, duration = await get_completion(messages, model=model, response_format=response_format, temperature=temperature)
+    else:    
+        messages = await get_messages_for_test_generation(function_signature, prompt_type, function_name)
+        tests, prompt_tokens, completion_tokens, duration = await get_completion(messages, max_tokens=4096, model=model, response_format=response_format, temperature=temperature)
     tests_as_list = convert_tests_to_list(tests, prompt_type)
     tests_with_function_def = split_tests_into_individual_functions(tests_as_list)
     correct_tests_with_function_def = filter_syntactically_correct_tests_ast(tests_with_function_def)

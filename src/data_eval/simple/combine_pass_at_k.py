@@ -2,17 +2,10 @@ import subprocess
 import json
 
 # Define the path to the script you want to run
-problem_file_path="/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl"
-base_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple_gen_tests"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_gen_tests/sampling/sampling_gen_test.jsonl"
+base_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple"
+save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_prompt_method/combined_results.jsonl"
 
 mapping = {
-    # "0.2": {
-    #     "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
-    # },
-    # "0.4": {
-    #     "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
-    # },
     "0.6": {
         "io": ["gpt-4-0125-preview"],
         "scot": ["gpt-4-0125-preview"],
@@ -35,7 +28,7 @@ for temp, method_model_mapping in mapping.items():
             current_path = f"{base_path}/{temp}/{method}/{model}"
             for i in range(10):
                 k = i + 1
-                current_path_i = f"{current_path}/{i}/1_stats.json"
+                current_path_i = f"{current_path}/{i}/{k}_stats.json"
                 # read the stats file
                 with open(current_path_i, "r") as f:
                     stats = json.load(f)
@@ -44,7 +37,7 @@ for temp, method_model_mapping in mapping.items():
                     "method": method,
                     "model": model,
                     "k": k,
-                    "accuracy": stats["accuracy"][f"pass@1"],
+                    "accuracy": stats["accuracy"][f"pass@{k}"],
                     "prompt_tokens": stats["prompt_tokens"],
                     "completion_tokens": stats["completion_tokens"],
                     "duration": stats["duration"]

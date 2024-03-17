@@ -3,7 +3,7 @@ from .prompt_templates.solution_template import (ZERO_SHOT_COT_PLACEHOLDER, ZERO
 from .prompt_templates.syntax_correction_template import (SYNTAX_CORRECTION_CODE_SOLUTION, SYNTAX_CORRECTION_FEEDBACK, SYNTAX_CORRECTION_INSTRUCTION)
 from .prompt_templates.reflection_template import (SELF_REFLECTION_CHAT_INSTRUCTION_2, SELF_REFLECTION_FEW_SHOT_2, SELF_REFLECTION_CHAT_INSTRUCTION, SELF_REFLECTION_CURRENT_FEEDBACK, SELF_REFLECTION_FEW_SHOT)
 from .prompt_templates.refinement_template import (REFINEMENT_TASK, REFINEMENT_FEW_SHOT, REFINEMENT_FUNC_SIGNATURE, REFINEMENT_INSTRUCTION, REFINEMENT_PREVIOUS_FUNCTION_IMPL, REFINEMENT_REFLECTION, REFINEMENT_TESTS)
-from .prompt_templates.tests_template import (TEST_CODET_INSTRUCTION, TEST_CODET_PLACEHOLDER, TEST_GEN_CHAT_INSTRUCTION_SAVE, TEST_DETECTION_INSTRUCTION, TEST_DETECTION_PLACEHOLDER, TEST_REFINEMENT_INSTRUCTION, TEST_REFINEMENT_PlACEHOLDER, TEST_GEN_ZERO_SHOT_INSTRUCTION, TEST_GEN_INSTRUCTION_IO, TEST_GEN_CHAT_INSTRUCTION, TEST_GEN_FEW_SHOT, TEST_GEN_FUNCTION_SIGNATURE, TEST_GEN_FEW_SHOT_AC, TEST_GEN_INSTRUCTION_AC)
+from .prompt_templates.tests_template import (TEST_GEN_SYNTH_FEW_SHOT_GEN_FEW_SHOT_POST, TEST_GEN_SYNTH_FEW_SHOT_INSTRUCTION_POST, TEST_GEN_SYNTH_FEW_SHOT_FEW_SHOT_PRE, TEST_GEN_SYNTH_FEW_SHOT_GEN_INSTRUCTION_PRE, TEST_GEN_COT_INSTRUCTION, TEST_CODET_INSTRUCTION, TEST_CODET_PLACEHOLDER, TEST_GEN_CHAT_INSTRUCTION_SAVE, TEST_DETECTION_INSTRUCTION, TEST_DETECTION_PLACEHOLDER, TEST_REFINEMENT_INSTRUCTION, TEST_REFINEMENT_PlACEHOLDER, TEST_GEN_INSTRUCTION_IO, TEST_GEN_CHAT_INSTRUCTION, TEST_GEN_FEW_SHOT, TEST_GEN_FUNCTION_SIGNATURE, TEST_GEN_FEW_SHOT_AC, TEST_GEN_INSTRUCTION_AC)
 
 def create_system_message(template, **kwargs):
     return {"role": "system", "content": template.format(**kwargs)}
@@ -68,11 +68,11 @@ async def get_messages_for_code_generation(function_description: str, prompt_typ
         ]
     if prompt_type == "zero_shot_cot":
         return [
-            create_system_message(TEST_GEN_ZERO_SHOT_INSTRUCTION),
-            create_user_message(TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_description),
+            create_system_message(ZERO_SHOT_COT_INSTRUCTION),
+            create_user_message(ZERO_SHOT_COT_PLACEHOLDER, function_signature=function_description),
         ]
     
-async def get_messages_for_test_generation(function_signature: str, prompt_type="io", function_name=""):
+async def get_messages_for_test_generation(function_signature: str, prompt_type="io", function_name="", preprocessed_prompt=None):
     if prompt_type == "io":
         return [
             create_system_message(TEST_GEN_INSTRUCTION_IO),
@@ -85,13 +85,23 @@ async def get_messages_for_test_generation(function_signature: str, prompt_type=
         ]
     if prompt_type == "zero_shot_cot":
         return [
-            create_system_message(TEST_GEN_ZERO_SHOT_INSTRUCTION),
+            create_system_message(TEST_GEN_COT_INSTRUCTION),
             create_user_message(TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
         ]
     if prompt_type == "codeT":
         return [
             create_system_message(TEST_CODET_INSTRUCTION),
             create_user_message(TEST_CODET_PLACEHOLDER, function_signature=function_signature, function_name=function_name),
+        ]
+    if prompt_type == "synth_few_shot_pre":
+        return [
+            create_system_message(TEST_GEN_SYNTH_FEW_SHOT_GEN_INSTRUCTION_PRE),
+            create_user_message(TEST_GEN_SYNTH_FEW_SHOT_FEW_SHOT_PRE, function_signature=function_signature),
+        ]
+    if prompt_type == "synth_few_shot":
+        return [
+            create_system_message(TEST_GEN_SYNTH_FEW_SHOT_INSTRUCTION_POST),
+            create_user_message(TEST_GEN_SYNTH_FEW_SHOT_GEN_FEW_SHOT_POST, function_signature=function_signature, preprocessed_prompt=preprocessed_prompt),
         ]
     
 async def get_messages_for_test_refinement(test: str, function_signature: str):

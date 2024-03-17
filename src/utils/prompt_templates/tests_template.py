@@ -5,8 +5,6 @@ TEST_GEN_CHAT_INSTRUCTION = """You are an AI coding assistant that can write uni
 
 TEST_GEN_CHAT_INSTRUCTION_SAVE="You are an AI coding assistant that can write unique, diverse and intuitive unit tests for the given function signature and docstring. Answer with code only not in English. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'."
 
-TEST_GEN_ZERO_SHOT_INSTRUCTION = "Write unique, diverse, and intuitive unit tests for functions given the signature and docstring. Answer with code only containing comments. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'. Think step by step by providing comments before each assert statement."
-
 TEST_GEN_FEW_SHOT = """
 Example:
 [func signature]:
@@ -137,3 +135,41 @@ TEST_CODET_PLACEHOLDER = """
 # check the correctness of {function_name}
 assert
 """
+
+TEST_GEN_COT_INSTRUCTION = "You are a Python programming assistant that can create unit tests only. Do not restate the function signature or docstring. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6. Think step by step by providing comments before each assert statement."
+
+TEST_GEN_SYNTH_FEW_SHOT_GEN_INSTRUCTION_PRE = "You are a Python programming assistant that can create unit tests. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'. Explain the core concepts in it and provide three other relevant problems as shown in the example. Use json format for your response."
+
+TEST_GEN_SYNTH_FEW_SHOT_FEW_SHOT_PRE = '''
+# Example:
+[function_description]:
+\n\ndef strlen(string: str) -> int:\n    \"\"\" Return length of given string\n    >>> strlen('')\n    0\n    >>> strlen('abc')\n    3\n    \"\"\"\n
+[response]: 
+{{
+  "Algorithms": "String Manipulation",
+  "Tutorial": "Assert correct lengths for inputs, including edge cases like empty strings, to ensure accuracy in calculating string lengths.",
+  "Example Problems": [
+    {{
+      "Problem Description": "Write a unit test for a function that reverses a string.",
+      "Solution Explanation": "To test a string reversal function, you would call the function with a known string and assert that the output equals the expected reversed string.",
+      "Unit Tests": [
+        "assert reverse_string('hello') == 'olleh'",
+        "assert reverse_string('') == ''"
+      ]
+    }}
+  ],
+}}
+# Task:
+[function_description]:
+{function_signature}
+[response]:
+'''
+
+TEST_GEN_SYNTH_FEW_SHOT_INSTRUCTION_POST = "You are a Python programming assistant that can answer with unit tests only, not english. Use only assert statements that are independent from each other, e.g.: 'assert add3Numbers(1, 2, 3) == 6'. Besides the task, you will be given the core concepts of the task and three other relevant problems as few-shots that could help you to create tests."
+
+TEST_GEN_SYNTH_FEW_SHOT_GEN_FEW_SHOT_POST = '''
+{preprocessed_prompt}
+[function_description]:
+{function_signature}
+[unit tests]:
+'''

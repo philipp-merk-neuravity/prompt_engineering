@@ -1,24 +1,24 @@
 import json
 import pandas as pd
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests/test_results_with_costs.json"  
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests"  
+path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests/combined_results.json"
+save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests/test_results.tex"
 
 with open(path, "r") as f:
     data = json.load(f)
 
 df = pd.DataFrame(data)
 
-dfs = {model: df[df["model"] == model] for model in df["model"].unique()}
+# Creating a new column for 'with_refinement' based on the 'test_type'
+df['with_refinement'] = df['test_type'].apply(lambda x: 'Yes' if x == 'with_refinement' else 'No')
 
-def df_to_latex(df, filename, index='model', columns='refinement_model'):
-    
-    selected_df = df[[index, columns, 'accuracy', 'total_cost']]
-    
-    latex_str = selected_df.to_latex(index=False, float_format="{:0.3f}".format, 
-                                      header=["Model", "Refinement Model", "Accuracy", "Costs"])
-    with open(f"{save_path}/{filename}_latex_table.tex", "w") as f:
-        f.write(latex_str)
+# Grouping data by 'model' and 'with_refinement', and getting the mean accuracy
+grouped_df = df.groupby(['model', 'with_refinement'])['accuracy'].mean().unstack()
 
-for model, model_df in dfs.items():
-    df_to_latex(model_df, model)
+def df_to_latex(df, save_path):
+    latex_code = df.to_latex(float_format="{:0.3f}".format, header=['With Refinement', 'Without Refinement'], index=True)
+    with open(save_path, "w") as f:
+        f.write(latex_code)
+
+
+df_to_latex(grouped_df, save_path)

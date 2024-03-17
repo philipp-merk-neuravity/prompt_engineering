@@ -16,7 +16,7 @@ async def main(model, prompt_type, chunk_size, model_for_refinement, temperature
         print(f"Processing chunk {i} to {i+chunk_size}")
         chunk = benchmark_data[i:i+chunk_size]
         results = await process_chunk(chunk, model, prompt_type, model_for_refinement, use_refinement, temperature)
-
+        
         for result, item in zip(results, chunk):
             items_to_save.append({
                 "task_id": item["task_id"],
