@@ -2,7 +2,6 @@ import subprocess
 import json
 
 # Define the path to the script you want to run
-script_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
 problem_file_path="/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl"
 base_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple"
 save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_prompt_method/results_prompt_method.jsonl"
