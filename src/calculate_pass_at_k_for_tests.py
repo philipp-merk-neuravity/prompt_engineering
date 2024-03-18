@@ -1,33 +1,31 @@
 import numpy as np
 import json
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4-0125-preview/with_refinement/gpt-4-0125-preview"
+path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/codeT/gpt-3.5-turbo-0125/without_refinement"
+save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/codeT/gpt-3.5-turbo-0125/without_refinement"
 
-def estimator(n: int, c: int, k: int) -> float:
-    """ 
-    :param n: total number of samples 
-    :param c: number of correct samples 
-    :param k: k in pass@$k$ 
-    """ 
-    if n - c < k:
-        return 1.0
-    return 1.0 - np.prod(1.0 - k / np.arange(n - c + 1, n + 1))
+mapping = {
+    "codeT": {
+        "gpt-3.5-turbo-0125": {
+            "without_refinement": {}
+        }
+    }
+}
 
-all_results = []
+def get_pass_at_1_for_method():
+    sum_of_accuracy = 0
+    for i in range(3):
+        current_path = f"{path}/{i}/test_results_stats.json"
+        with open(current_path, "r") as f:
+            data = json.load(f)
+            sum_of_accuracy += data["accuracy"]
+    return sum_of_accuracy / 3
 
-for i in range(0, 4):
-    with open(f"{path}/{i}/test_results.json") as f:
-        # load all data first
-        data = json.load(f)
-    for result in data:
-        all_results.append(result)
+sum_of_accuracy = get_pass_at_1_for_method()
 
-n = len(all_results)
-c = sum([result["is_solved"] for result in all_results])
-k = 1
+# save
+with open(f"{save_path}/pass_at_1.json", "w") as f:
+    json.dump({ "pass_at_1": sum_of_accuracy}, f)
 
-pass_at_k = estimator(n, c, k)
+                
 
-# save the number
-with open(f"{path}/pass_at_{k}.json", "w") as f:
-    f.write(json.dumps(pass_at_k))

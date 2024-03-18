@@ -73,11 +73,6 @@ async def get_messages_for_code_generation(function_description: str, prompt_typ
         ]
     
 async def get_messages_for_test_generation(function_signature: str, prompt_type="io", function_name="", preprocessed_prompt=None):
-    if prompt_type == "io":
-        return [
-            create_system_message(TEST_GEN_INSTRUCTION_IO),
-            create_user_message(TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
-        ]
     if prompt_type == "few_shot":
         return [
             create_system_message(TEST_GEN_CHAT_INSTRUCTION_SAVE),
@@ -88,7 +83,7 @@ async def get_messages_for_test_generation(function_signature: str, prompt_type=
             create_system_message(TEST_GEN_COT_INSTRUCTION),
             create_user_message(TEST_GEN_FUNCTION_SIGNATURE, function_signature=function_signature),
         ]
-    if prompt_type == "codeT":
+    if prompt_type == "io":
         return [
             create_system_message(TEST_CODET_INSTRUCTION),
             create_user_message(TEST_CODET_PLACEHOLDER, function_signature=function_signature, function_name=function_name),

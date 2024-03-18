@@ -14,15 +14,18 @@
     },
     {
         "task_id": "HumanEval/1",
-        "is_solved": true,
+        "is_solved": false,
         "test_results": {
             "passed_tests": [
-                "assert separate_paren_groups('( ) (( )) (( )( ))') == ['()', '(())', '(()())']"
+                "assert separate_paren_groups('( ) (( )) (( )( ))') == ['()', '(())', '(()())']",
+                "assert separate_paren_groups('()()()()()') == ['()', '()', '()', '()', '()']"
             ],
-            "failed_tests": []
+            "failed_tests": [
+                "assert separate_paren_groups('(( )) ( ( ) )') == ['(())', '()'] (AssertionError: )"
+            ]
         },
         "prompt_tokens": 189,
-        "completion_tokens": 23
+        "completion_tokens": 72
     },
     {
         "task_id": "HumanEval/2",
@@ -60,12 +63,13 @@
             "passed_tests": [
                 "assert mean_absolute_deviation([1.0, 2.0, 3.0, 4.0]) == 1.0",
                 "assert mean_absolute_deviation([10.0, 20.0, 30.0, 40.0]) == 10.0",
-                "assert mean_absolute_deviation([2.5, 3.5, 4.5, 5.5]) == 1.0"
+                "assert mean_absolute_deviation([2.5, 3.5, 4.5, 5.5]) == 1.0",
+                "assert mean_absolute_deviation([0.0, 0.0, 0.0, 0.0]) == 0.0"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 191,
-        "completion_tokens": 92
+        "completion_tokens": 123
     },
     {
         "task_id": "HumanEval/5",
@@ -82,17 +86,19 @@
     },
     {
         "task_id": "HumanEval/6",
-        "is_solved": true,
+        "is_solved": false,
         "test_results": {
             "passed_tests": [
-                "assert parse_nested_parens('()') == [1]",
+                "assert parse_nested_parens('(()()) ((())) () ((())()())') == [2, 3, 1, 3]",
                 "assert parse_nested_parens('((()))') == [3]",
-                "assert parse_nested_parens('(()()) ((())) () ((())()())') == [2, 3, 1, 3]"
+                "assert parse_nested_parens('((()(())))') == [4]"
             ],
-            "failed_tests": []
+            "failed_tests": [
+                "assert parse_nested_parens('()()()()') == [1, 1, 1, 1] (AssertionError: )"
+            ]
         },
         "prompt_tokens": 187,
-        "completion_tokens": 60
+        "completion_tokens": 85
     },
     {
         "task_id": "HumanEval/7",
@@ -100,14 +106,16 @@
         "test_results": {
             "passed_tests": [
                 "assert filter_by_substring([], 'a') == []",
-                "assert filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a') == ['abc', 'bacd', 'array']"
+                "assert filter_by_substring(['abc', 'bacd', 'cde', 'array'], 'a') == ['abc', 'bacd', 'array']",
+                "assert filter_by_substring(['apple', 'banana', 'cherry'], 'an') == ['banana']",
+                "assert filter_by_substring(['python', 'java', 'javascript'], 'java') == ['java', 'javascript']"
             ],
             "failed_tests": [
                 "assert filter_by_substring(['hello', 'world', 'python'], 'o') == ['hello', 'world'] (AssertionError: )"
             ]
         },
         "prompt_tokens": 167,
-        "completion_tokens": 70
+        "completion_tokens": 115
     },
     {
         "task_id": "HumanEval/8",
@@ -129,13 +137,12 @@
             "passed_tests": [
                 "assert rolling_max([1, 2, 3, 2, 3, 4, 2]) == [1, 2, 3, 3, 3, 4, 4]",
                 "assert rolling_max([5, 4, 3, 2, 1]) == [5, 5, 5, 5, 5]",
-                "assert rolling_max([1, 1, 1, 1, 1]) == [1, 1, 1, 1, 1]",
                 "assert rolling_max([10, 20, 15, 30, 25]) == [10, 20, 20, 30, 30]"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 172,
-        "completion_tokens": 148
+        "completion_tokens": 114
     },
     {
         "task_id": "HumanEval/10",
@@ -144,13 +151,12 @@
             "passed_tests": [
                 "assert is_palindrome('racecar') == True",
                 "assert is_palindrome('hello') == False",
-                "assert is_palindrome('12321') == True",
-                "assert is_palindrome('python') == False"
+                "assert is_palindrome('madam') == True"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 215,
-        "completion_tokens": 46
+        "completion_tokens": 31
     },
     {
         "task_id": "HumanEval/11",
@@ -272,13 +278,14 @@
         "test_results": {
             "passed_tests": [
                 "assert sort_numbers('three one five') == 'one three five'",
-                "assert sort_numbers('nine eight seven six five four three two one') == 'one two three four five six seven eight nine'",
-                "assert sort_numbers('zero two four six eight') == 'zero two four six eight'"
+                "assert sort_numbers('nine seven two') == 'two seven nine'",
+                "assert sort_numbers('zero four eight') == 'zero four eight'",
+                "assert sort_numbers('six five three') == 'three five six'"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 177,
-        "completion_tokens": 58
+        "completion_tokens": 56
     },
     {
         "task_id": "HumanEval/20",
@@ -300,12 +307,12 @@
             "passed_tests": [
                 "assert rescale_to_unit([1.0, 2.0, 3.0, 4.0, 5.0]) == [0.0, 0.25, 0.5, 0.75, 1.0]",
                 "assert rescale_to_unit([5.0, 4.0, 3.0, 2.0, 1.0]) == [1.0, 0.75, 0.5, 0.25, 0.0]",
-                "assert rescale_to_unit([10.0, 20.0, 30.0, 40.0]) == [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]"
+                "assert rescale_to_unit([10.0, 20.0, 30.0]) == [0.0, 0.5, 1.0]"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 197,
-        "completion_tokens": 168
+        "completion_tokens": 148
     },
     {
         "task_id": "HumanEval/22",
@@ -326,12 +333,13 @@
         "test_results": {
             "passed_tests": [
                 "assert strlen('') == 0",
-                "assert strlen('abc') == 3"
+                "assert strlen('abc') == 3",
+                "assert strlen('Python') == 6"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 114,
-        "completion_tokens": 16
+        "completion_tokens": 25
     },
     {
         "task_id": "HumanEval/24",
@@ -339,7 +347,7 @@
         "test_results": {
             "passed_tests": [
                 "assert largest_divisor(15) == 5",
-                "assert largest_divisor(20) == 10",
+                "assert largest_divisor(12) == 6",
                 "assert largest_divisor(7) == 1",
                 "assert largest_divisor(100) == 50"
             ],
@@ -367,16 +375,15 @@
         "is_solved": false,
         "test_results": {
             "passed_tests": [
-                "assert remove_duplicates([1, 2, 3, 2, 4]) == [1, 3, 4]",
-                "assert remove_duplicates([5, 4, 3, 2, 1]) == [5, 4, 3, 2, 1]"
+                "assert remove_duplicates([1, 2, 3, 2, 4]) == [1, 3, 4]"
             ],
             "failed_tests": [
-                "assert remove_duplicates([1, 1, 1, 2, 2, 3, 3, 3, 4, 4, 4]) == [1, 2, 3, 4] (AssertionError: )",
-                "assert remove_duplicates([1, 2, 3, 4, 5, 1, 2, 3, 4, 5]) == [1, 2, 3, 4, 5] (AssertionError: )"
+                "assert remove_duplicates([1, 1, 2, 2, 3, 3, 4, 4]) == [1, 2, 3, 4] (AssertionError: )",
+                "assert remove_duplicates([5, 5, 5, 5, 5]) == [5] (AssertionError: )"
             ]
         },
         "prompt_tokens": 156,
-        "completion_tokens": 160
+        "completion_tokens": 90
     },
     {
         "task_id": "HumanEval/27",
@@ -384,13 +391,13 @@
         "test_results": {
             "passed_tests": [
                 "assert flip_case('Hello') == 'hELLO'",
-                "assert flip_case('Python Programming') == 'pYTHON pROGRAMMING'",
+                "assert flip_case('Python') == 'pYTHON'",
                 "assert flip_case('123abcXYZ') == '123ABCxyz'"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 120,
-        "completion_tokens": 43
+        "completion_tokens": 38
     },
     {
         "task_id": "HumanEval/28",
@@ -411,12 +418,16 @@
         "test_results": {
             "passed_tests": [
                 "assert filter_by_prefix([], 'a') == []",
-                "assert filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a') == ['abc', 'array']"
+                "assert filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'a') == ['abc', 'array']",
+                "assert filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'b') == ['bcd']",
+                "assert filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'c') == ['cde']",
+                "assert filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'd') == []",
+                "assert filter_by_prefix(['abc', 'bcd', 'cde', 'array'], 'e') == []"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 160,
-        "completion_tokens": 37
+        "completion_tokens": 130
     },
     {
         "task_id": "HumanEval/30",
@@ -484,12 +495,15 @@
         "is_solved": true,
         "test_results": {
             "passed_tests": [
-                "assert unique([5, 3, 5, 2, 3, 3, 9, 0, 123]) == [0, 2, 3, 5, 9, 123]"
+                "assert unique([5, 3, 5, 2, 3, 3, 9, 0, 123]) == [0, 2, 3, 5, 9, 123]",
+                "assert unique([1, 1, 1, 1, 1]) == [1]",
+                "assert unique([4, 3, 2, 1]) == [1, 2, 3, 4]",
+                "assert unique([]) == []"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 144,
-        "completion_tokens": 48
+        "completion_tokens": 102
     },
     {
         "task_id": "HumanEval/35",
@@ -540,7 +554,7 @@
             ],
             "failed_tests": [
                 "assert encode_cyclic(\"python\") == \"ythpon\" (AssertionError: )",
-                "assert encode_cyclic(\"programming\") == \"rogamminprg\" (AssertionError: )"
+                "assert encode_cyclic(\"programming\") == \"rogmmnpiam\" (AssertionError: )"
             ]
         },
         "prompt_tokens": 231,
@@ -580,15 +594,16 @@
     },
     {
         "task_id": "HumanEval/41",
-        "is_solved": true,
+        "is_solved": false,
         "test_results": {
             "passed_tests": [
-                "assert car_race_collision(1) == 1",
-                "assert car_race_collision(2) == 4",
-                "assert car_race_collision(3) == 9",
-                "assert car_race_collision(4) == 16"
+                "assert car_race_collision(1) == 1"
             ],
-            "failed_tests": []
+            "failed_tests": [
+                "assert car_race_collision(2) == 2 (AssertionError: )",
+                "assert car_race_collision(3) == 3 (AssertionError: )",
+                "assert car_race_collision(4) == 4 (AssertionError: )"
+            ]
         },
         "prompt_tokens": 224,
         "completion_tokens": 43
@@ -642,8 +657,8 @@
         "test_results": {
             "passed_tests": [
                 "assert triangle_area(5, 3) == 7.5",
-                "assert triangle_area(10, 4) == 20.0",
-                "assert triangle_area(7, 5) == 17.5"
+                "assert triangle_area(4, 6) == 12.0",
+                "assert triangle_area(10, 8) == 40.0"
             ],
             "failed_tests": []
         },
@@ -655,6 +670,11 @@
         "is_solved": true,
         "test_results": {
             "passed_tests": [
+                "assert fib4(0) == 0",
+                "assert fib4(1) == 0",
+                "assert fib4(2) == 2",
+                "assert fib4(3) == 0",
+                "assert fib4(4) == 2",
                 "assert fib4(5) == 4",
                 "assert fib4(6) == 8",
                 "assert fib4(7) == 14"
@@ -662,7 +682,7 @@
             "failed_tests": []
         },
         "prompt_tokens": 243,
-        "completion_tokens": 29
+        "completion_tokens": 79
     },
     {
         "task_id": "HumanEval/47",
@@ -711,13 +731,14 @@
     },
     {
         "task_id": "HumanEval/50",
-        "is_solved": true,
+        "is_solved": false,
         "test_results": {
             "passed_tests": [
-                "assert encode_shift(\"abc\") == \"fgh\"",
-                "assert encode_shift(\"xyz\") == \"cde\""
+                "assert encode_shift(\"abc\") == \"fgh\""
             ],
-            "failed_tests": []
+            "failed_tests": [
+                "assert encode_shift(\"xyz\") == \"efg\" (AssertionError: )"
+            ]
         },
         "prompt_tokens": 162,
         "completion_tokens": 22
@@ -802,10 +823,10 @@
         "is_solved": true,
         "test_results": {
             "passed_tests": [
-                "assert correct_bracketing(\"<\") == False",
                 "assert correct_bracketing(\"<>\") == True",
                 "assert correct_bracketing(\"<<><>>\") == True",
-                "assert correct_bracketing(\"><<>\") == False"
+                "assert correct_bracketing(\"><<>\") == False",
+                "assert correct_bracketing(\"<\") == False"
             ],
             "failed_tests": []
         },
@@ -928,19 +949,18 @@
     },
     {
         "task_id": "HumanEval/65",
-        "is_solved": false,
+        "is_solved": true,
         "test_results": {
             "passed_tests": [
                 "assert circular_shift(12, 1) == \"21\"",
                 "assert circular_shift(12, 2) == \"12\"",
-                "assert circular_shift(12345, 3) == \"34512\""
+                "assert circular_shift(12345, 3) == \"34512\"",
+                "assert circular_shift(12345, 6) == \"54321\""
             ],
-            "failed_tests": [
-                "assert circular_shift(987654321, 9) == \"123456789\" (AssertionError: )"
-            ]
+            "failed_tests": []
         },
         "prompt_tokens": 154,
-        "completion_tokens": 58
+        "completion_tokens": 56
     },
     {
         "task_id": "HumanEval/66",
@@ -1079,16 +1099,15 @@
     },
     {
         "task_id": "HumanEval/75",
-        "is_solved": false,
+        "is_solved": true,
         "test_results": {
             "passed_tests": [
                 "assert is_multiply_prime(30) == True",
-                "assert is_multiply_prime(42) == True"
+                "assert is_multiply_prime(24) == False",
+                "assert is_multiply_prime(2) == False",
+                "assert is_multiply_prime(6) == False"
             ],
-            "failed_tests": [
-                "assert is_multiply_prime(20) == False (AssertionError: )",
-                "assert is_multiply_prime(99) == False (AssertionError: )"
-            ]
+            "failed_tests": []
         },
         "prompt_tokens": 152,
         "completion_tokens": 39
@@ -1180,11 +1199,12 @@
             "passed_tests": [],
             "failed_tests": [
                 "assert numerical_letter_grade([4.0, 3, 1.7, 2, 3.5]) == ['A+', 'C', 'C-', 'C+', 'A-'] (AssertionError: )",
-                "assert numerical_letter_grade([3.8, 2.5, 1.0, 3.2, 2.9]) == ['A', 'C', 'D+', 'B-', 'B'] (AssertionError: )"
+                "assert numerical_letter_grade([3.8, 2.5, 1.1, 3.2, 2.9]) == ['A', 'C-', 'D+', 'B-', 'B'] (AssertionError: )",
+                "assert numerical_letter_grade([2.0, 1.5, 3.7, 0.8, 2.3]) == ['C+', 'D', 'A', 'D-', 'B-'] (AssertionError: )"
             ]
         },
         "prompt_tokens": 343,
-        "completion_tokens": 87
+        "completion_tokens": 133
     },
     {
         "task_id": "HumanEval/82",
@@ -1209,14 +1229,13 @@
                 "assert starts_one_ends(1) == 1"
             ],
             "failed_tests": [
-                "assert starts_one_ends(9) == 1 (AssertionError: )",
-                "assert starts_one_ends(10) == 2 (AssertionError: )",
-                "assert starts_one_ends(99) == 20 (AssertionError: )",
-                "assert starts_one_ends(100) == 21 (AssertionError: )"
+                "assert starts_one_ends(9) == 2 (AssertionError: )",
+                "assert starts_one_ends(11) == 3 (AssertionError: )",
+                "assert starts_one_ends(99) == 20 (AssertionError: )"
             ]
         },
         "prompt_tokens": 117,
-        "completion_tokens": 54
+        "completion_tokens": 43
     },
     {
         "task_id": "HumanEval/84",
@@ -1225,12 +1244,15 @@
             "passed_tests": [
                 "assert solve(1000) == \"1\"",
                 "assert solve(150) == \"110\"",
-                "assert solve(147) == \"1100\""
+                "assert solve(147) == \"1100\"",
+                "assert solve(0) == \"0\"",
+                "assert solve(10) == \"1\"",
+                "assert solve(1111) == \"100\""
             ],
             "failed_tests": []
         },
         "prompt_tokens": 204,
-        "completion_tokens": 29
+        "completion_tokens": 57
     },
     {
         "task_id": "HumanEval/85",
@@ -1241,11 +1263,12 @@
                 "assert add([1, 3, 5, 7]) == 0"
             ],
             "failed_tests": [
-                "assert add([2, 4, 6, 8]) == 0 (AssertionError: )"
+                "assert add([2, 4, 6, 8]) == 0 (AssertionError: )",
+                "assert add([1, 2, 3, 4, 5, 6, 7, 8, 9]) == 6 (AssertionError: )"
             ]
         },
         "prompt_tokens": 126,
-        "completion_tokens": 53
+        "completion_tokens": 86
     },
     {
         "task_id": "HumanEval/86",
@@ -1288,7 +1311,7 @@
             "failed_tests": []
         },
         "prompt_tokens": 275,
-        "completion_tokens": 103
+        "completion_tokens": 107
     },
     {
         "task_id": "HumanEval/89",
@@ -1463,12 +1486,13 @@
                 "assert make_a_pile(1) == [1]",
                 "assert make_a_pile(2) == [2, 4]",
                 "assert make_a_pile(3) == [3, 5, 7]",
-                "assert make_a_pile(4) == [4, 6, 8, 10]"
+                "assert make_a_pile(4) == [4, 6, 8, 10]",
+                "assert make_a_pile(5) == [5, 7, 9, 11, 13]"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 206,
-        "completion_tokens": 70
+        "completion_tokens": 90
     },
     {
         "task_id": "HumanEval/101",
@@ -1491,12 +1515,13 @@
                 "assert choose_num(12, 15) == 14",
                 "assert choose_num(13, 12) == -1",
                 "assert choose_num(1, 10) == 10",
-                "assert choose_num(3, 7) == 6"
+                "assert choose_num(2, 4) == 4",
+                "assert choose_num(5, 7) == 6"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 166,
-        "completion_tokens": 51
+        "completion_tokens": 64
     },
     {
         "task_id": "HumanEval/103",
@@ -1585,16 +1610,17 @@
     },
     {
         "task_id": "HumanEval/109",
-        "is_solved": true,
+        "is_solved": false,
         "test_results": {
             "passed_tests": [
                 "assert move_one_ball([3, 4, 5, 1, 2]) == True",
                 "assert move_one_ball([3, 5, 4, 1, 2]) == False",
                 "assert move_one_ball([]) == True",
-                "assert move_one_ball([1, 2, 3, 4, 5]) == True",
-                "assert move_one_ball([5, 4, 3, 2, 1]) == False"
+                "assert move_one_ball([1, 2, 3, 4, 5]) == True"
             ],
-            "failed_tests": []
+            "failed_tests": [
+                "assert move_one_ball([5, 4, 3, 2, 1]) == True (AssertionError: )"
+            ]
         },
         "prompt_tokens": 372,
         "completion_tokens": 96
@@ -1665,12 +1691,13 @@
             "passed_tests": [
                 "assert minSubArraySum([2, 3, 4, 1, 2, 4]) == 1",
                 "assert minSubArraySum([-1, -2, -3]) == -6",
-                "assert minSubArraySum([5, -3, 2, 1, -4, 5]) == -4"
+                "assert minSubArraySum([1, 2, 3, 4, 5]) == 1",
+                "assert minSubArraySum([-5, -4, -3, -2, -1]) == -15"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 162,
-        "completion_tokens": 71
+        "completion_tokens": 92
     },
     {
         "task_id": "HumanEval/115",
@@ -1778,16 +1805,15 @@
         "test_results": {
             "passed_tests": [
                 "assert add_elements([111, 21, 3, 4000, 5, 6, 7, 8, 9], 4) == 24",
-                "assert add_elements([1, 2, 3, 4, 5], 3) == 6",
-                "assert add_elements([10, 20, 30, 40, 50], 5) == 150",
-                "assert add_elements([5, 15, 25, 35, 45, 55], 6) == 180"
+                "assert add_elements([10, 20, 30, 40, 50], 3) == 60",
+                "assert add_elements([1, 2, 3, 4, 5], 5) == 15"
             ],
             "failed_tests": [
-                "assert add_elements([111, 222, 333, 444, 555], 2) == 333 (AssertionError: )"
+                "assert add_elements([100, 200, 300, 400, 500], 2) == 300 (AssertionError: )"
             ]
         },
         "prompt_tokens": 200,
-        "completion_tokens": 140
+        "completion_tokens": 112
     },
     {
         "task_id": "HumanEval/123",
@@ -1938,7 +1964,7 @@
             "failed_tests": []
         },
         "prompt_tokens": 205,
-        "completion_tokens": 63
+        "completion_tokens": 68
     },
     {
         "task_id": "HumanEval/133",
@@ -1978,12 +2004,13 @@
             "passed_tests": [
                 "assert can_arrange([1, 2, 4, 3, 5]) == 3",
                 "assert can_arrange([1, 2, 3]) == -1",
-                "assert can_arrange([5, 4, 3, 2, 1]) == 4"
+                "assert can_arrange([5, 4, 3, 2, 1]) == 4",
+                "assert can_arrange([1, 3, 2, 4, 5]) == 2"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 176,
-        "completion_tokens": 62
+        "completion_tokens": 85
     },
     {
         "task_id": "HumanEval/136",
@@ -2021,12 +2048,13 @@
             "passed_tests": [
                 "assert is_equal_to_sum_even(4) == False",
                 "assert is_equal_to_sum_even(6) == False",
-                "assert is_equal_to_sum_even(8) == True"
+                "assert is_equal_to_sum_even(8) == True",
+                "assert is_equal_to_sum_even(10) == True"
             ],
             "failed_tests": []
         },
         "prompt_tokens": 152,
-        "completion_tokens": 35
+        "completion_tokens": 47
     },
     {
         "task_id": "HumanEval/139",
@@ -2061,19 +2089,25 @@
     },
     {
         "task_id": "HumanEval/141",
-        "is_solved": true,
+        "is_solved": false,
         "test_results": {
             "passed_tests": [
                 "assert file_name_check(\"example.txt\") == 'Yes'",
                 "assert file_name_check(\"1example.dll\") == 'No'",
-                "assert file_name_check(\"file_name.exe\") == 'Yes'",
-                "assert file_name_check(\"file_name\") == 'No'",
-                "assert file_name_check(\"file_name.123\") == 'No'"
+                "assert file_name_check(\"file_name.\") == 'No'",
+                "assert file_name_check(\"file_name.123\") == 'No'",
+                "assert file_name_check(\"file_name.tx\") == 'No'",
+                "assert file_name_check(\"file_name.txxt\") == 'No'",
+                "assert file_name_check(\"file_name.txT\") == 'No'",
+                "assert file_name_check(\"file_name.txT\") == 'No'",
+                "assert file_name_check(\"file_name.txT\") == 'No'"
             ],
-            "failed_tests": []
+            "failed_tests": [
+                "assert file_name_check(\"file_name.exe\") == 'No' (AssertionError: )"
+            ]
         },
         "prompt_tokens": 287,
-        "completion_tokens": 64
+        "completion_tokens": 133
     },
     {
         "task_id": "HumanEval/142",
@@ -2148,11 +2182,11 @@
         "test_results": {
             "passed_tests": [
                 "assert get_max_triples(5) == 1",
-                "assert get_max_triples(1) == 0",
-                "assert get_max_triples(3) == 0"
+                "assert get_max_triples(1) == 0"
             ],
             "failed_tests": [
-                "assert get_max_triples(10) == 4 (AssertionError: )"
+                "assert get_max_triples(3) == 1 (AssertionError: )",
+                "assert get_max_triples(6) == 3 (AssertionError: )"
             ]
         },
         "prompt_tokens": 239,
@@ -2165,14 +2199,15 @@
             "passed_tests": [
                 "assert bf(\"Jupiter\", \"Neptune\") == (\"Saturn\", \"Uranus\")",
                 "assert bf(\"Mercury\", \"Uranus\") == (\"Venus\", \"Earth\", \"Mars\", \"Jupiter\", \"Saturn\")",
-                "assert bf(\"Mars\", \"Pluto\") == ()"
+                "assert bf(\"Pluto\", \"Mars\") == ()",
+                "assert bf(\"Earth\", \"Pluto\") == ()"
             ],
             "failed_tests": [
                 "assert bf(\"Earth\", \"Mercury\") == (\"Venus\") (AssertionError: )"
             ]
         },
         "prompt_tokens": 282,
-        "completion_tokens": 77
+        "completion_tokens": 88
     },
     {
         "task_id": "HumanEval/149",
@@ -2231,18 +2266,16 @@
     },
     {
         "task_id": "HumanEval/153",
-        "is_solved": false,
+        "is_solved": true,
         "test_results": {
             "passed_tests": [
                 "assert Strongest_Extension('my_class', ['AA', 'Be', 'CC']) == 'my_class.AA'",
                 "assert Strongest_Extension('Slices', ['SErviNGSliCes', 'Cheese', 'StuFfed']) == 'Slices.SErviNGSliCes'"
             ],
-            "failed_tests": [
-                "assert Strongest_Extension('test', ['TEST', 'test', 'tEsT']) == 'test.test' (AssertionError: )"
-            ]
+            "failed_tests": []
         },
         "prompt_tokens": 351,
-        "completion_tokens": 91
+        "completion_tokens": 67
     },
     {
         "task_id": "HumanEval/154",
@@ -2339,15 +2372,14 @@
         "is_solved": false,
         "test_results": {
             "passed_tests": [
-                "assert do_algebra(['+'], [1, 2]) == 3",
-                "assert do_algebra(['//', '**', '+'], [10, 2, 3, 2]) == 10 // 2 ** 3 + 2"
+                "assert do_algebra(['+'], [1, 2]) == 3"
             ],
             "failed_tests": [
-                "assert do_algebra(['*', '-'], [2, 3, 4]) == -10 (AssertionError: )"
+                "assert do_algebra(['*', '+', '-'], [2, 3, 4, 5]) == 3 (AssertionError: )"
             ]
         },
         "prompt_tokens": 280,
-        "completion_tokens": 73
+        "completion_tokens": 42
     },
     {
         "task_id": "HumanEval/161",
@@ -2359,11 +2391,11 @@
             ],
             "failed_tests": [
                 "assert solve(\"ABC\") == \"cba\" (AssertionError: )",
-                "assert solve(\"123abc\") == \"CBA432\" (AssertionError: )"
+                "assert solve(\"123aBc\") == \"CBA321\" (AssertionError: )"
             ]
         },
         "prompt_tokens": 178,
-        "completion_tokens": 53
+        "completion_tokens": 55
     },
     {
         "task_id": "HumanEval/162",
@@ -2371,7 +2403,7 @@
         "test_results": {
             "passed_tests": [
                 "assert string_to_md5('Hello world') == '3e25960a79dbc69b674cd4ec67a72c62'",
-                "assert string_to_md5('') == None"
+                "assert string_to_md5('') is None"
             ],
             "failed_tests": []
         },

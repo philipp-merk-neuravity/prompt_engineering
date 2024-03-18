@@ -3,5 +3,5 @@
     "number_of_failed_tasks": 54,
     "accuracy": 0.6707317073170732,
     "prompt_tokens": 34265,
-    "completion_tokens": 25462
+    "completion_tokens": 25290
 }
