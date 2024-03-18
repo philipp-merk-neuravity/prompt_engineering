@@ -1,0 +1,38 @@
+[
+    {
+        "model": "gpt-3.5-turbo-0125",
+        "method": "io",
+        "test_type": "without_refinement",
+        "accuracy": 0.8902439024390244
+    },
+    {
+        "model": "gpt-4-0125-preview",
+        "method": "io",
+        "test_type": "without_refinement",
+        "accuracy": 0.5182926829268293
+    },
+    {
+        "model": "gpt-3.5-turbo-0125",
+        "method": "synth_few_shot",
+        "test_type": "without_refinement",
+        "accuracy": 0.8170731707317073
+    },
+    {
+        "model": "gpt-4-0125-preview",
+        "method": "synth_few_shot",
+        "test_type": "without_refinement",
+        "accuracy": 0.5182926829268293
+    },
+    {
+        "model": "gpt-3.5-turbo-0125",
+        "method": "zero_shot_cot",
+        "test_type": "without_refinement",
+        "accuracy": 0.7560975609756098
+    },
+    {
+        "model": "gpt-4-0125-preview",
+        "method": "zero_shot_cot",
+        "test_type": "without_refinement",
+        "accuracy": 0.4817073170731707
+    }
+]

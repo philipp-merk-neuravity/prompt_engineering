@@ -6,12 +6,12 @@ import subprocess
 
 # Paths
 method = "io"
-model = "gpt-4-0125-preview"
-temperature = "0.6"
-test_type = "tests_4"
+model = "gpt-3.5-turbo-0125"
+temperature = "0.8"
+test_type = "gpt_3.5_synth_few_shot"
 save_path = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simpe_check_tests/{temperature}/{method}/{model}/{test_type}"
 path_for_samples = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/{temperature}/{method}/{model}"
-path_for_tests = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/codeT/gpt-4-0125-preview/without_refinement/0/0.jsonl"
+path_for_tests = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/synth_few_shot/gpt-3.5-turbo-0125/without_refinement/0/0.jsonl"
 predefined_tests_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json"
 evaluation_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
 script_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
@@ -25,12 +25,6 @@ with open(predefined_tests_path, "r") as f:
 # Load tests
 with open(path_for_tests, "r") as f:
     tests = [json.loads(line) for line in f.readlines()]
-
-# Function to calculate pass at k
-def pass_at_k(n, c, k):
-    if n - c < k:
-        return 1.0
-    return 1.0 - np.prod(1.0 - k / np.arange(n - c + 1, n + 1))
 
 # Function to run tests and capture results
 def run_tests(sample_code, tests, queue):
