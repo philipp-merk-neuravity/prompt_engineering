@@ -1,7 +1,7 @@
 {
-    "number_of_solved_tasks": 124,
-    "number_of_failed_tasks": 40,
-    "accuracy": 0.7560975609756098,
+    "number_of_solved_tasks": 133,
+    "number_of_failed_tasks": 31,
+    "accuracy": 0.8109756097560976,
     "prompt_tokens": 35828,
-    "completion_tokens": 23826
+    "completion_tokens": 23442
 }

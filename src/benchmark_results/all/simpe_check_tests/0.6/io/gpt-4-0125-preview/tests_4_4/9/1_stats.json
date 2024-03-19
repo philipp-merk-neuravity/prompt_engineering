@@ -1,1 +1,1 @@
-{"accuracy": {"pass@1": 0.8963414634146342}, "prompt_tokens": 3057.9, "completion_tokens": 1344.3, "duration": 113.85588374137879}
+{"accuracy": {"pass@1": 0.9115853658536586}, "prompt_tokens": 61158.0, "completion_tokens": 27310.7, "duration": 2204.8657876491548}

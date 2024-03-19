@@ -8,10 +8,10 @@ import subprocess
 method = "io"
 model = "gpt-3.5-turbo-0125"
 temperature = "0.8"
-test_type = "tests_3.5_3.5"
+test_type = "tests_3.5_zero_shot_cot"
 save_path = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simpe_check_tests/{temperature}/{method}/{model}/{test_type}"
 path_for_samples = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/{temperature}/{method}/{model}"
-path_for_tests = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/io/gpt-3.5-turbo-0125/with_refinement/gpt-3.5-turbo-0125/1/1.jsonl"
+path_for_tests = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/zero_shot_cot/gpt-3.5-turbo-0125/without_refinement/1/1.jsonl"
 predefined_tests_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json"
 evaluation_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
 script_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
@@ -83,13 +83,13 @@ def process_samples():
         results[i] = current_results
     return results
 
-# Function to find best samples
 def find_best_samples(results):
+    simulation_count = 20
     best_samples_for_generated_tests = {}
     for i in range(max_sample_size):
         current_best_results = []
-        current_results = []
-        for ix in range(max_sample_size):
+        for ix in range(simulation_count):
+            current_results = []
             random_numbers = np.random.choice(max_sample_size, i+1, replace=False)
             for random_number in random_numbers:
                 current_results += results[random_number]
@@ -107,7 +107,7 @@ def find_best_samples(results):
                         best_solved_count = result["solved_count"]
                         is_solved = result["is_solved"]
                 current_best_results.append(best_result)
-            best_samples_for_generated_tests[i] = current_best_results
+        best_samples_for_generated_tests[i] = current_best_results
     print("Found best samples for generated tests")
     return best_samples_for_generated_tests
 

@@ -1,24 +1,70 @@
 import json
 
 path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_using_methods"
+save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_with_methods"
 
-methods = ["io", "synth_few_shot", "zero_shot_cot"]
-models = ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"]
+mapping = {
+    "io": {
+        "gpt-3.5-turbo-0125": {
+            "without_refinement": 3
+        },
+        "gpt-4-0125-preview": {
+            "with_refinement": 2
+        },
+    },
+    "synth_few_shot": {
+        "gpt-3.5-turbo-0125": {
+            "without_refinement": 3
+        },
+        "gpt-4-0125-preview": {
+            "with_refinement": 3
+        }
+    },
+    "zero_shot_cot": {
+        "gpt-3.5-turbo-0125": {
+            "without_refinement": 3
+        },
+        "gpt-4-0125-preview": {
+            "with_refinement": 3
+        }
+    }
+}
 
 combined_results = []
+combined_mean_results = []
 
-for method in methods:
-    for model in models:
-        file_path = f"{path}/{method}/{model}/without_refinement/0/test_results_stats.json"
-        with open(file_path, "r") as f:
-            data = json.load(f)
-            combined_results.append({
+for prompt_method, models in mapping.items():
+    for model, refinements in models.items():
+        for refinement, item_count in refinements.items():
+            current_sum_of_accuracy = 0
+            if refinement == "without_refinement":
+                current_folder_path = f"{path}/{prompt_method}/{model}/{refinement}"
+            else: 
+                current_folder_path = f"{path}/{prompt_method}/{model}/{refinement}/{model}"
+            for i in range(item_count):
+                current_file_path = f"{current_folder_path}/{i}/test_results_stats.json"
+                with open(current_file_path, "r") as f:
+                    data = json.load(f)
+                    current_sum_of_accuracy += data["accuracy"]
+                    combined_results.append({
+                        "prompt_method": prompt_method,
+                        "model": model,
+                        "refinement": refinement,
+                        "accuracy": data["accuracy"],
+                    })
+            mean_accuracy = current_sum_of_accuracy / item_count
+            combined_mean_results.append({
+                "prompt_method": prompt_method,
                 "model": model,
-                "method": method,
-                "test_type": "without_refinement",
-                "accuracy": data["accuracy"]
+                "refinement": refinement,
+                "accuracy": mean_accuracy,
             })
 
-with open(f"{save_path}/combined_results.json", "w") as f:
-    json.dump(combined_results, f, indent=4)
+with open(f"{save_path}/combined_results.jsonl", "w") as f:
+    for item in combined_results:
+        f.write(json.dumps(item) + "\n")
+
+with open(f"{save_path}/combined_mean_results.jsonl", "w") as f:
+    for item in combined_mean_results:
+        f.write(json.dumps(item) + "\n")
+

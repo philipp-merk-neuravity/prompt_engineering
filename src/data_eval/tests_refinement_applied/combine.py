@@ -1,22 +1,42 @@
 import json
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_with_prompt_methods"
-prompt_methods = ["io", "synth_few_shot", "zero_shot_cot"]
+path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simpe_check_tests"
+save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_refinement_applied"
 
-models = ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"]
+
+mapping = {
+    "0.6": {
+        "io": {
+            "gpt-4-0125-preview": ["tests_3.5", "tests_3.5_3.5", "tests_4", "tests_4_4"]
+        }
+    },
+    "0.8": {
+        "io": {
+            "gpt-3.5-turbo-0125": ["tests_3.5", "tests_3.5_3.5"]
+        }
+    }
+}
 
 combined_results = []
 
-for prompt_method in prompt_methods:
-    for model in models:
-        with open(f"{path}/{prompt_method}/{model}/without_refinement/0/test_results_stats.json", "r") as f:
-            data = json.load(f)
-            combined_results.append({
-                "prompt_method": prompt_method,
-                "model": model,
-                "data": data
-            })
+for temperature, methods in mapping.items():
+    for method, models in methods.items():
+        for model, test_types in models.items():
+            for test_type in test_types:
+                current_folder_path = f"{path}/{temperature}/{method}/{model}/{test_type}"
+                for i in range(10):
+                    current_file_path = f"{current_folder_path}/{i}/1_stats.json"
+                    with open(current_file_path, "r") as f:
+                        data = json.load(f)
+                        combined_results.append({
+                            "temperature": temperature,
+                            "method": method,
+                            "model": model,
+                            "test_type": test_type,
+                            "accuracy": data["accuracy"]["pass@1"],
+                            "sample_size": i + 1
+                        })
 
-with open(f"{save_path}/combined_results.json", "w") as f:
-    json.dump(combined_results, f, indent=4)
+with open(f"{save_path}/combined_stats.jsonl", "w") as f:
+    for result in combined_results:
+        f.write(json.dumps(result) + "\n")

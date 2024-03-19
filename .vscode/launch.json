@@ -43,9 +43,9 @@
       "console": "integratedTerminal",
       "args": [
         "--model", "gpt-3.5-turbo-0125",
-        "--prompt_type", "io",
+        "--prompt_type", "zero_shot_cot",
         "--chunk_size", "50",
-        "--model_for_refinement", "gpt-3.5-turbo-0125",
+        "--model_for_refinement", "",
         "--temperature", "0.2"
       ],
       "cwd": "${workspaceFolder}/src"
