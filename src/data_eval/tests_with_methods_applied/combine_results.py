@@ -6,12 +6,12 @@ save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/result
 mapping = {
     "0.6": {
         "io": {
-            "gpt-4-0125-preview": ["tests_4", "gpt_3.5_synth_few_shot", "gpt_3.5_zero_shot_cot", "gpt_4_synth_few_shot", "gpt_4_zero_shot_cot"]
+            "gpt-4-0125-preview": ["tests_4_4", "tests_3.5_synth_few_shot", "tests_3.5_zero_shot_cot", "tests_4_4_synth_few_shot", "tests_4_4_zero_shot_cot"]
         },
     },
     "0.8": {
         "io": {
-            "gpt-3.5-turbo-0125": ["tests_3.5", "gpt_3.5_synth_few_shot", "gpt_3.5_zero_shot_cot"]
+            "gpt-3.5-turbo-0125": ["tests_3.5", "tests_3.5_synth_few_shot", "tests_3.5_zero_shot_cot"]
         },
     }
 }
@@ -25,7 +25,6 @@ for temperature, prompt_methods in mapping.items():
                 current_path = f"{path}/{temperature}/{prompt_method}/{prompt_model}/{test_name}"
                 for i in range(10):
                     current_file_path = f"{current_path}/{i}/1_stats.json"
-                    # {"accuracy": {"pass@1": 0.8414634146341463}, "prompt_tokens": 3057.9, "completion_tokens": 1336.2, "duration": 108.76289551258087}
                     with open(current_file_path, "r") as f:
                         data = json.load(f)
                         combined_results.append({
