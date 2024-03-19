@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
 import json
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_gen_tests/reflection/combined_results.jsonl"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/images/keep_best_gen_tests"
+path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_refl_keep_best/combined_results.jsonl"
+save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/images/keep_best"
 
 label_mapping = {
     "use_best": "Beste Lösung",
