@@ -315,7 +315,7 @@ To initiate the sampling simulation using generated tests with removal, execute 
 
 **For gpt-4:**
 
-For conducting the sampling simulation with gpt-4, using the tests that have undergone the removal process, run this script (exec and no costs):
+For conducting the sampling simulation with gpt-4, using the tests that have undergone the removal process, run this script (exec and no costs) :
 
 ```sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_removal/gpt_4/sampling_for_tests_with_removal.sh
