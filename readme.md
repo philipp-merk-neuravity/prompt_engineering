@@ -10,6 +10,8 @@ You also have to create a .env file in the root directory. Add your OPENAI_API_K
 OPENAI_API_KEY=***
 DEV_PATH="/home/neuravity/dev/prompt_engineering"
 
+Also you have to unzip the human_eval.zip file and place the `human_eval` file in the `src` folder.
+
 **IMPORTANT**: Please ensure all scripts are run from a Bash shell and remain in the root directory. Do not alter the directory path!
 
 ---
