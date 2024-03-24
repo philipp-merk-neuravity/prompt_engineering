@@ -82,13 +82,13 @@ This experiment aims to compare the effects of different temperatures on the per
 ### 1.1 Generation
 To evaluate for pass@k<=10 youve to execute both scripts 10 times.
 
-#### For gpt-3.5:
+#### For gpt-3.5 (low costs):
 
 ```sh
 ./src/scripts/gen_data/temperature/gpt_3.5/run_sampling_for_temp.sh
 ```
 
-#### For gpt-4:
+#### For gpt-4 (high costs):
 
 ```sh
 ./src/scripts/gen_data/temperature/gpt_4/run_sampling_for_temp.sh
@@ -98,7 +98,7 @@ The results will be stored at: `src/benchmark_results/code_gen/simple`
 
 ### 1.2 Data Conversion and Evaluation
 
-To combine the code generation results into one file per model and temperature, and then evaluate the results for pass@k (k=1-10), execute the following:
+To combine the code generation results into one file per model and temperature, and then evaluate the results for pass@k (k=1-10), execute the following (exec):
 
 ```sh
 ./src/scripts/eval_data/eval_temp/eval_temp.sh
@@ -131,31 +131,31 @@ This experiment aims to compare the effects of 2 types of reflexion. One were th
 
 ## Execution steps
 
-### 2.1 Generation
+### 2.1 Generation:
 To reduce variance execute each script 5 times.
 
-use_best with gpt-3.5
+use_best with gpt-3.5 (low costs):
 ```sh
 ./src/scripts/gen_data/reflexion/use_best/gpt_3.5/run_reflexion_gpt_3.5.sh
 ```
 
-use_best with gpt-4
+use_best with gpt-4 (high costs):
 ```sh
 ./src/scripts/gen_data/reflexion/use_best/gpt_4/run_reflexion_gpt_4.sh
 ```
 
-use_next with gpt-3.5
+use_next with gpt-3.5 (low costs):
 ```sh
 ./src/scripts/gen_data/reflexion/use_next/gpt_3.5/run_reflexion_gpt_3.5.sh
 ```
 
-use_next with gpt-4
+use_next with gpt-4 (high costs):
 ```sh
 ./src/scripts/gen_data/reflexion/use_next/gpt_4/run_reflexion_gpt_4.sh
 ```
 
 ### 2.2 Data Conversion and Evaluation
-The following script creates 10 files, each representing the maximum iteration count. It uses the 5 initally generated files for this.
+The following script creates 10 files, each representing the maximum iteration count. It uses the 5 initally generated files for this (exec).
 
 ```sh
 ./src/scripts/eval_data/eval_reflexion/eval_reflexion.sh
@@ -188,40 +188,41 @@ In this experiment, we delve into the effectiveness of various prompting methods
 
 To produce code solutions for the gpt-3.5-turbo-0125 model, execute the following scripts. Note that each script is designed to generate the code solutions a single time. In order to conduct an evaluation for pass rates of k<=10, it is necessary to run each script 10 times.
 
-- For Zero-Shot Chain of Thought (CoT) generation:
+- For Zero-Shot Chain of Thought (CoT) generation (low costs):
 ```sh
 ./src/scripts/gen_data/sampling/gpt_3.5/run_sampling_zero_shot_cot.sh
 ```
 
-- For Structured CoT generation:
+- For Structured CoT generation (low costs):
 ```sh
 ./src/scripts/gen_data/sampling/gpt_3.5/run_sampling_scot.sh
 ```
 
-- For Synthetic Few-Shots generation:
+- For Synthetic Few-Shots generation (low costs):
 ```sh
 ./src/scripts/gen_data/sampling/gpt_3.5/run_sampling_synth_few_shot.sh
 ```
 
 To generate code solutions for the gpt-4-0125-preview model, follow these instructions. Each script below is tailored for a specific prompting method and needs to be executed individually to create code solutions. Similar to the gpt-3.5 model, to ensure a thorough evaluation for pass rates of k<=10, it's necessary to run each script ten times.
 
-- For Zero-Shot Chain of Thought (CoT) generation:
+- For Zero-Shot Chain of Thought (CoT) generation (high costs):
 ```sh
 ./src/scripts/gen_data/sampling/gpt_4/run_sampling_zero_shot_cot.sh
 ```
 
-- For Structured CoT generation:
+- For Structured CoT generation (high costs):
 ```sh
 ./src/scripts/gen_data/sampling/gpt_4/run_sampling_scot.sh
 ```
 
-- For Synthetic Few-Shots generation:
+- For Synthetic Few-Shots generation (high costs):
 ```sh
 ./src/scripts/gen_data/sampling/gpt_4/run_sampling_synth_few_shot.sh
 ```
 
 ### 3.2 Data Conversion and Evaluation
 
+(exec)
 ```sh
 ./src/scripts/eval_data/eval_code_gen_per_prompt_type/eval_prompting.sh
 ```
@@ -257,30 +258,31 @@ To reduce variability, each script must be executed three times.
 
 **For gpt-3.5:**
 
-- Generating tests with refinement (removal of potentially flawed tests):
+- Generating tests with refinement (removal of potentially flawed tests) (low costs):
 ```sh
 ./src/scripts/gen_data/tests_with_removal/gpt_3.5/tests_gen_with_removal.sh
 ```
 
-- Generating tests without refinement:
+- Generating tests without refinement (low costs):
 ```sh
 ./src/scripts/gen_data/tests_with_removal/gpt_3.5/tests_gen_without_removal.sh
 ```
 
 **For gpt-4:**
 
-- Generating tests with refinement:
+- Generating tests with refinement (high costs):
 ```sh
 ./src/scripts/gen_data/tests_with_removal/gpt_4/tests_gen_with_removal.sh
 ```
 
-- Generating tests without refinement:
+- Generating tests without refinement (high costs):
 ```sh
 ./src/scripts/gen_data/tests_with_removal/gpt_4/tests_gen_without_removal.sh
 ```
 
 ### 4.2 Conversion and Evaluation
 
+(exec)
 ```sh
 ./src/scripts/eval_data/eval_tests/eval_tests_with_removal/eval_tests_with_removal.sh
 ```
@@ -305,7 +307,7 @@ This experiment focuses on optimizing solution selection by leveraging unit test
 
 **For gpt-3.5:**
 
-To initiate the sampling simulation using generated tests with removal, execute the following script:
+To initiate the sampling simulation using generated tests with removal, execute the following script (exec and no costs).
 
 ```sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_removal/gpt_3.5/sampling_for_tests_with_removal.sh
@@ -313,7 +315,7 @@ To initiate the sampling simulation using generated tests with removal, execute 
 
 **For gpt-4:**
 
-For conducting the sampling simulation with gpt-4, using the tests that have undergone the removal process, run this script:
+For conducting the sampling simulation with gpt-4, using the tests that have undergone the removal process, run this script (exec and no costs):
 
 ```sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_removal/gpt_4/sampling_for_tests_with_removal.sh
@@ -353,40 +355,41 @@ To ensure consistency and reduce variability, each script should be executed thr
 
 **For gpt-3.5-turbo:**
 
-- Generating tests with Synthetic Few-Shots:
+- Generating tests with Synthetic Few-Shots (low costs):
 ```sh
 ./src/scripts/gen_data/tests_with_prompt_methods/gpt_3.5/run_test_gen_synth_few_shot.sh
 ```
 
-- Generating tests with Zero-Shot CoT:
+- Generating tests with Zero-Shot CoT (low costs):
 ```sh
 ./src/scripts/gen_data/tests_with_prompt_methods/gpt_3.5/run_test_gen_zero_shot_cot.sh
 ```
 
-- Generating tests with Zero-Shot:
+- Generating tests with Zero-Shot (low costs):
 ```sh
 ./src/scripts/gen_data/tests_with_prompt_methods/gpt_3.5/run_test_gen_zero_shot.sh
 ```
 
 **For gpt-4:**
 
-- Generating tests with Synthetic Few-Shots:
+- Generating tests with Synthetic Few-Shots (high costs):
 ```sh
 ./src/scripts/gen_data/tests_with_prompt_methods/gpt_4/run_test_gen_synth_few_shot.sh
 ```
 
-- Generating tests with Zero-Shot CoT:
+- Generating tests with Zero-Shot CoT (high costs):
 ```sh
 ./src/scripts/gen_data/tests_with_prompt_methods/gpt_4/run_test_gen_zero_shot_cot.sh
 ```
 
-- Generating tests with Zero-Shot:
+- Generating tests with Zero-Shot (high costs):
 ```sh
 ./src/scripts/gen_data/tests_with_prompt_methods/gpt_4/run_test_gen_zero_shot.sh
 ```
 
 ### 6.2 Conversion and Evaluation
 
+(exec)
 ```sh
 ./src/scripts/eval_data/eval_tests/eval_tests_with_prompting_methods/eval_tests_with_prompting_methods.sh
 ```
@@ -406,21 +409,21 @@ This experiment uses the unit tests from experiment 6 for selection of code-solu
 
 ### 7.1 Generation and Evaluation
 
-gpt-3.5-turbo for code generation and gpt-3.5-turbo for test generation
+gpt-3.5-turbo for code generation and gpt-3.5-turbo for test generation (exec and no costs):
 ```sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_prompting_methods/gpt_3.5/run_synth_few_shot.sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_prompting_methods/gpt_3.5/run_zero_shot_cot.sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_prompting_methods/gpt_3.5/run_zero_shot.sh
 ```
 
-gpt-4-turbo for code generation and gpt-3.5-turbo for test generation
+gpt-4-turbo for code generation and gpt-3.5-turbo for test generation (exec and no costs):
 ```sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_prompting_methods/gpt_4/tests_by_gpt_3.5/run_synth_few_shot.sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_prompting_methods/gpt_4/tests_by_gpt_3.5/run_zero_shot_cot.sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_prompting_methods/gpt_4/tests_by_gpt_3.5/run_zero_shot.sh
 ```
 
-gpt-4-turbo for code generation and gpt-4-turbo for test generation
+gpt-4-turbo for code generation and gpt-4-turbo for test generation (exec and no costs):
 ```sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_prompting_methods/gpt_4/tests_by_gpt_4/run_synth_few_shot.sh
 ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_prompting_methods/gpt_4/tests_by_gpt_4/run_zero_shot_cot.sh
