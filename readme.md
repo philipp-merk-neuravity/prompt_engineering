@@ -3,16 +3,21 @@
 
 The scripts for running the experiments are categorized based on their operational costs and functions. Scripts utilizing GPT-4 have higher expenses, typically ranging from $0.5 to $5 per execution. In contrast, those leveraging GPT-3.5-turbo are significantly more economical, generally costing less than $1 per run. Additionally, there are scripts designed for generating code and conducting unit tests. To facilitate identification, scripts have been labeled as "high costs," "low costs," or "exec" according to their associated expenses and functionalities. While all scripts were tested in a local environment and appeared to be safe, their safety cannot be guaranteed. Therefore, it is advised not to run scripts marked "exec" without employing Docker or on critical systems to mitigate risks.
 
-# Prequesites
-The experiments have been executed on wsl2. If youre using windows you first have to install wsl2 to avoid compatability issues. Otherwise native ubunutu environments or macos should work.
+# Prerequisites
 
-You also have to create a .env file in the root directory. Add your OPENAI_API_KEY and the DEV_PATH. The DEV_PATH should be the whole path to the project.
-OPENAI_API_KEY=***
-DEV_PATH="/home/neuravity/dev/prompt_engineering"
+Before you begin, ensure you meet the following prerequisites to avoid compatibility issues:
 
-Also you have to unzip the human_eval.zip file and place the `human_eval` file in the `src` folder.
+- **Operating System**: The experiments have been executed on WSL2. If you're using Windows, you must first install WSL2. Native Ubuntu environments or macOS should work without issues.
 
-**IMPORTANT**: Please ensure all scripts are run from a Bash shell and remain in the root directory. Do not alter the directory path!
+- **Environment Variables**: You need to create a `.env` file in the root directory of the project. This file should include your `OPENAI_API_KEY` and the `DEV_PATH`. The `DEV_PATH` must be the full path to the project directory. Here's an example:
+  ```
+  OPENAI_API_KEY=your_key_here
+  DEV_PATH="/home/username/dev/project_name"
+  ```
+
+- **Human Eval Dataset**: The `human_eval.zip` file must be unzipped and the extracted `human_eval` folder should be placed in the `src` folder of the project.
+
+**IMPORTANT**: Please ensure all scripts are executed from a Bash shell and that you remain in the root directory of the project. Do not alter the directory path!
 
 ---
 
@@ -49,7 +54,7 @@ After activation, your terminal prompt will change to indicate that the virtual 
 ### Step 6: Deactivate the python env
 ```deactivate```
 
-# Bash Scripts Access
+## Bash Scripts Access
 
 To ensure all scripts used in the experiments are executable, follow the steps below. This grants the necessary permissions to execute the scripts.
 
