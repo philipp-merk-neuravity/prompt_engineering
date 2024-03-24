@@ -17,7 +17,7 @@ Before you begin, ensure you meet the following prerequisites to avoid compatibi
 
 - **Human Eval Dataset**: The `human_eval.zip` file must be unzipped and the extracted `human_eval` folder should be placed in the `src` folder of the project.
 
-**IMPORTANT**: Please ensure all scripts are executed from a Bash shell and that you remain in the root directory of the project. Do not alter the directory path!
+**IMPORTANT**: Please ensure all scripts are executed from a Bash shell and that you remain in the root directory of the project. Do not alter the directory path.
 
 ---
 
