@@ -1,8 +1,12 @@
 from utils.storage import load_from_jsonl
 import json
-import os  # Import the os module
+import os
 
-base_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/iterative_sampling/gpt4_predefined"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+base_path = f"{DEV_PATH}/src/benchmark_results/code_gen/iterative_sampling/gpt4_predefined"
 # Load the data
 path = base_path + "/combined_results.jsonl"
 data = load_from_jsonl(path)

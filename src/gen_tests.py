@@ -2,11 +2,16 @@ import asyncio
 import argparse
 from utils.code_generation import gen_tests
 from utils.storage import load_benchmark, save_generated_tests
+import os
+
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
 
 async def process_chunk(chunk, model, prompt_type, model_for_refinement, use_refinement, temperature):
     tasks = [gen_tests(item["prompt"], model, prompt_type, model_for_refinement=model_for_refinement, use_refinement=use_refinement, temperature=temperature, amount=10) for item in chunk]
     return await asyncio.gather(*tasks)
-
+    
 async def main(model, prompt_type, chunk_size, model_for_refinement, temperature):
     use_refinement = model_for_refinement != ""
     benchmark_data = load_benchmark("all")
@@ -63,8 +68,8 @@ if __name__ == "__main__":
 #                 "completion_tokens": tokens_for_completion,
 #                 "duration": duration
 #         }
-#         # write to: /home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4/0/0.jsonl
-#         with open(f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-4/0/0.jsonl", "a") as f:
+#         # write to: $DEV_PATH/src/benchmark_results/test_cases/few_shot/gpt-4/0/0.jsonl
+#         with open(ff"{DEV_PATH}/src/benchmark_results/test_cases/few_shot/gpt-4/0/0.jsonl", "a") as f:
 #             # use json.dump
 #             json.dump(formatted_test_result, f, indent=4)
 

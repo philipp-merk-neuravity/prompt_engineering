@@ -1,8 +1,13 @@
 import json
 import matplotlib.pyplot as plt
+import os
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/temperature/results_temp.jsonl"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
 
+
+path = f"{DEV_PATH}/src/benchmark_results/results/data/temperature/combined_results_temp.jsonl"
+save_path = f"{DEV_PATH}/src/benchmark_results/images/temperature"
 results = []
 
 with open(path, "r") as f:
@@ -39,7 +44,7 @@ def plot_data_for_model(model_data, model_name):
     plt.legend()
     plt.grid(True)
     # save
-    plt.savefig(f"/home/neuravity/dev/prompt_engineering/src/{model_name}.png", dpi=600)
+    plt.savefig(f"{save_path}/{model_name}.png", dpi=600)
 
 # Plot data for each model
 for model_name, model_data in data_by_model.items():

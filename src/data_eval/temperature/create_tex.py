@@ -1,8 +1,13 @@
 import json
 import pandas as pd
+import os
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/temperature/results_temp.jsonl"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/temperature"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+path = f"{DEV_PATH}/src/benchmark_results/results/data/temperature/results_temp.jsonl"
+save_path = f"{DEV_PATH}/src/benchmark_results/results/data/temperature"
 
 with open(path, "r") as f:
     data = [json.loads(line) for line in f]

@@ -1,12 +1,14 @@
 import numpy as np
 import json
 import os
-#TODO: Only one load_object function is enough.
 
-humanEval_file_path = '/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl'
-humanEval_50_file_path = '/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval_50.jsonl'
-static_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results"
-test_cases_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+humanEval_file_path = f'{DEV_PATH}/src/human_eval/data/HumanEval.jsonl'
+humanEval_50_file_path = f'{DEV_PATH}/src/human_eval/data/HumanEval_50.jsonl'
+static_path = f"{DEV_PATH}/src/benchmark_results"
+test_cases_path = f"{DEV_PATH}/src/human_eval/data/ExtractedTests.json"
 
 def load_benchmark(type: str = 'all'):
     json_objects = []
@@ -129,7 +131,7 @@ def save_benchmark_results_for_reflection(items, benchmark_type, strategy, file_
     return full_file_path
 
 def create_file_for_iterative_sampling(test_case_type):
-    base_path = f"{static_path}/all/iterative_sampling/{test_case_type}"
+    base_path = f"{static_path}/code_gen/iterative_sampling/{test_case_type}"
     os.makedirs(base_path, exist_ok=True)
 
     # get the highest prefix

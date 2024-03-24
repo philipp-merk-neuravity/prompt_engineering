@@ -1,8 +1,13 @@
 from utils.storage import load_benchmark_results
 import json
 import random
+import os
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/without_refinement"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+path = f"{DEV_PATH}/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/without_refinement"
 
 combined_results = []
 randomly_selected_results = []

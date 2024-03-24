@@ -68,7 +68,6 @@ async def run_test_case_in_executor(executor, code_solution, test_cases):
 
 async def main(path_for_test_cases):
     benchmark_data = load_benchmark("all")
-    # test_cases = (path_for_test_cases)
     test_cases = load_test_cases(path_for_test_cases)
     all_test_results = []
 
@@ -111,6 +110,9 @@ async def main(path_for_test_cases):
             "prompt_tokens": all_prompt_tokens,
             "completion_tokens": all_completion_tokens
         }, f, indent=4)
+
+def run_main(path):
+    asyncio.run(main(path))
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run async tasks with model parameter.')

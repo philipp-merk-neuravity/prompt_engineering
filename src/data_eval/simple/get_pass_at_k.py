@@ -1,62 +1,55 @@
 import subprocess
+import os
+import argparse
 import json
 
-# Define the path to the script you want to run
-script_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
-problem_file_path="/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl"
-base_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple"
+DEV_PATH = os.getenv('DEV_PATH')
 
-mapping = {
-    # "0.2": {
-    #     "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
-    # },
-    # "0.4": {
-    #     "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"],
-    # },
-    "0.6": {
-        "zero_shot_cot": ["gpt-4-0125-preview"],
-    },
-    # "0.8": {
-    #     "zero_shot_cot": ["gpt-3.5-turbo-0125"],
-    # }
-}
+script_path = f"{DEV_PATH}/src/human_eval/human_eval/evaluate_functional_correctness.py"
+problem_file_path=f"{DEV_PATH}/src/human_eval/data/HumanEval.jsonl"
+base_path = f"{DEV_PATH}/src/benchmark_results/code_gen/simple"
 
-for temp, method_model_mapping in mapping.items():
-    for method, models in method_model_mapping.items():
-        for model in models:
-            combined_results = []
-            samples_path = f"{base_path}/{temp}/{method}/{model}"
-            samples_combined_results_path = f"{samples_path}/combined_results.jsonl"
-            for i in range(10):
-                k = i + 1
-                current_data_path = f"{samples_path}/{i}/{i}.jsonl"
-                with open(current_data_path) as f:
-                    data = f.readlines()
-                    combined_results.extend(data)
-            # save the combined results to a file
-            
-            with open(samples_combined_results_path, "w") as f:
-                f.writelines(combined_results)
+def run_pass_at_k_eval(mapping):
+    for temp, method_model_mapping in mapping.items():
+        for method, models in method_model_mapping.items():
+            for model in models:
+                combined_results = []
+                samples_path = f"{base_path}/{temp}/{method}/{model}"
+                samples_combined_results_path = f"{samples_path}/combined_results.jsonl"
+                for i in range(10):
+                    k = i + 1
+                    current_data_path = f"{samples_path}/{i}/{i}.jsonl"
+                    with open(current_data_path) as f:
+                        data = f.readlines()
+                        combined_results.extend(data)
                 
-            # run the evaluation script for combined results
-            for i in range(10):
-                k = i + 1
-                command = [
-                    "python", script_path,
-                    "--sample_file", samples_combined_results_path,
-                    "--problem_file", problem_file_path,
-                    "--k", str(k),
-                    # Include other command line arguments as needed
-                ]
-                subprocess.run(command)
-                # after process is done, move the new {k}_stats.json and {k}_results.jsonl to samples_path/{i}
-                save_path = f"{samples_path}/{i}"
-                stats_path = f"{samples_path}/{k}_stats.json"
-                results_path = f"{samples_path}/{k}_results.jsonl"
+                with open(samples_combined_results_path, "w") as f:
+                    f.writelines(combined_results)
+                    
+                for i in range(10):
+                    k = i + 1
+                    command = [
+                        "python", script_path,
+                        "--sample_file", samples_combined_results_path,
+                        "--problem_file", problem_file_path,
+                        "--k", str(k),
+                    ]
+                    subprocess.run(command)
+                    save_path = f"{samples_path}/{i}"
+                    stats_path = f"{samples_path}/{k}_stats.json"
+                    results_path = f"{samples_path}/{k}_results.jsonl"
 
-                subprocess.run(["mv", stats_path, save_path])
-                subprocess.run(["mv", results_path, save_path])
+                    subprocess.run(["mv", stats_path, save_path])
+                    subprocess.run(["mv", results_path, save_path])
 
             
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Run async tasks for code generation with iterative refinement.')
+    parser.add_argument('--mapping_path', type=str, help='Mapping folder structure.')
+    args = parser.parse_args()
 
+    with open(args.mapping_path, 'r') as f:
+        mapping = json.load(f)
+        
+    run_pass_at_k_eval(mapping)
 

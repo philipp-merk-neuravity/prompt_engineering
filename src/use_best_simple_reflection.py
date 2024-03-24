@@ -8,6 +8,11 @@ from utils.test_execution import get_test_results_async
 import asyncio
 import time
 import random
+import os
+
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
 
 async def async_refine_code(item, model_for_reflection, model_for_refinement, prompt_for_reflection, prompt_for_refinement, max_iterations, test_cases, file_path_for_results, init_result, temp_for_reflection, temp_for_refinement):
     generated_code = init_result["generated_code"]
@@ -104,7 +109,7 @@ async def main(model_for_reflection, model_for_refinement, prompt_for_reflection
         ["use_next_x_use_best"],
         [test_type]
     ]    
-    file_path_for_results = create_file_for_reflection("/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/reflection", folder_path_config)
+    file_path_for_results = create_file_for_reflection(f"{DEV_PATH}/src/benchmark_results/code_gen/reflection", folder_path_config)
     init_results = load_from_jsonl(file_path_for_init)
     current_benchmark_results = load_from_jsonl(file_path_for_results)
     benchmark_data = load_benchmark(benchmark_type)

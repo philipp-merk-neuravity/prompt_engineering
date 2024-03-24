@@ -1,8 +1,12 @@
 import numpy as np
 import json
+import os
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/codeT/gpt-3.5-turbo-0125/without_refinement"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/codeT/gpt-3.5-turbo-0125/without_refinement"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+path = f"{DEV_PATH}/src/benchmark_results/test_cases/0.2/codeT/gpt-3.5-turbo-0125/without_refinement"
+save_path = f"{DEV_PATH}/src/benchmark_results/test_cases/0.2/codeT/gpt-3.5-turbo-0125/without_refinement"
 
 mapping = {
     "codeT": {

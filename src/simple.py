@@ -16,7 +16,7 @@ async def process_chunk(chunk, model, prompt_type, preprocessed_prompts: List[st
     return await asyncio.gather(*tasks)
 
 async def main(model, prompt_type, benchmark_type, chunk_size, delay_seconds, temperature):
-    benchmark_data = load_benchmark(benchmark_type)
+    benchmark_data = load_benchmark(benchmark_type)[:1]
     items_to_save = []
 
     for i in range(0, len(benchmark_data), chunk_size):
@@ -43,7 +43,6 @@ async def main(model, prompt_type, benchmark_type, chunk_size, delay_seconds, te
                 "duration": result[3]
             })
         print(f"Processed {len(items_to_save)} items")
-        # Delay after each chunk is processed before starting the next chunk
         await asyncio.sleep(delay_seconds)
 
     save_benchmark_results(items_to_save, benchmark_type, "simple", prompt_type, model, temperature)

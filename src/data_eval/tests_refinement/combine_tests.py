@@ -1,6 +1,12 @@
 import json
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/io"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_refinement"
+import os
+
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+path = f"{DEV_PATH}/src/benchmark_results/test_cases/0.2/io"
+save_path = f"{DEV_PATH}/src/benchmark_results/results/data/eval_tests_refinement"
 
 mapping = {
     "gpt-3.5-turbo-0125": {
@@ -8,7 +14,7 @@ mapping = {
         "without_refinement": 3
     },
     "gpt-4-0125-preview": {
-        "with_refinement": 2,
+        "with_refinement": 3,
         "without_refinement": 3
     }
 }

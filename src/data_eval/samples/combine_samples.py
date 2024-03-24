@@ -1,7 +1,12 @@
 import json
+import os
 
-base_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simpe_check_tests"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_with_samples"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+base_path = f"{DEV_PATH}/src/benchmark_results/code_gen/simpe_check_tests"
+save_path = f"{DEV_PATH}/src/benchmark_results/results/data/eval_tests_with_samples"
 
 mapping = {
     "0.6": {

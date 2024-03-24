@@ -1,0 +1,4 @@
+{"model": "gpt-3.5-turbo-0125", "method": "io", "refinement_type": "with_refinement", "refinement_model": "gpt-3.5-turbo-0125", "accuracy": 0.8902439024390244}
+{"model": "gpt-3.5-turbo-0125", "method": "io", "refinement_type": "without_refinement", "refinement_model": "", "accuracy": 0.8617886178861789}
+{"model": "gpt-4-0125-preview", "method": "io", "refinement_type": "with_refinement", "refinement_model": "gpt-4-0125-preview", "accuracy": 0.6707317073170732}
+{"model": "gpt-4-0125-preview", "method": "io", "refinement_type": "without_refinement", "refinement_model": "", "accuracy": 0.5182926829268293}

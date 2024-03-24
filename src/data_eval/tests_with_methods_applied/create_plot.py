@@ -1,16 +1,21 @@
 import matplotlib.pyplot as plt
 import json
+import os
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_with_methods_applied/combined_results.jsonl"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/images/test_methods_applied"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+path = f"{DEV_PATH}/src/benchmark_results/results/data/eval_tests_with_methods_applied/combined_results.jsonl"
+save_path = f"{DEV_PATH}/src/benchmark_results/images/test_methods_applied"
 
 test_name_mapping = {
-    "tests_4_4": "GPT-4 (Zero-Shot)",
+    "tests_4_4_zero_shot": "GPT-4 (Zero-Shot)",
     "tests_3.5_synth_few_shot": "GPT-3.5 (Synth. Few-Shots)",
     "tests_3.5_zero_shot_cot": "GPT-3.5 (Zero-Shot CoT)",
     "tests_4_4_synth_few_shot": "GPT-4 (Synth. Few-Shots)",
     "tests_4_4_zero_shot_cot": "GPT-4 (Zero-Shot CoT)",
-    "tests_3.5": "GPT-3.5 (Zero-Shot)",
+    "tests_3.5_zero_shot": "GPT-3.5 (Zero-Shot)",
     "tests_3.5_synth_few_shot": "GPT-3.5 (Synth. Few-Shots)",
     "tests_3.5_zero_shot_cot": "GPT-3.5 (Zero-Shot CoT)"
 }

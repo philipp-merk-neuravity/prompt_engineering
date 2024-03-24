@@ -1,0 +1,36 @@
+#!/bin/bash
+
+chmod +x ./src/scripts/gen_data/sampling/gpt_3.5/run_sampling_zero_shot_cot.sh
+chmod +x ./src/scripts/gen_data/sampling/gpt_3.5/run_sampling_scot.sh
+chmod +x ./src/scripts/gen_data/sampling/gpt_3.5/run_sampling_synth_few_shot.sh
+chmod +x ./src/scripts/gen_data/sampling/gpt_4/run_sampling_zero_shot_cot.sh
+chmod +x ./src/scripts/gen_data/sampling/gpt_4/run_sampling_scot.sh
+chmod +x ./src/scripts/gen_data/sampling/gpt_4/run_sampling_synth_few_shot.sh
+chmod +x ./src/scripts/eval_data/eval_tests/eval_tests_with_removal/eval_tests_with_removal.sh
+chmod +x ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_removal/gpt_3.5/sampling_for_tests_with_removal.sh
+chmod +x ./src/scripts/gen_data/sampling_simulation_with_gen_tests/sampling_for_tests_with_removal/gpt_4/sampling_for_tests_with_removal.sh
+chmod +x ./src/scripts/eval_data/eval_sampling_with_gen_tests/for_test_removal/eval_sampling_with_gen_tests.sh
+chmod +x ./src/scripts/plot_data/sampling_with_gen_tests_refinement/create_plot.sh
+chmod +x src/scripts/gen_data/tests_with_prompt_methods/gpt_3.5/run_test_gen_synth_few_shot.sh
+chmod +x src/scripts/gen_data/tests_with_prompt_methods/gpt_3.5/run_test_gen_zero_shot_cot.sh
+chmod +x src/scripts/gen_data/tests_with_prompt_methods/gpt_3.5/run_test_gen_zero_shot.sh
+chmod +x src/scripts/gen_data/tests_with_prompt_methods/gpt_4/run_test_gen_synth_few_shot.sh
+chmod +x ./src/scripts/eval_data/eval_tests/eval_tests_with_prompting_methods/eval_tests_with_prompting_methods.sh
+chmod +x src/scripts/gen_data/tests_with_prompt_methods/gpt_4/run_test_gen_zero_shot.sh
+chmod +x src/scripts/gen_data/tests_with_prompt_methods/gpt_4/run_test_gen_zero_shot_cot.sh
+chmod +x ./src/scripts/gen_data/tests_with_removal/gpt_3.5/tests_gen_with_removal.sh
+chmod +x ./src/scripts/gen_data/tests_with_removal/gpt_3.5/tests_gen_without_removal.sh
+chmod +x ./src/scripts/gen_data/tests_with_removal/gpt_4/tests_gen_with_removal.sh
+chmod +x ./src/scripts/gen_data/tests_with_removal/gpt_4/tests_gen_without_removal.sh
+chmod +x ./src/scripts/plot_data/prompting_methods/create_plot_for_prompting_methods.sh
+chmod +x ./src/scripts/eval_data/eval_code_gen_per_prompt_type/eval_prompting.sh
+chmod +x ./src/scripts/plot_data/reflexion/create_plot_for_reflexion.sh
+chmod +x ./src/scripts/eval_data/eval_reflexion/eval_reflexion.sh
+chmod +x ./src/scripts/gen_data/reflexion/use_best/gpt_3.5/run_reflexion_gpt_3.5.sh
+chmod +x ./src/scripts/gen_data/reflexion/use_best/gpt_4/run_reflexion_gpt_4.sh
+chmod +x ./src/scripts/gen_data/reflexion/use_next/gpt_3.5/run_reflexion_gpt_3.5.sh
+chmod +x ./src/scripts/gen_data/reflexion/use_next/gpt_4/run_reflexion_gpt_4.sh
+chmod +x ./src/scripts/plot_data/temperature/create_plot_for_temp.sh
+chmod +x ./src/scripts/eval_data/eval_temp/eval_temp.sh
+chmod +x ./src/scripts/gen_data/temperature/gpt_3.5/run_sampling_for_temp.sh
+chmod +x ./src/scripts/gen_data/temperature/gpt_4/run_sampling_for_temp.sh

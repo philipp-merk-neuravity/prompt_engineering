@@ -1,18 +1,24 @@
 import json
 import os
 
-base_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/reflection"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+base_path = f"{DEV_PATH}/src/benchmark_results/code_gen/reflection"
 
 mapping = {
     "simple_simple": {
-        # "0.8_0.8": {
-        #    "gpt-3.5-turbo-0125": {
-        #       "use_next": ["gpt_3.5-turbo-0125_gpt-4-0125-preview"],
-        #    }
-        # },
+        "0.8_0.8": {
+           "gpt-3.5-turbo-0125": {
+              "use_next": ["predefined"],
+              "use_best": ["predefined"]
+           }
+        },
         "0.8_0.6": {
             "gpt-4-0125-preview": {
-                "use_next_x_use_best": ["predefined"],
+                "use_next": ["predefined"],
+                "use_best": ["predefined"]
             }
         },
     }

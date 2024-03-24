@@ -3,28 +3,14 @@ import numpy as np
 import multiprocessing
 import re
 import subprocess
+import os
+import argparse
 
-# Paths
-method = "io"
-model = "gpt-3.5-turbo-0125"
-temperature = "0.8"
-test_type = "tests_3.5_zero_shot_cot"
-save_path = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simpe_check_tests/{temperature}/{method}/{model}/{test_type}"
-path_for_samples = f"/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/{temperature}/{method}/{model}"
-path_for_tests = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/zero_shot_cot/gpt-3.5-turbo-0125/without_refinement/1/1.jsonl"
-predefined_tests_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/data/ExtractedTests.json"
-evaluation_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
-script_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/human_eval/evaluate_functional_correctness.py"
-problem_file_path = "/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl"
-max_sample_size = 10
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
 
-# Load predefined tests
-with open(predefined_tests_path, "r") as f:
-    predefined_tests = json.load(f)
 
-# Load tests
-with open(path_for_tests, "r") as f:
-    tests = [json.loads(line) for line in f.readlines()]
+
 
 # Function to run tests and capture results
 def run_tests(sample_code, tests, queue):
@@ -59,7 +45,7 @@ def execute_sample_tests(sample_code, tests, timeout=6):
         return is_solved, solved_count
 
 # Function to process sample tests
-def process_samples():
+def process_samples(max_sample_size, path_for_samples, tests):
     results = {}
     for i in range(max_sample_size):
         samples_path = f"{path_for_samples}/{i}/{i}.jsonl"
@@ -83,7 +69,7 @@ def process_samples():
         results[i] = current_results
     return results
 
-def find_best_samples(results):
+def find_best_samples(results, max_sample_size, tests):
     simulation_count = 20
     best_samples_for_generated_tests = {}
     for i in range(max_sample_size):
@@ -116,24 +102,8 @@ def get_first_function_name(generated_code):
     match = re.search(r'def\s+([a-zA-Z_][a-zA-Z_0-9]*)\(', generated_code)
     return match.group(1) if match else None
 
-# Function to execute predefined tests
-def execute_predefined_tests(best_samples_for_generated_tests):
-    for i in range(max_sample_size):
-        current_best_results = best_samples_for_generated_tests[i]
-        for test in predefined_tests:
-            task_id = test["task_id"]
-            for result in current_best_results:
-                if result["task_id"] == task_id:
-                    function_name = get_first_function_name(result["generated_code"])
-                    modified_tests = [current_test.replace("candidate", function_name) for current_test in test["tests"]]
-                    is_solved, solved_count = execute_sample_tests(result["generated_code"], modified_tests)
-                    result["is_solved_for_predefined_tests"] = is_solved
-                    result["solved_count_for_predefined_tests"] = solved_count
-    print("Executed predefined tests")
-    return best_samples_for_generated_tests
-
 # Function to calculate pass@k per sample size
-def calculate_pass_at_k_per_sample_size(best_samples_for_generated_tests):
+def calculate_pass_at_k_per_sample_size(best_samples_for_generated_tests, script_path, problem_file_path):
     command = [
         "python", script_path,
         "--sample_file", best_samples_for_generated_tests,
@@ -143,11 +113,31 @@ def calculate_pass_at_k_per_sample_size(best_samples_for_generated_tests):
     subprocess.run(command)
 
 # Main execution flow
-def main():
-    results_per_sample_size = process_samples()
-    best_samples = find_best_samples(results_per_sample_size)
+def main(method, model, temperature, test_type, test_path):
+    save_path = f"{DEV_PATH}/src/benchmark_results/code_gen/simple_check_tests/{temperature}/{method}/{model}/{test_type}"
+    path_for_samples = f"{DEV_PATH}/src/benchmark_results/code_gen/simple/{temperature}/{method}/{model}"
+    path_for_tests = f"{DEV_PATH}/src/benchmark_results/test_cases/0.2/{test_path}"
+    script_path = f"{DEV_PATH}/src/human_eval/human_eval/evaluate_functional_correctness.py"
+    problem_file_path = f"{DEV_PATH}/src/human_eval/data/HumanEval.jsonl"
+    max_sample_size = 10
+
+    with open(path_for_tests, "r") as f:
+        tests = [json.loads(line) for line in f.readlines()]
+
+    results_per_sample_size = process_samples(
+        max_sample_size,
+        path_for_samples,
+        tests
+    )
+    print(results_per_sample_size)
+
+    best_samples = find_best_samples(
+        results_per_sample_size,
+        max_sample_size,
+        tests
+    )
+
     for i in range(max_sample_size):
-        # first create the folders 0-9
         subprocess.run(["mkdir", f"{save_path}/{i}"])
         with open(f"{save_path}/{i}/combined_results.jsonl", "w") as f:
             for result in best_samples[i]:
@@ -155,6 +145,29 @@ def main():
 
     for i in range(max_sample_size):
         current_results_path = f"{save_path}/{i}/combined_results.jsonl"
-        calculate_pass_at_k_per_sample_size(current_results_path)
+        calculate_pass_at_k_per_sample_size(
+            current_results_path,
+            script_path,
+            problem_file_path
+        )
+
+
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description='Run async tasks for code generation with iterative refinement.')
+    parser.add_argument('--method', type=str, required=True, help='Model parameter for reflection.')
+    parser.add_argument('--model', type=str, required=True, help='Model parameter for refinement.')
+    parser.add_argument('--temperature', type=str, required=True, help='Model parameter for refinement.')
+    parser.add_argument('--test_type', type=str, required=True, help='Model parameter for refinement.')
+    parser.add_argument('--test_path', type=str, required=True, help='Model parameter for refinement.')
+
+    args = parser.parse_args()
+
+    main(
+        method=args.method,
+        model=args.model,
+        temperature=args.temperature,
+        test_type=args.test_type,
+        test_path=args.test_path
+    )
+
+        

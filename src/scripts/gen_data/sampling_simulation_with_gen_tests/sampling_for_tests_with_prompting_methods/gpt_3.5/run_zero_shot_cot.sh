@@ -1,0 +1,7 @@
+#!/bin/bash
+PYTHON_SCRIPT="$DEV_PATH/src/simulate_sampling_with_gen_tests.py"
+PYTHON_INTERPRETER_PATH="$DEV_PATH/venv/bin/activate"
+
+source "$PYTHON_INTERPRETER_PATH"
+python3 "$PYTHON_SCRIPT" --method="io" --model="gpt-3.5-turbo-0125" --temperature="0.8" --test_type="tests_3.5_zero_shot_cot" --test_path="zero_shot_cot/gpt-3.5-turbo-0125/without_refinement/2/2.jsonl"
+deactivate

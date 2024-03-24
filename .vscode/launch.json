@@ -31,7 +31,7 @@
       "program": "${workspaceFolder}/src/human_eval/human_eval/evaluate_functional_correctness.py",
       "console": "integratedTerminal",
       "args": [
-        "--sample_file", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/reflection/8_reflexion_without_few_shot_reflexion_without_few_shot_gpt-3.5-turbo-0125_gpt-3.5-turbo-0125/8_reflexion_without_few_shot_reflexion_without_few_shot_gpt-3.5-turbo-0125_gpt-3.5-turbo-0125.jsonl",
+        "--sample_file", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/code_gen/reflection/8_reflexion_without_few_shot_reflexion_without_few_shot_gpt-3.5-turbo-0125_gpt-3.5-turbo-0125/8_reflexion_without_few_shot_reflexion_without_few_shot_gpt-3.5-turbo-0125_gpt-3.5-turbo-0125.jsonl",
         "--problem_file", "/home/neuravity/dev/prompt_engineering/src/human_eval/data/HumanEval.jsonl",
       ],
     },
@@ -68,12 +68,12 @@
       "program": "${workspaceFolder}/src/simple.py",
       "console": "integratedTerminal",
       "args": [
-        "--model", "gpt-4-0125-preview",
-        "--prompt_type", "zero_shot_cot",
+        "--model", "gpt-3.5-turbo-0125",
+        "--prompt_type", "zero_shot",
         "--benchmark_type", "all",
         "--chunk_size", "179",
         "--delay_seconds", "20",
-        "--temperature", "0.6"
+        "--temperature", "0.7"
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -92,7 +92,7 @@
         "--benchmark_type", "all",
         "--chunk_size", "57",
         "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/with_refinement/gpt-4-0125-preview/init/init.jsonl",
-        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/0.8/io/gpt-3.5-turbo-0125/init_file/combined_results.jsonl",
+        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/code_gen/simple/0.8/io/gpt-3.5-turbo-0125/init_file/combined_results.jsonl",
         "--temp_for_reflection", "0.8",
         "--temp_for_refinement", "0.8",
         "--test_type", "gpt_3.5-turbo-0125_gpt-4-0125-preview",
@@ -113,11 +113,11 @@
         "--max_iterations", "10",
         "--benchmark_type", "all",
         "--chunk_size", "57",
-        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/with_refinement/gpt-4-0125-preview/init/init.jsonl",
-        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/0.8/io/gpt-3.5-turbo-0125/init_file/combined_results.jsonl",
+        "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/0.2/io/gpt-3.5-turbo-0125/without_refinement/0/0.jsonl",
+        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/code_gen/simple/0.8/io/gpt-3.5-turbo-0125/init_file/combined_results.jsonl",
         "--temp_for_reflection", "0.8",
         "--temp_for_refinement", "0.8",
-        "--test_type", "gpt_3.5-turbo-0125_gpt-4-0125-preview",
+        "--test_type", "test_123",
       ],
       "cwd": "${workspaceFolder}/src"
     },
@@ -136,12 +136,38 @@
         "--benchmark_type", "all",
         "--chunk_size", "57",
         "--tests_path", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/test_cases/few_shot/gpt-3.5-turbo-0125/with_refinement/gpt-4-0125-preview/init/init.jsonl",
-        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simple/0.8/io/gpt-3.5-turbo-0125/init_file/combined_results.jsonl",
+        "--file_path_for_init", "/home/neuravity/dev/prompt_engineering/src/benchmark_results/code_gen/simple/0.8/io/gpt-3.5-turbo-0125/init_file/combined_results.jsonl",
         "--temp_for_reflection", "0.8",
         "--temp_for_refinement", "0.8",
         "--test_type", "gpt_3.5-turbo-0125_gpt-4-0125-preview",
       ],
       "cwd": "${workspaceFolder}/src"
     },
+    {
+      "name": "Simulated Sampling",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/simulate_sampling_with_gen_tests.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--method", "io",
+        "--model", "gpt-3.5-turbo-0125",
+        "--temperature", "0.8",
+        "--test_type", "tests_3.5_zero_shot_cot",
+        "--test_path", "zero_shot_cot/gpt-3.5-turbo-0125/without_refinement/1/1.jsonl"
+      ],
+      "cwd": "${workspaceFolder}/src"
+    },
+    {
+      "name": "get_pass_at_k",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/data_eval/simple/get_pass_at_k.py",
+      "console": "integratedTerminal",
+      "args": [
+        "--mapping_path", "/home/neuravity/dev/prompt_engineering/src/scripts/eval_data/eval_temp/mapping_for_temp.json",
+      ],
+      "cwd": "${workspaceFolder}/src"
+    }
   ],
 }

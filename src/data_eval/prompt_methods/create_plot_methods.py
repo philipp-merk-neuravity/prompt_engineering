@@ -1,8 +1,13 @@
 import json
 import matplotlib.pyplot as plt
+import os
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_prompt_method/combined_results.jsonl"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/images/prompt_method"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+path = f"{DEV_PATH}/src/benchmark_results/results/data/eval_prompt_method/combined_results_prompt_method.jsonl"
+save_path = f"{DEV_PATH}/src/benchmark_results/images/prompt_method"
 
 results = []
 

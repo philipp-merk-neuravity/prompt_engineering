@@ -1,0 +1,14 @@
+{
+    "0.2": {
+        "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"]
+    },
+    "0.4": {
+        "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"]
+    },
+    "0.6": {
+        "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"]
+    },
+    "0.8": {
+        "io": ["gpt-3.5-turbo-0125", "gpt-4-0125-preview"]
+    }
+}

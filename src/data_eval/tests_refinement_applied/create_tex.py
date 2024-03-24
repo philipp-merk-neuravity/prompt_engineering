@@ -1,5 +1,10 @@
 import json
 import pandas as pd
+import os
+
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
 
 # Function to load and prepare your data
 def load_and_prepare_data(path):
@@ -35,8 +40,8 @@ def df_to_latex(df, save_path, file_name="aggregated_results.tex"):
 
 # Main function to orchestrate data loading, processing, and LaTeX conversion
 def main():
-    path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_refinement_applied/combined_stats.jsonl"
-    save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_refinement_applied"
+    path = f"{DEV_PATH}/src/benchmark_results/results/data/eval_tests_refinement_applied/combined_stats.jsonl"
+    save_path = f"{DEV_PATH}/src/benchmark_results/results/data/eval_tests_refinement_applied"
 
     df = load_and_prepare_data(path)
     aggregated_df = aggregate_data(df)

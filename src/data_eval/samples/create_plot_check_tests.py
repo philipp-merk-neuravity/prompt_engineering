@@ -1,8 +1,13 @@
 import json
 import matplotlib.pyplot as plt
+import os
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_with_samples/combined_samples.jsonl"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/images/sampling_check_test"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+path = f"{DEV_PATH}/src/benchmark_results/results/data/eval_tests_with_samples/combined_samples.jsonl"
+save_path = f"{DEV_PATH}/src/benchmark_results/images/sampling_check_test"
 
 with open(path, "r") as f:
     results = [json.loads(line) for line in f]

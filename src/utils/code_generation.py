@@ -3,6 +3,7 @@ from .template_functions import get_messages_for_test_detection, get_messages_fo
 from .data_conversion import extract_function_name, extract_python_code_from_json, parse_code_block, convert_tests_to_list, check_is_syntax_correct, split_tests_into_individual_functions, filter_syntactically_correct_tests_ast, remove_function_definition_from_test
 import random
 from typing import List
+import json
 
 async def evaluate_syntax_for_code_solution(code_solution: str, function_signature: str) -> str:
     is_syntax_correct, error_message = check_is_syntax_correct(code_solution)
@@ -42,9 +43,6 @@ async def gen_function(function_description: str, model="gpt-3.5-turbo", prompt_
         completion_tokens + completion_tokens_for_syntax_correction,
         duration + duration_for_syntax_correction
     )
-
-
-import json
 
 async def remove_flawed_tests(tests: List[str], model: str, function_signature: str) -> List[str]:
     tests_as_str = "\n".join(tests)

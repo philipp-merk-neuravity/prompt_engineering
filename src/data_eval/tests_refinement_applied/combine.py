@@ -1,18 +1,23 @@
 import json
+import os
 
-path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/all/simpe_check_tests"
-save_path = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_tests_refinement_applied"
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+path = f"{DEV_PATH}/src/benchmark_results/code_gen/simple_check_tests"
+save_path = f"{DEV_PATH}/src/benchmark_results/results/data/eval_tests_refinement_applied"
 
 
 mapping = {
     "0.6": {
         "io": {
-            "gpt-4-0125-preview": ["tests_3.5", "tests_3.5_3.5", "tests_4", "tests_4_4"]
+            "gpt-4-0125-preview": ["tests_3.5_zero_shot", "tests_3.5_3.5_zero_shot", "tests_4_zero_shot", "tests_4_4_zero_shot"]
         }
     },
     "0.8": {
         "io": {
-            "gpt-3.5-turbo-0125": ["tests_3.5", "tests_3.5_3.5"]
+            "gpt-3.5-turbo-0125": ["tests_3.5_zero_shot", "tests_3.5_3.5_zero_shot"]
         }
     }
 }

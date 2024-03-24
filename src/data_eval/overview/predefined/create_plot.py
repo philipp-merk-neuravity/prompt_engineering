@@ -1,4 +1,10 @@
-path_for_reflection = "/home/neuravity/dev/prompt_engineering/src/benchmark_results/results/data/eval_refl_keep_best/combined_results.jsonl"
+import os
+
+# Fetch the environment variable 'DEV_PATH' defined in your system
+DEV_PATH = os.getenv('DEV_PATH')
+
+
+path_for_reflection = f"{DEV_PATH}/src/benchmark_results/results/data/eval_refl_keep_best/combined_results.jsonl"
 
 mapping = [
     {
