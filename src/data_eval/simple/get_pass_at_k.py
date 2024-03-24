@@ -2,7 +2,9 @@ import subprocess
 import os
 import argparse
 import json
+from dotenv import load_dotenv
 
+load_dotenv()
 DEV_PATH = os.getenv('DEV_PATH')
 
 script_path = f"{DEV_PATH}/src/human_eval/human_eval/evaluate_functional_correctness.py"

@@ -3,7 +3,9 @@ import argparse
 from utils.code_generation import gen_tests
 from utils.storage import load_benchmark, save_generated_tests
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Fetch the environment variable 'DEV_PATH' defined in your system
 DEV_PATH = os.getenv('DEV_PATH')
 

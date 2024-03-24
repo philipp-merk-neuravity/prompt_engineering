@@ -2,7 +2,9 @@ from eval_tests import run_main
 import os
 import json
 import argparse
+from dotenv import load_dotenv
 
+load_dotenv()
 DEV_PATH = os.getenv('DEV_PATH')
 
 base_path = f"{DEV_PATH}/src/benchmark_results/test_cases/0.2"

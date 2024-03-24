@@ -2,8 +2,9 @@ from utils.storage import load_benchmark_results
 import json
 import random
 import os
+from dotenv import load_dotenv
 
-# Fetch the environment variable 'DEV_PATH' defined in your system
+load_dotenv()
 DEV_PATH = os.getenv('DEV_PATH')
 
 

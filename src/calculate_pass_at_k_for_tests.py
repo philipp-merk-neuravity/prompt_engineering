@@ -1,8 +1,9 @@
 import numpy as np
 import json
 import os
+from dotenv import load_dotenv
 
-# Fetch the environment variable 'DEV_PATH' defined in your system
+load_dotenv()
 DEV_PATH = os.getenv('DEV_PATH')
 
 path = f"{DEV_PATH}/src/benchmark_results/test_cases/0.2/codeT/gpt-3.5-turbo-0125/without_refinement"

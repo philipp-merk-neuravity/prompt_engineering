@@ -1,5 +1,7 @@
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # Fetch the environment variable 'DEV_PATH' defined in your system
 DEV_PATH = os.getenv('DEV_PATH')
 
