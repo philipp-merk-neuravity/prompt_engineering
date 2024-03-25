@@ -9,11 +9,22 @@ Before you begin, ensure you meet the following prerequisites to avoid compatibi
 
 - **Operating System**: The experiments have been executed on WSL2. If you're using Windows, you must first install WSL2. Native Ubuntu environments or macOS should work without issues.
 
-- **Environment Variables**: You need to create a `.env` file in the root directory of the project. This file should include your `OPENAI_API_KEY` and the `DEV_PATH`. The `DEV_PATH` must be the full path to the project directory. Here's an example:
+- **Environment Variables**: You need to create a `.env` file in the root directory of the project. This file should include your `OPENAI_API_KEY`. 
   ```
   OPENAI_API_KEY=your_key_here
-  DEV_PATH="/home/username/dev/project_name"
   ```
+
+- **Global Environment Variables**  The DEV_PATH on the other hand needs to be placed inside of your .bashrc file in the root directory of your WSL2 or Ubuntu environment. Add your path at the end of the file like this:
+
+```
+export DEV_PATH="/home/user/dev/prompt_engineering"
+```
+
+Afterwards you have to activate the .bashrc file with the following command:
+
+```
+source .bashrc
+```
 
 - **Human Eval Dataset**: The `human_eval.zip` file must be unzipped and the extracted `human_eval` folder should be placed in the `src` folder of the project.
 
